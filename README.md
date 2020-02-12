@@ -1,1 +1,1 @@
-# hawesome-vue-extends npm publish test
+# hawesome-vue-extends
