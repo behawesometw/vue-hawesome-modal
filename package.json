@@ -1,6 +1,6 @@
 {
   "name": "hawesome-vue-extends",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "hawesome-vue-extends",
   "main": "./dist/hawesome-vue-extends.common.js",
   "files": [
@@ -43,7 +43,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-console": "off",
+      "no-debugger": "off"
+    }
   },
   "browserslist": [
     "> 1%",
@@ -53,8 +56,8 @@
     "type": "git",
     "url": "git+https://github.com/behawesometw/hawesome-vue-extends.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "behawesometw",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/behawesometw/hawesome-vue-extends/issues"
   },
