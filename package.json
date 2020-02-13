@@ -1,12 +1,15 @@
 {
   "name": "hawesome-vue-extends",
-  "version": "1.0.10",
+  "version": "1.0.13",
   "description": "hawesome-vue-extends",
   "main": "./dist/hawesome-vue-extends.common.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name hawesome-vue-extends src/packEntry.js",
+    "serve": "vue-cli-service serve ./dev/demoEntry.js",
+    "build-demo-site": "vue-cli-service build --dest demoSite ./dev/demoEntry.js",
+    "build": "vue-cli-service build --target lib --name hawesome-vue-extends src/customPlugin.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -22,8 +25,11 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.0.4",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.3.0"
   },
   "eslintConfig": {
     "root": true,

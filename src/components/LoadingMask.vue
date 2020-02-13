@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isLoading" persistent width="300">
+  <v-dialog v-model="isGlobalLoading" persistent width="300">
     <v-card class="pa-0">
       <v-card-text class="pa-5 text-center">
         {{maskText}}
@@ -10,17 +10,13 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapState({
-      maskText(state) {
-        return state.loadingMask.maskText;
-      }
-    }),
-    ...mapGetters({
-      isLoading: "loadingMask/isLoading"
-    })
+    maskText() {
+      return this.$store.state.loadingMask.maskText;
+    },
+    ...mapGetters(["isGlobalLoading"])
   }
 };
 </script>

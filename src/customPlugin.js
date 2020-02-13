@@ -1,9 +1,6 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify';
 import LoadingMask from './components/LoadingMask'
-import loadingMaskStore from "./js/store";
-
-Vue.use(Vuetify);
+import waitingCountModule from "./modules/waitingCountModule";
+import loadingMaskModule from "./modules/loadingMaskModule";
 
 export default {
     install(Vue, options) {
@@ -12,7 +9,9 @@ export default {
         }
         var $storeFromApp = options.store;
 
-        $storeFromApp.registerModule('loadingMask', loadingMaskStore)
+        $storeFromApp.registerModule('waitingCount', waitingCountModule)
+
+        $storeFromApp.registerModule('loadingMask', loadingMaskModule)
 
         Vue.component('LoadingMask', LoadingMask);
 
@@ -20,10 +19,12 @@ export default {
             get() {
                 return {
                     on(value) {
-                        $storeFromApp.commit('loadingMask/start', value);
+                        $storeFromApp.commit('increase');
+                        $storeFromApp.commit('loadingMask/setMaskText', value);
                     },
                     off() {
-                        $storeFromApp.commit('loadingMask/end');
+                        $storeFromApp.commit('decrease');
+                        $storeFromApp.commit('loadingMask/setMaskText');
                     }
                 }
             }
