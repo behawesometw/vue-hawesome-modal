@@ -1,7 +1,6 @@
 export default {
-    state: {
-        waitingCount: 0
-    },
+    namespaced: true,
+    state: { waitingCount: 0 },
     mutations: {
         increase(state) {
             state.waitingCount++;
@@ -10,7 +9,7 @@ export default {
             if (state.waitingCount > 0) {
                 state.waitingCount--;
             }
-        },
+        }
     },
     getters: {
         isGlobalLoading(state) {

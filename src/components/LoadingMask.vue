@@ -16,7 +16,9 @@ export default {
     maskText() {
       return this.$store.state.loadingMask.maskText;
     },
-    ...mapGetters(["isGlobalLoading"])
+    ...mapGetters({
+      isGlobalLoading: "waitingCount/isGlobalLoading"
+    })
   }
 };
 </script>

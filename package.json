@@ -1,15 +1,18 @@
 {
   "name": "hawesome-vue-extends",
-  "version": "1.0.15",
+  "version": "1.0.20",
   "description": "hawesome-vue-extends",
   "main": "./dist/hawesome-vue-extends.common.js",
+  "types": "index.d.ts",
+  "typing": "index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "serve": "vue-cli-service serve ./dev/demoEntry.js",
     "build-demo-site": "vue-cli-service build --dest demoSite ./dev/demoEntry.js",
-    "build": "vue-cli-service build --target lib --name hawesome-vue-extends src/customPlugin.js",
+    "build": "vue-cli-service build --target lib --name hawesome-vue-extends src/plugin.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

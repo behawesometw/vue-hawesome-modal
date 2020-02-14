@@ -11,7 +11,7 @@ export default {
 
         $storeFromApp.registerModule('waitingCount', waitingCountModule)
 
-        $storeFromApp.registerModule('loadingMask', loadingMaskModule)
+        $storeFromApp.registerModule("loadingMask", loadingMaskModule)
 
         Vue.component('LoadingMask', LoadingMask);
 
@@ -19,12 +19,10 @@ export default {
             get() {
                 return {
                     on(value) {
-                        $storeFromApp.commit('increase');
-                        $storeFromApp.commit('loadingMask/setMaskText', value);
+                        $storeFromApp.dispatch("loadingMask/on", value);
                     },
                     off() {
-                        $storeFromApp.commit('decrease');
-                        $storeFromApp.commit('loadingMask/setMaskText');
+                        $storeFromApp.dispatch("loadingMask/off");
                     }
                 }
             }

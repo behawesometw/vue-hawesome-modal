@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import vuetify from './vuetify'
-import hawesomeVue from '@/customPlugin'
+import hawesomeVue from '../src/plugin'
 import Demo from './Demo'
 import store from "./vuex";
 
