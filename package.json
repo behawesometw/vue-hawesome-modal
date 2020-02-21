@@ -1,6 +1,6 @@
 {
   "name": "hawesome-vue-extends",
-  "version": "1.0.20",
+  "version": "0.0.0-development",
   "description": "hawesome-vue-extends",
   "main": "./dist/hawesome-vue-extends.common.js",
   "types": "index.d.ts",
@@ -14,7 +14,8 @@
     "serve": "vue-cli-service serve ./dev/demoEntry.js --open",
     "build-demo-site": "vue-cli-service build --dest demoSite ./dev/demoEntry.js",
     "build": "vue-cli-service build --target lib --name hawesome-vue-extends src/plugin.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -58,7 +59,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/behawesometw/hawesome-vue-extends.git"
+    "url": "https://github.com/behawesometw/hawesome-vue-extends.git"
   },
   "author": "behawesometw",
   "license": "MIT",
