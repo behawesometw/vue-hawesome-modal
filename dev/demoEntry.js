@@ -2,7 +2,7 @@ import Vue from 'vue'
 import vuetify from './vuetify'
 import hawesomeVue from '../src/plugin'
 import Demo from './Demo'
-import store from "./vuex";
+import store from "./store";
 
 Vue.use(hawesomeVue, { store })
 

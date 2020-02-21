@@ -7,10 +7,11 @@
   "typing": "index.d.ts",
   "files": [
     "dist",
-    "index.d.ts"
+    "index.d.ts",
+    "lib"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve ./dev/demoEntry.js",
+    "serve": "vue-cli-service serve ./dev/demoEntry.js --open",
     "build-demo-site": "vue-cli-service build --dest demoSite ./dev/demoEntry.js",
     "build": "vue-cli-service build --target lib --name hawesome-vue-extends src/plugin.js",
     "lint": "vue-cli-service lint"

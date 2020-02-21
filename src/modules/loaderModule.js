@@ -1,14 +1,14 @@
 export default {
     namespaced: true,
-    state: { maskText: "" },
+    state: { loaderText: "" },
     mutations: {
-        setMaskText(state, maskText) {
-            state.maskText = (maskText && typeof maskText === 'string') ? maskText : "";
+        setLoaderText(state, loaderText) {
+            state.loaderText = (loaderText && typeof loaderText === 'string') ? loaderText : "";
         }
     },
     actions: {
-        on({ commit }, maskText) {
-            commit("setMaskText", maskText);
+        on({ commit }, loaderText) {
+            commit("setLoaderText", loaderText);
             commit('waitingCount/increase', null, { root: true })
         },
         off({ commit }) {

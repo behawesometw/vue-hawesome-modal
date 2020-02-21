@@ -1,0 +1,37 @@
+import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
+
+export default {
+    namespaced: true,
+    state: {
+        config: DialogConfigBuilder.defaultConfig()
+    },
+    mutations: {
+        setConfig(state, config) {
+            state.config = config;
+        }
+    },
+    actions: {
+        talk({ commit }, dialogConfigBuilderInstance) {
+
+            if (!(dialogConfigBuilderInstance instanceof DialogConfigBuilder)) {
+                throw new Error("parameter must be instance of DialogConfigBuilder.");
+            }
+
+            var configReadyToShoot = { ...DialogConfigBuilder.defaultConfig(), ...dialogConfigBuilderInstance.config };
+
+            var dialogPromise = new Promise((rsv, rj) => {
+                configReadyToShoot.resolve = rsv;
+                configReadyToShoot.reject = rj;
+            })
+
+            configReadyToShoot.isShow = true;
+
+            commit("setConfig", configReadyToShoot);
+
+            return dialogPromise;
+        },
+        hangUp({ commit }) {
+            commit('setConfig', { ...DialogConfigBuilder.defaultConfig() })
+        }
+    }
+}
