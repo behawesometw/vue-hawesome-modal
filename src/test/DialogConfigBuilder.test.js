@@ -24,7 +24,7 @@ describe("test DialogConfigBuilder", () => {
     })
 
     it("set attr as null value will be ignored", () => {
-        var builder = new DialogConfigBuilder("test");
+        var builder = new DialogConfigBuilder("isShowTest");
         var intance = builder.set("isShow", null);
         expect(intance instanceof DialogConfigBuilder).toBeTruthy();
         expect(builder.config.isShow).toEqual(undefined);

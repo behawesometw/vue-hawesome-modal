@@ -17,7 +17,7 @@ export default {
         $storeFromApp.registerModule('waitingCount', waitingCountModule)
         $storeFromApp.registerModule("theme", themeModule)
         $storeFromApp.registerModule("loader", loaderModule)
-        $storeFromApp.registerModule("dialog", dialogModule)
+        $storeFromApp.registerModue("dialog", dialogModule)
 
         Vue.component('HawesomeLoader', HawesomeLoader);
         Vue.component('HawesomeDialog', HawesomeDialog);
@@ -45,7 +45,7 @@ export default {
                         else if (val instanceof DialogConfigBuilder) {
                             return $storeFromApp.dispatch("dialog/talk", val);
                         }
-                        else { 
+                        else {
                             throw new Error("val should be a string or instance of DialogConfigBuilder.");
                         }
                     },
