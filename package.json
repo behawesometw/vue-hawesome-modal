@@ -1,6 +1,6 @@
 {
   "name": "hawesome-vue-extends",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "hawesome-vue-extends",
   "main": "./dist/hawesome-vue-extends.common.js",
   "types": "index.d.ts",
