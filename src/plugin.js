@@ -45,7 +45,7 @@ export default {
                         else if (val instanceof DialogConfigBuilder) {
                             return $storeFromApp.dispatch("dialog/talk", val);
                         }
-                        else {
+                        else { 
                             throw new Error("val should be a string or instance of DialogConfigBuilder.");
                         }
                     },
