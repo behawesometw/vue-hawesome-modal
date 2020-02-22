@@ -7,7 +7,7 @@
         label="select color"
         v-model="colorSelect"
         :items="colorItems"
-        @change="colorSelectOnChange"
+        @change="colorSelectChange"
       ></v-combobox>
       <v-btn class="d-block mt-5" @click="loaderTest">loader test</v-btn>
       <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn>
@@ -23,7 +23,7 @@ export default {
     colorItems: ["primary", "error"]
   }),
   methods: {
-    colorSelectOnChange() {
+    colorSelectChange() {
       this.$store.commit("theme/setColor", this.colorSelect);
     },
     loaderTest() {
