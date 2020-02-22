@@ -2,6 +2,7 @@
 node_modules
 demoSite
 dist
+coverage
 
 # local env files
 .env.local
