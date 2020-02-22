@@ -5,7 +5,6 @@ import waitingCountModule from "./modules/waitingCountModule";
 import loaderModule from "./modules/loaderModule";
 import themeModule from "./modules/themeModule";
 import dialogModule from "./modules/dialogModule";
-import Vuex from "vuex";
 
 export default {
     install(Vue, options) {
