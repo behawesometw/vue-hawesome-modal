@@ -17,7 +17,7 @@ export default {
         $storeFromApp.registerModule('waitingCount', waitingCountModule)
         $storeFromApp.registerModule("theme", themeModule)
         $storeFromApp.registerModule("loader", loaderModule)
-        $storeFromApp.registerModue("dialog", dialogModule)
+        $storeFromApp.registerModule("dialog", dialogModule)
 
         Vue.component('HawesomeLoader', HawesomeLoader);
         Vue.component('HawesomeDialog', HawesomeDialog);
