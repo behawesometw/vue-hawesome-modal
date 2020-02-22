@@ -9,7 +9,7 @@ import Vuex from "vuex";
 
 export default {
     install(Vue, options) {
-        if (!options || !options.store || !(options.store instanceof Vuex.Store)) {
+        if (!options || !options.store) {
             throw new Error('Please initialise plugin with a Vuex store.')
         }
 
