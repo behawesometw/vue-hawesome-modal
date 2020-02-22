@@ -44,10 +44,10 @@ export default {
           return that.$dialog.talk(builder);
         })
         .then(() => {
-          console.log("confirm");
+          console.log("confirm!!");
         })
         .catch(() => {
-          console.log("cancel");
+          console.log("cancel!!");
         })
         .finally(that.$dialog.hangUp);
     }
