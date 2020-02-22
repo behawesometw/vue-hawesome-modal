@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/behawesometw/hawesome-vue-extends/compare/v1.1.2...v1.1.3) (2020-02-22)
+
+
+### Bug Fixes
+
+* figure the ci process out ([9ebf919](https://github.com/behawesometw/hawesome-vue-extends/commit/9ebf919704ea1fd68a234036645d510416f594d4))
+
 ## [1.1.2](https://github.com/behawesometw/hawesome-vue-extends/compare/v1.1.1...v1.1.2) (2020-02-22)
 
 
