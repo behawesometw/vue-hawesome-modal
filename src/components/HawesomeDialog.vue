@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    hide-overlay
+    overlay-opacity
     persistent
     v-model="config.isShow"
     :max-width="config.maxWidth"

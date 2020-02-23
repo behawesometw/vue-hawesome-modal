@@ -1,9 +1,9 @@
 <template>
-  <v-dialog v-model="isGlobalLoading" persistent width="300" hide-overlay>
+  <v-dialog v-model="isGlobalLoading" persistent overlay-opacity width="300">
     <v-card class="pa-0">
       <v-card-text class="pa-5 text-center">
         {{loaderText}}
-        <v-progress-linear class="mt-2" height="10" indeterminate :color="color"></v-progress-linear>
+        <v-progress-linear class="mt-2" height="10" indeterminate :color="globalThemeColor"></v-progress-linear>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -13,7 +13,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    color() {
+    globalThemeColor() {
       return this.$store.state.theme.color;
     },
     loaderText() {
