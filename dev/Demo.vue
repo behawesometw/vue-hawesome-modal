@@ -3,6 +3,7 @@
     <div class="ma-auto">
       <HawesomeLoader />
       <HawesomeDialog />
+      <HawesomeNotify />
       <v-combobox
         label="select color"
         v-model="colorSelect"
@@ -11,6 +12,7 @@
       ></v-combobox>
       <v-btn class="d-block mt-5" @click="loaderTest">loader test</v-btn>
       <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn>
+      <v-btn class="d-block mt-5" @click="notiTest">noti test</v-btn>
     </div>
   </v-app>
 </template>
@@ -50,6 +52,22 @@ export default {
           console.log("cancel!!");
         })
         .finally(that.$dialog.hangUp);
+    },
+    notiTest() {
+      this.$notify.info(
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
+      );
+      this.$notify.warning(
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
+      );
+      this.$notify
+        .promise(
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!",
+          "success"
+        )
+        .then(() => {
+          console.log("promised!!");
+        });
     }
   }
 };

@@ -1,10 +1,14 @@
+import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
 import DialogConfigBuilder from "../lib/dialog/dialogConfigBuilder";
-import HawesomeLoader from './components/HawesomeLoader'
-import HawesomeDialog from './components/HawesomeDialog'
+import HawesomeLoader from './components/Loader/HawesomeLoader'
+import HawesomeDialog from './components/Dialog/HawesomeDialog'
+import HawesomeNotify from './components/Notify/HawesomeNotify'
+
 import waitingCountModule from "./modules/waitingCountModule";
 import loaderModule from "./modules/loaderModule";
 import themeModule from "./modules/themeModule";
 import dialogModule from "./modules/dialogModule";
+import notifyModule from "./modules/notifyModule";
 
 export default {
     install(Vue, options) {
@@ -18,9 +22,11 @@ export default {
         $storeFromApp.registerModule("theme", themeModule)
         $storeFromApp.registerModule("loader", loaderModule)
         $storeFromApp.registerModule("dialog", dialogModule)
+        $storeFromApp.registerModule("notify", notifyModule)
 
         Vue.component('HawesomeLoader', HawesomeLoader);
         Vue.component('HawesomeDialog', HawesomeDialog);
+        Vue.component('HawesomeNotify', HawesomeNotify);
 
         Object.defineProperty(Vue.prototype, "$loader", {
             get() {
@@ -51,6 +57,43 @@ export default {
                     },
                     hangUp() {
                         $storeFromApp.dispatch('dialog/hangUp');
+                    }
+                }
+            }
+        })
+
+        Object.defineProperty(Vue.prototype, "$notify", {
+            get() {
+                return {
+                    info(val) {
+                        return this._push(val);
+                    },
+                    success(val) {
+                        var builder = new NotifyConfigBuilder(val).setType("success");
+                        return this._push(builder);
+                    },
+                    warning(val) {
+                        var builder = new NotifyConfigBuilder(val).setType("warning");
+                        return this._push(builder);
+                    },
+                    error(val) {
+                        var builder = new NotifyConfigBuilder(val).setType("error");
+                        return this._push(builder);
+                    },
+                    promise(val, type) {
+                        var builder = new NotifyConfigBuilder(val).setType(type).setTimeout(0);
+                        return this._push(builder);
+                    },
+                    _push(val) {
+                        if (val && typeof val === "string") {
+                            return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
+                        }
+                        else if (val instanceof NotifyConfigBuilder) {
+                            return $storeFromApp.dispatch("notify/push", val);
+                        }
+                        else {
+                            throw new Error("val should be a string or instance of NotifyConfigBuilder.");
+                        }
                     }
                 }
             }

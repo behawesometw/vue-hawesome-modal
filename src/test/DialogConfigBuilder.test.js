@@ -1,32 +1,42 @@
+/* eslint-disable no-undef */
 import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
+import { dialogSizeArr } from "../../lib/dialog/dialogConfigAttribute";
+
 
 describe("test DialogConfigBuilder", () => {
-    it("ctor call", () => {
+    test("ctor call", () => {
         var builder = new DialogConfigBuilder("test");
         expect(builder.config.content).toEqual("test");
     })
 
-    it("defaultConfig", () => {
+    test("ctor call throw error", () => {
+        expect(() => {
+            new DialogConfigBuilder({});
+        }).toThrow()
+    })
+
+    test("defaultConfig", () => {
         var defaultConfig = DialogConfigBuilder.defaultConfig();
-        expect(typeof defaultConfig).toEqual("object");
+        expect(Object.prototype.hasOwnProperty.call(defaultConfig, "resolve")).toBeTruthy();
+        expect(Object.prototype.hasOwnProperty.call(defaultConfig, "reject")).toBeTruthy();
+        expect(Object.prototype.hasOwnProperty.call(defaultConfig, "content")).toBeTruthy();
+        expect(Object.prototype.hasOwnProperty.call(defaultConfig, "notContainThisAttr")).toBeFalsy();
     })
 
-    it("set return builder", () => {
-        var builder = new DialogConfigBuilder("test");
-        var intance = builder.set("isShow", true);
-        expect(intance instanceof DialogConfigBuilder).toBeTruthy();
+    test("setSize", () => {
+        var builder = new DialogConfigBuilder("test").setSize("l");
+        var compareItem = dialogSizeArr.find(m => m.type === "S");
+
+        expect(builder.config.maxWidth >= compareItem.width).toBeTruthy();
+        expect(builder.config.maxHeight >= compareItem.height).toBeTruthy();
     })
 
-    it("set", () => {
-        var builder = new DialogConfigBuilder("test");
-        builder.set("isShow", true);
-        expect(builder.config.isShow).toEqual(true);
+    test("is dialogConfigAttribute well-defined? every element must contains name and defaultVal attr", () => {
+        var flag = new DialogConfigBuilder("isShowTest")
+            ._configAttributeArr
+            .map(m => Object.prototype.hasOwnProperty.call(m, "name") && Object.prototype.hasOwnProperty.call(m, "defaultVal"))
+            .some(m => !m);
+        expect(flag).toBeFalsy();
     })
 
-    it("set attr as null value will be ignored", () => {
-        var builder = new DialogConfigBuilder("isShowTest");
-        var intance = builder.set("isShow", null);
-        expect(intance instanceof DialogConfigBuilder).toBeTruthy();
-        expect(builder.config.isShow).toEqual(undefined);
-    })
 })
