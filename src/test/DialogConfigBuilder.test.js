@@ -30,13 +30,4 @@ describe("test DialogConfigBuilder", () => {
         expect(builder.config.maxWidth >= compareItem.width).toBeTruthy();
         expect(builder.config.maxHeight >= compareItem.height).toBeTruthy();
     })
-
-    test("is dialogConfigAttribute well-defined? every element must contains name and defaultVal attr", () => {
-        var flag = new DialogConfigBuilder("isShowTest")
-            ._configAttributeArr
-            .map(m => Object.prototype.hasOwnProperty.call(m, "name") && Object.prototype.hasOwnProperty.call(m, "defaultVal"))
-            .some(m => !m);
-        expect(flag).toBeFalsy();
-    })
-
 })

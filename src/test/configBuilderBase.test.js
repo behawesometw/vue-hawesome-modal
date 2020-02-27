@@ -4,8 +4,8 @@ import ConfigBuilderBase from "../../lib/common/configBuilderBase";
 const configAttributeArr = [
     { name: "content", defaultVal: "" },
     { name: "key", defaultVal: "" },
-    { name: "key", defaultVal: "" },
-    { name: "value", defaultVal: "" }
+    { name: "value", defaultVal: "" },
+    { name: "valueCascade", defaultVal: "", cascadeAttr: ["value"] }
 ];
 
 describe("test ConfigBuilderBase", () => {
@@ -36,7 +36,6 @@ describe("test ConfigBuilderBase", () => {
         expect(Object.prototype.hasOwnProperty.call(defaultConfig, "key")).toBeTruthy();
         expect(Object.prototype.hasOwnProperty.call(defaultConfig, "value")).toBeTruthy();
         expect(Object.prototype.hasOwnProperty.call(defaultConfig, "notContainThisAttr")).toBeFalsy();
-        expect(Object.keys(defaultConfig).length).toEqual(3);
     })
 
     test("set return builder", () => {
@@ -49,6 +48,18 @@ describe("test ConfigBuilderBase", () => {
         var builder = new ConfigBuilderBase("test", configAttributeArr);
         builder.set("key", "theKey");
         expect(builder.config.key).toEqual("theKey");
+    })
+
+    test("set a non-existent attr does't impact config object", () => {
+        var builder = new ConfigBuilderBase("test", configAttributeArr);
+        builder.set("nonExistentAttr", "nonExistent")
+        expect(builder.config.nonExistentAttr).toEqual(undefined);
+    })
+
+    test("set cascade attr", () => {
+        var builder = new ConfigBuilderBase("test", configAttributeArr);
+        builder.set("valueCascade", "theValue");
+        expect(builder.config.value).toEqual("theValue");
     })
 
     test("set attr as null value will be ignored", () => {
@@ -64,5 +75,19 @@ describe("test ConfigBuilderBase", () => {
             .map(m => Object.prototype.hasOwnProperty.call(m, "name") && Object.prototype.hasOwnProperty.call(m, "defaultVal"))
             .some(m => !m);
         expect(flag).toBeFalsy();
+    })
+
+    test("is configAttributeArr well-defined? no duplicate name attribute in array.", () => {
+        var hasDuplicate = new ConfigBuilderBase("isShowTest", configAttributeArr)
+            ._configAttributeArr.map((obj, idx, arr) => {
+                return {
+                    name: obj.name,
+                    cnt: arr.map(m => m.name === obj.name).reduce((acc, cur) => {
+                        return cur ? ++acc : acc;
+                    }, 0)
+                }
+            }).some(m => m.cnt > 1);
+
+        expect(hasDuplicate).toBeFalsy();
     })
 })
