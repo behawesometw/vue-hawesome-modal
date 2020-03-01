@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
-import { dialogSizeArr } from "../../lib/dialog/dialogConfigAttribute";
-
+import DialogConfigBuilder from "../../../lib/dialog/dialogConfigBuilder";
+import { dialogSizeArr } from "../../../lib/dialog/dialogConfigAttribute";
 
 describe("test DialogConfigBuilder", () => {
     test("ctor call", () => {

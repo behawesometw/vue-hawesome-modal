@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import ConfigBuilderBase from "../../lib/common/configBuilderBase";
+import ConfigBuilderBase from "../../../lib/common/configBuilderBase";
 
 const configAttributeArr = [
     { name: "content", defaultVal: "" },
