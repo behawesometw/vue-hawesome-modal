@@ -7,6 +7,6 @@ describe("themeModule", () => {
     test("mutations", () => {
         var state = { color: "primary" };
         setColor(state, "success");
-        expect(state.color).toEqual("success");
+        expect(state.color).toEqual("suc1cess");
     })
 })
