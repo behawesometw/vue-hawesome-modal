@@ -22,3 +22,5 @@ jobs:
         github_token: ${GITHUB_TOKEN}
         keep_history: true
         local_dir: demoSite
+        on:
+          branch: master
