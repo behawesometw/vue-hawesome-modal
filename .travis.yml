@@ -5,11 +5,11 @@ node_js:
 
 jobs:
   include:
-    - stage: release
+    - stage: test
+      script: npm run test
+    - stage: deployLibraryToNPM
       node_js: lts/*
-      script:
-        - npm run test
-        - npm run build
+      script: npm run build
       deploy:
         provider: script
         skip_cleanup: true
