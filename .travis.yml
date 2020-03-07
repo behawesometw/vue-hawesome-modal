@@ -22,5 +22,3 @@ jobs:
         github_token: 1bd66a6e018565cb42c0f8c2a4d208d10cc15e93
         keep_history: true
         local_dir: demoSite
-        on:
-          branch: master
