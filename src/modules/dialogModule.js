@@ -3,21 +3,29 @@ import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
 export default {
     namespaced: true,
     state: {
-        config: DialogConfigBuilder.defaultConfig()
+        config: DialogConfigBuilder.defaultConfig(),
+        globalSetting: {}
     },
     mutations: {
+        setGlobalSetting(state, setting) {
+            state.globalSetting = { ...state.globalSetting, ...setting };
+        },
         setConfig(state, config) {
             state.config = config;
         }
     },
     actions: {
-        talk({ commit }, dialogConfigBuilderInstance) {
+        talk({ commit, state }, dialogConfigBuilderInstance) {
 
             if (!(dialogConfigBuilderInstance instanceof DialogConfigBuilder)) {
                 throw new Error("parameter must be instance of DialogConfigBuilder.");
             }
 
-            var configReadyToShoot = { ...DialogConfigBuilder.defaultConfig(), ...dialogConfigBuilderInstance.config };
+            var configReadyToShoot = {
+                ...DialogConfigBuilder.defaultConfig(),
+                ...state.globalSetting,
+                ...dialogConfigBuilderInstance.config
+            };
 
             var dialogPromise = new Promise((rsv, rj) => {
                 configReadyToShoot.resolve = rsv;

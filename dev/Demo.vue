@@ -1,9 +1,9 @@
 <template>
   <v-app>
+    <HawesomeLoader />
+    <HawesomeDialog />
+    <HawesomeNotify />
     <div class="ma-auto">
-      <HawesomeLoader />
-      <HawesomeDialog />
-      <HawesomeNotify />
       <v-combobox
         label="select color"
         v-model="colorSelect"
@@ -18,11 +18,15 @@
 </template>
 
 <script>
+// todo: notify 漸變
+// todo: 寫 readme.md 並調整程式碼到更適合的情境
+
 import DialogConfigBuilder from "../lib/dialog/dialogConfigBuilder";
+// import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
 export default {
   data: () => ({
     colorSelect: "primary",
-    colorItems: ["primary", "error"]
+    colorItems: ["primary", "error", "success"]
   }),
   methods: {
     colorSelectChange() {
@@ -54,20 +58,36 @@ export default {
         .finally(that.$dialog.hangUp);
     },
     notiTest() {
-      this.$notify.info(
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
-      );
-      this.$notify.warning(
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
-      );
-      this.$notify
-        .promise(
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!",
-          "success"
-        )
-        .then(() => {
-          console.log("promised!!");
-        });
+      // this.$notify.info(
+      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
+      // );
+
+      // var builder = new NotifyConfigBuilder(
+      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
+      // )
+      //   .setTimeout(5)
+      //   .setType("success");
+      // this.$notify._push(builder);
+
+      // setTimeout(() => {
+      //   this.$notify
+      //     .promise(
+      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!",
+      //       "success"
+      //     )
+      //     .then(() => {
+      //       console.log("promised!!");
+      //     });
+      // }, 1000);
+
+      // setTimeout(() => {
+      //   this.$notify.warning(
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
+      //   );
+      // }, 2000);
+      this.$notify.promise("1", "success");
+      this.$notify.promise("2", "success");
+      this.$notify.promise("3", "success");
     }
   }
 };

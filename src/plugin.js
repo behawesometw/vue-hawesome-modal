@@ -24,6 +24,13 @@ export default {
         $storeFromApp.registerModule("dialog", dialogModule)
         $storeFromApp.registerModule("notify", notifyModule)
 
+        if (options.loaderSetting)
+            $storeFromApp.commit('loader/setGlobalSetting', options.loaderSetting)
+        if (options.dialogSetting)
+            $storeFromApp.commit('dialog/setGlobalSetting', options.dialogSetting)
+        if (options.notifySetting)
+            $storeFromApp.commit('notify/setGlobalSetting', options.notifySetting)
+
         Vue.component('HawesomeLoader', HawesomeLoader);
         Vue.component('HawesomeDialog', HawesomeDialog);
         Vue.component('HawesomeNotify', HawesomeNotify);

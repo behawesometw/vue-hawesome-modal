@@ -1,5 +1,5 @@
 <template>
-  <div class="notify-container">
+  <div class="notify-container" :class="position">
     <div v-for="(item, index) in notifyList" :key="index">
       <HawesomeNotifyItem :item="item" />
     </div>
@@ -13,6 +13,33 @@ export default {
   computed: {
     notifyList() {
       return this.$store.state.notify.list;
+    },
+    position() {
+      var p = {};
+      switch (this.$store.state.notify.globalSetting.position) {
+        case "topRight":
+          p.top = true;
+          p.right = true;
+          break;
+        case "bottomRight":
+          p.bottom = true;
+          p.right = true;
+          break;
+        case "topLeft":
+          p.top = true;
+          p.left = true;
+          break;
+        case "bottomLeft":
+          p.bottom = true;
+          p.left = true;
+          break;
+        default:
+          p.bottom = true;
+          p.right = true;
+          break;
+      }
+      console.log(p);
+      return p;
     }
   }
 };
@@ -20,13 +47,23 @@ export default {
 <style scoped>
 .notify-container {
   display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
   position: fixed;
-  right: 0;
-  bottom: 0;
   width: auto;
   height: auto;
   z-index: 9999;
+}
+.top {
+  top: 10px;
+  flex-direction: column-reverse;
+}
+.bottom {
+  bottom: 5px;
+  flex-direction: column;
+}
+.right {
+  right: 10px;
+}
+.left {
+  left: 10px;
 }
 </style>

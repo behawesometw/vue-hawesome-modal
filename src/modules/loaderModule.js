@@ -1,7 +1,15 @@
 export default {
     namespaced: true,
-    state: { loaderText: "" },
+    state: {
+        loaderText: "",
+        globalSetting: {
+            type: "linear"
+        }
+    },
     mutations: {
+        setGlobalSetting(state, setting) {
+            state.globalSetting = { ...state.globalSetting, ...setting };
+        },
         setLoaderText(state, loaderText) {
             state.loaderText = (loaderText && typeof loaderText === 'string') ? loaderText : "";
         }
