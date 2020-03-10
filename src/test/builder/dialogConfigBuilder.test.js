@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import DialogConfigBuilder from "../../../lib/dialog/dialogConfigBuilder";
 import { dialogSizeArr } from "../../../lib/dialog/dialogConfigAttribute";
 

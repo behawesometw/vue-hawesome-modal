@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import dialogConfigAttribute from "../../../lib/dialog/dialogConfigAttribute";
 import notifyConfigAttribute from "../../../lib/notify/notifyConfigAttribute";
 import { isArrEveryElementContainCertainAttrs, isArrElementContainNameAttrAndNameBeUnique } from "../helper/testHelper";

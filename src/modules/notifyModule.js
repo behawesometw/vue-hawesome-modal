@@ -7,7 +7,8 @@ export default {
     state: {
         list: [],
         globalSetting: {
-            position: "bottomRight"
+            position: "bottomRight",
+            timeout: 3
         }
     },
     mutations: {

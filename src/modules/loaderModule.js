@@ -1,17 +1,24 @@
+var textHandler = (text) => {
+    return (text && text.trim() && typeof text === "string") ? text.trim() : "";
+}
+
 export default {
     namespaced: true,
     state: {
         loaderText: "",
         globalSetting: {
-            type: "linear"
+            type: "linear",
+            loaderText: ""
         }
     },
     mutations: {
         setGlobalSetting(state, setting) {
             state.globalSetting = { ...state.globalSetting, ...setting };
         },
-        setLoaderText(state, loaderText) {
-            state.loaderText = (loaderText && typeof loaderText === 'string') ? loaderText : "";
+        setLoaderText(state, loaderTextIn) {
+            var loaderText = textHandler(loaderTextIn);
+            var loaderTextGlobal = textHandler(state.globalSetting.loaderText);
+            state.loaderText = loaderText || loaderTextGlobal || "";
         }
     },
     actions: {

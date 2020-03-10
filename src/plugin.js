@@ -73,25 +73,25 @@ export default {
             get() {
                 return {
                     info(val) {
-                        return this._push(val);
+                        return this.push(val);
                     },
                     success(val) {
                         var builder = new NotifyConfigBuilder(val).setType("success");
-                        return this._push(builder);
+                        return this.push(builder);
                     },
                     warning(val) {
                         var builder = new NotifyConfigBuilder(val).setType("warning");
-                        return this._push(builder);
+                        return this.push(builder);
                     },
                     error(val) {
                         var builder = new NotifyConfigBuilder(val).setType("error");
-                        return this._push(builder);
+                        return this.push(builder);
                     },
                     promise(val, type) {
                         var builder = new NotifyConfigBuilder(val).setType(type).setTimeout(0);
-                        return this._push(builder);
+                        return this.push(builder);
                     },
-                    _push(val) {
+                    push(val) {
                         if (val && typeof val === "string") {
                             return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
                         }

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import ConfigBuilderBase from "../../../lib/common/configBuilderBase";
 
 const configAttributeArr = [

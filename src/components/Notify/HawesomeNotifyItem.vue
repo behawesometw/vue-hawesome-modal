@@ -1,25 +1,30 @@
 <template>
-  <div v-if="!item.isDone">
-    <v-hover v-slot:default="{ hover }">
-      <v-card
-        width="250"
-        height="50"
-        class="mb-10"
-        :elevation="hover ? 12 : 2"
-        :class="{ 'on-hover': hover }"
-      >
-        <v-progress-linear v-if="hasLoadingProgress" :color="item.type" :value="item.progressValue"></v-progress-linear>
-        <v-toolbar>
-          <v-icon class="mr-2" :color="item.type" v-text="item.icon"></v-icon>
-          <div class="noti-content" v-html="item.content"></div>
-          <v-spacer></v-spacer>
-          <v-btn icon :color="item.type" @click="resolveNoti(item)">
-            <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-          </v-btn>
-        </v-toolbar>
-      </v-card>
-    </v-hover>
-  </div>
+  <transition name="fade">
+    <div v-if="!item.isDone">
+      <v-hover v-slot:default="{ hover }">
+        <v-card
+          width="250"
+          height="50"
+          :elevation="hover ? 12 : 2"
+          :class="[{'on-hover': hover}, itemMarginClass]"
+        >
+          <v-progress-linear
+            v-if="hasLoadingProgress"
+            :color="item.type"
+            :value="item.progressValue"
+          ></v-progress-linear>
+          <v-toolbar>
+            <v-icon class="mr-2" :color="item.type" v-text="item.icon"></v-icon>
+            <div class="noti-content" v-html="item.content"></div>
+            <v-spacer></v-spacer>
+            <v-btn icon :color="item.type" @click="resolveNoti(item)">
+              <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
+            </v-btn>
+          </v-toolbar>
+        </v-card>
+      </v-hover>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -38,6 +43,13 @@ export default {
   computed: {
     hasLoadingProgress() {
       return this.item.timeout > 0;
+    },
+    itemMarginClass() {
+      return {
+        [`${
+          this.$store.state.notify.globalSetting.position.top ? "mt-8" : "mb-8"
+        }`]: true
+      };
     }
   }
 };
@@ -48,5 +60,19 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.v-progress-linear__bar,
+.v-progress-linear__bar__determinate {
+  transition: none;
 }
 </style>

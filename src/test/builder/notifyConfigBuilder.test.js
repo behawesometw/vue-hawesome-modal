@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import NotifyConfigBuilder from "../../../lib/notify/notifyConfigBuilder";
 import { typeMappingArr } from "../../../lib/notify/notifyConfigAttribute";
 

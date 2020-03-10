@@ -18,7 +18,7 @@ declare module 'vue/types/vue' {
             warning(notiText: string): Promise<null>,
             error(notiText: string): Promise<null>,
             promise(notiText: string, type: string): Promise<null>,
-            _push(val: String | NotifyConfigBuilder): Promise<null>,
+            push(val: String | NotifyConfigBuilder): Promise<null>,
         }
     }
 }

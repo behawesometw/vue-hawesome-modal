@@ -1,33 +1,46 @@
 <template>
   <v-app>
-    <HawesomeLoader />
-    <HawesomeDialog />
-    <HawesomeNotify />
-    <div class="ma-auto">
-      <v-combobox
-        label="select color"
-        v-model="colorSelect"
-        :items="colorItems"
-        @change="colorSelectChange"
-      ></v-combobox>
-      <v-btn class="d-block mt-5" @click="loaderTest">loader test</v-btn>
-      <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn>
-      <v-btn class="d-block mt-5" @click="notiTest">noti test</v-btn>
-    </div>
+    <HawesomeLoader></HawesomeLoader>
+    <HawesomeDialog></HawesomeDialog>
+    <HawesomeNotify></HawesomeNotify>
+
+    <v-tabs centered grow :color="globalThemeColor">
+      <v-tab>dialog</v-tab>
+      <v-tab>lodaer</v-tab>
+      <v-tab>notify</v-tab>
+
+      <v-tab-item>1</v-tab-item>
+      <v-tab-item>2</v-tab-item>
+      <v-tab-item>3</v-tab-item>
+    </v-tabs>
+    <v-combobox
+      label="select color"
+      v-model="colorSelect"
+      :items="colorItems"
+      @change="colorSelectChange"
+    ></v-combobox>
+
+    <v-btn class="d-block mt-5" @click="loaderTest">loader test</v-btn>
+    <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn>
+    <v-btn class="d-block mt-5" @click="notiTest">noti test</v-btn>
   </v-app>
 </template>
 
 <script>
-// todo: notify 漸變
 // todo: 寫 readme.md 並調整程式碼到更適合的情境
 
 import DialogConfigBuilder from "../lib/dialog/dialogConfigBuilder";
-// import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
+import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
 export default {
   data: () => ({
     colorSelect: "primary",
     colorItems: ["primary", "error", "success"]
   }),
+  computed: {
+    globalThemeColor() {
+      return this.$store.state.theme.color;
+    }
+  },
   methods: {
     colorSelectChange() {
       this.$store.commit("theme/setColor", this.colorSelect);
@@ -58,36 +71,25 @@ export default {
         .finally(that.$dialog.hangUp);
     },
     notiTest() {
-      // this.$notify.info(
-      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
-      // );
+      this.$notify.info("info");
 
-      // var builder = new NotifyConfigBuilder(
-      //   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
-      // )
-      //   .setTimeout(5)
-      //   .setType("success");
-      // this.$notify._push(builder);
+      this.$notify.push(
+        new NotifyConfigBuilder("success").setTimeout(1).setType("success")
+      );
 
-      // setTimeout(() => {
-      //   this.$notify
-      //     .promise(
-      //       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!",
-      //       "success"
-      //     )
-      //     .then(() => {
-      //       console.log("promised!!");
-      //     });
-      // }, 1000);
+      this.$notify.push(
+        new NotifyConfigBuilder("warning").setTimeout(3).setType("warning")
+      );
 
-      // setTimeout(() => {
-      //   this.$notify.warning(
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolorem!"
-      //   );
-      // }, 2000);
-      this.$notify.promise("1", "success");
-      this.$notify.promise("2", "success");
-      this.$notify.promise("3", "success");
+      this.$notify.push(
+        new NotifyConfigBuilder("error").setTimeout(4).setType("error")
+      );
+
+      setTimeout(() => {
+        this.$notify.promise("success", "info").then(() => {
+          console.log("done");
+        });
+      }, 2000);
     }
   }
 };
