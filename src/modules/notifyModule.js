@@ -33,6 +33,15 @@ export default {
             if (totalCnt == itemDoneCnt) {
                 state.list = [];
             }
+        },
+        resolveAllNotify(state) {
+            state.list.forEach(notifyObj => {
+                notifyObj.resolve();
+            });
+            state.list = [];
+        },
+        clearAllNotify(state) {
+            state.list = [];
         }
     },
     actions: {

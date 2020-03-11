@@ -10,6 +10,10 @@ import themeModule from "./modules/themeModule";
 import dialogModule from "./modules/dialogModule";
 import notifyModule from "./modules/notifyModule";
 
+const isWellDefinedFunction = (func) => {
+    return func && typeof func === "function";
+};
+
 export default {
     install(Vue, options) {
         if (!options || !options.store) {
@@ -51,7 +55,12 @@ export default {
         Object.defineProperty(Vue.prototype, "$dialog", {
             get() {
                 return {
-                    talk(val) {
+                    talk(val, func) {
+                        var builder = new DialogConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._talk(builder);
+                    },
+                    _talk(val) {
                         if (val && typeof val === "string") {
                             return $storeFromApp.dispatch("dialog/talk", new DialogConfigBuilder(val));
                         }
@@ -72,26 +81,37 @@ export default {
         Object.defineProperty(Vue.prototype, "$notify", {
             get() {
                 return {
-                    info(val) {
-                        return this.push(val);
+                    info(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("info"));
                     },
-                    success(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("success");
-                        return this.push(builder);
+                    success(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("success"));
                     },
-                    warning(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("warning");
-                        return this.push(builder);
+                    warning(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("warning"));
                     },
-                    error(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("error");
-                        return this.push(builder);
+                    error(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("error"));
                     },
-                    promise(val, type) {
-                        var builder = new NotifyConfigBuilder(val).setType(type).setTimeout(0);
-                        return this.push(builder);
+                    promise(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setTimeout(0));
                     },
-                    push(val) {
+                    push(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder);
+                    },
+                    _push(val) {
                         if (val && typeof val === "string") {
                             return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
                         }
@@ -101,7 +121,13 @@ export default {
                         else {
                             throw new Error("val should be a string or instance of NotifyConfigBuilder.");
                         }
-                    }
+                    },
+                    resolveAllNotify() {
+                        $storeFromApp.commit('notify/resolveAllNotify')
+                    },
+                    clearAllNotify() {
+                        $storeFromApp.commit('notify/clearAllNotify')
+                    },
                 }
             }
         })

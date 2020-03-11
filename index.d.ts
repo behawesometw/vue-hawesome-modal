@@ -1,4 +1,3 @@
-import Vue from "vue";
 import DialogConfigBuilder from "./lib/dialog/dialogConfigBuilder";
 import NotifyConfigBuilder from "./lib/notify/notifyConfigBuilder";
 
@@ -9,16 +8,20 @@ declare module 'vue/types/vue' {
             off(): void,
         },
         $dialog: {
-            talk(val: String | DialogConfigBuilder): Promise<null>,
+            talk(val: string, func: (builder: DialogConfigBuilder) => void): Promise<null>,
+            _talk(val: String | DialogConfigBuilder): Promise<null>,
             hangUp(): void
         },
         $notify: {
-            info(notiText: string): Promise<null>,
-            success(notiText: string): Promise<null>,
-            warning(notiText: string): Promise<null>,
-            error(notiText: string): Promise<null>,
-            promise(notiText: string, type: string): Promise<null>,
-            push(val: String | NotifyConfigBuilder): Promise<null>,
+            info(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            success(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            warning(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            error(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            promise(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            push(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
+            _push(val: String | NotifyConfigBuilder): Promise<null>,
+            resolveAllNotify(): void,
+            clearAllNotify(): void
         }
     }
 }

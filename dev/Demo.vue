@@ -3,17 +3,12 @@
     <HawesomeLoader></HawesomeLoader>
     <HawesomeDialog></HawesomeDialog>
     <HawesomeNotify></HawesomeNotify>
-    <!-- 
 
-    <v-btn class="d-block mt-5" @click="loaderTest">loader test</v-btn>
-    <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn>
-    <v-btn class="d-block mt-5" @click="notiTest">noti test</v-btn>
-
-    -->
+    <!-- <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn> -->
 
     <v-card height="100%">
       <v-toolbar :color="globalThemeColor" dark>
-        <v-toolbar-title>Hawesome-vue-extends</v-toolbar-title>
+        <v-toolbar-title>hawesome-vue-extends</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -28,11 +23,23 @@
             <v-list>
               <v-list-item>
                 <v-combobox
-                  label="select color"
-                  v-model="colorSelect"
+                  label="select/type a color(or theme)"
+                  v-model="colorInput"
                   :items="colorItems"
-                  @change="colorSelectChange"
+                  @change="colorInputChange"
                 ></v-combobox>
+              </v-list-item>
+            </v-list>
+            <v-divider></v-divider>
+            <v-list>
+              <v-list-item>
+                <v-color-picker
+                  v-model="colorPick"
+                  hide-mode-switch
+                  hide-canvas
+                  flat
+                  @input="colorPickChange"
+                ></v-color-picker>
               </v-list-item>
             </v-list>
           </v-card>
@@ -61,7 +68,8 @@
 </template>
 
 <script>
-// todo: 寫 readme.md 並調整程式碼到更適合的情境
+// todo: 寫 readme.md
+// todo: rwd consider
 
 import Vue from "vue";
 
@@ -73,12 +81,11 @@ Vue.component("DialogDemo", DialogDemo);
 Vue.component("LoaderDemo", LoaderDemo);
 Vue.component("NotifyDemo", NotifyDemo);
 
-import DialogConfigBuilder from "../lib/dialog/dialogConfigBuilder";
-import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
 export default {
   data: () => ({
-    colorSelect: "primary",
+    colorInput: "primary",
     colorItems: ["primary", "error", "success"],
+    colorPick: "#1976d2FF",
     tab: null,
     demoComponents: ["Dialog", "Loader", "Notify"]
   }),
@@ -88,25 +95,27 @@ export default {
     }
   },
   methods: {
-    colorSelectChange() {
-      this.$store.commit("theme/setColor", this.colorSelect);
+    colorInputChange() {
+      if (this.colorInput) {
+        this.$store.commit("theme/setColor", this.colorInput);
+      }
     },
-    loaderTest() {
-      this.$loader.on();
-      setTimeout(() => {
-        this.$loader.off();
-      }, 2000);
+    colorPickChange() {
+      if (this.colorPick) {
+        this.$store.commit("theme/setColor", this.colorPick);
+      }
     },
     dialogTest() {
       var that = this;
       that.$dialog
         .talk("chainable testing")
         .then(() => {
-          var builder = new DialogConfigBuilder("chaining")
-            .set("confirmBtnTxt", "success")
-            .set("themeColor", "purple")
-            .set("isShowCancelBtn", false);
-          return that.$dialog.talk(builder);
+          return that.$dialog.talk("chaining", builder => {
+            builder
+              .set("confirmBtnTxt", "success")
+              .set("themeColor", "purple")
+              .set("isShowCancelBtn", false);
+          });
         })
         .then(() => {
           console.log("confirm!!");
@@ -115,27 +124,6 @@ export default {
           console.log("cancel!!");
         })
         .finally(that.$dialog.hangUp);
-    },
-    notiTest() {
-      this.$notify.info("info");
-
-      this.$notify.push(
-        new NotifyConfigBuilder("success").setTimeout(1).setType("success")
-      );
-
-      this.$notify.push(
-        new NotifyConfigBuilder("warning").setTimeout(3).setType("warning")
-      );
-
-      this.$notify.push(
-        new NotifyConfigBuilder("error").setTimeout(4).setType("error")
-      );
-
-      setTimeout(() => {
-        this.$notify.promise("success", "info").then(() => {
-          console.log("done");
-        });
-      }, 2000);
     }
   }
 };

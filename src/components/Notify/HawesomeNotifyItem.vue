@@ -45,10 +45,10 @@ export default {
       return this.item.timeout > 0;
     },
     itemMarginClass() {
+      var position = this.$store.state.notify.globalSetting.position;
+      var isTop = position && position.indexOf("top") > -1;
       return {
-        [`${
-          this.$store.state.notify.globalSetting.position.top ? "mt-8" : "mb-8"
-        }`]: true
+        [`${isTop ? "mt-6" : "mb-6"}`]: true
       };
     }
   }

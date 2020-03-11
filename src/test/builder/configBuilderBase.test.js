@@ -1,4 +1,5 @@
 import ConfigBuilderBase from "../../../lib/common/configBuilderBase";
+import { isArrEveryElementContainCertainAttrs, isArrElementContainNameAttrAndNameBeUnique } from "../helper/testHelper";
 
 const configAttributeArr = [
     { name: "content", defaultVal: "" },
@@ -69,24 +70,20 @@ describe("test ConfigBuilderBase", () => {
     })
 
     test("is configAttributeArr well-defined? every element must contains name and defaultVal attr", () => {
-        var flag = new ConfigBuilderBase("isShowTest", configAttributeArr)
-            ._configAttributeArr
-            .map(m => Object.prototype.hasOwnProperty.call(m, "name") && Object.prototype.hasOwnProperty.call(m, "defaultVal"))
-            .some(m => !m);
-        expect(flag).toBeFalsy();
+
+        var testTarget = new ConfigBuilderBase("isShowTest", configAttributeArr)._configAttributeArr;
+
+        var flag1 = isArrEveryElementContainCertainAttrs(testTarget, ["name", "defaultVal"]);
+        expect(flag1).toBeTruthy();
+
+        var flag2 = isArrEveryElementContainCertainAttrs(testTarget, ["name", "cascadeAttr"]);
+        expect(flag2).toBeFalsy();
     })
 
     test("is configAttributeArr well-defined? no duplicate name attribute in array.", () => {
-        var hasDuplicate = new ConfigBuilderBase("isShowTest", configAttributeArr)
-            ._configAttributeArr.map((obj, idx, arr) => {
-                return {
-                    name: obj.name,
-                    cnt: arr.map(m => m.name === obj.name).reduce((acc, cur) => {
-                        return cur ? ++acc : acc;
-                    }, 0)
-                }
-            }).some(m => m.cnt > 1);
+        var testTarget = new ConfigBuilderBase("isShowTest", configAttributeArr)._configAttributeArr
 
-        expect(hasDuplicate).toBeFalsy();
+        var flag = isArrElementContainNameAttrAndNameBeUnique(testTarget);
+        expect(flag).toBeTruthy()
     })
 })
