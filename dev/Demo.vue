@@ -54,13 +54,7 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="(component, index) in demoComponents" :key="index">
-          <div class="tab-item-wrapper">
-            <v-container fill-height>
-              <v-row justify="center" align="center">
-                <component v-bind:is="`${component}Demo`"></component>
-              </v-row>
-            </v-container>
-          </div>
+          <component v-bind:is="`${component}Demo`"></component>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
