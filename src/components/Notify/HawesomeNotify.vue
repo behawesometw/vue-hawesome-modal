@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import HawesomeNotifyItem from "./HawesomeNotifyItem";
+import HawesomeNotifyItem, { positionCheck } from "./HawesomeNotifyItem";
 export default {
   components: { HawesomeNotifyItem },
   computed: {
@@ -27,30 +27,7 @@ export default {
       return this.position.top ? "list-top" : "list-bottom";
     },
     position() {
-      var p = {};
-      switch (this.$store.state.notify.globalSetting.position) {
-        case "topRight":
-          p.top = true;
-          p.right = true;
-          break;
-        case "bottomRight":
-          p.bottom = true;
-          p.right = true;
-          break;
-        case "topLeft":
-          p.top = true;
-          p.left = true;
-          break;
-        case "bottomLeft":
-          p.bottom = true;
-          p.left = true;
-          break;
-        default:
-          p.bottom = true;
-          p.right = true;
-          break;
-      }
-      return p;
+      return positionCheck(this.$store.state.notify.globalSetting.position);
     }
   }
 };

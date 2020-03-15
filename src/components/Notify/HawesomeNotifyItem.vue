@@ -28,6 +28,33 @@
 </template>
 
 <script>
+export const positionCheck = position => {
+  var result = {};
+  switch (position) {
+    case "topRight":
+      result.top = true;
+      result.right = true;
+      break;
+    case "bottomRight":
+      result.bottom = true;
+      result.right = true;
+      break;
+    case "topLeft":
+      result.top = true;
+      result.left = true;
+      break;
+    case "bottomLeft":
+      result.bottom = true;
+      result.left = true;
+      break;
+    default:
+      result.bottom = true;
+      result.right = true;
+      break;
+  }
+  return result;
+};
+
 export default {
   props: {
     item: {
@@ -45,10 +72,11 @@ export default {
       return this.item.timeout > 0;
     },
     itemMarginClass() {
-      var position = this.$store.state.notify.globalSetting.position;
-      var isTop = position && position.indexOf("top") > -1;
+      var positionObj = positionCheck(
+        this.$store.state.notify.globalSetting.position
+      );
       return {
-        [`${isTop ? "mt-6" : "mb-6"}`]: true
+        [`${positionObj.top ? "mt-6" : "mb-6"}`]: true
       };
     }
   }

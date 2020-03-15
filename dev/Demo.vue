@@ -6,12 +6,15 @@
 
     <!-- <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn> -->
 
-    <v-card height="100%">
+    <v-card flat>
       <v-toolbar :color="globalThemeColor" dark>
         <v-toolbar-title>hawesome-vue-extends</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
+        <v-btn icon>
+          <v-icon>mdi-invert-colors</v-icon>
+        </v-btn>
         <v-menu :close-on-content-click="false" :nudge-width="200" offset-x>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
@@ -23,9 +26,10 @@
             <v-list>
               <v-list-item>
                 <v-combobox
-                  label="select/type a color(or theme)"
+                  label="select/type a color"
                   v-model="colorInput"
                   :items="colorItems"
+                  :color="globalThemeColor"
                   @change="colorInputChange"
                 ></v-combobox>
               </v-list-item>
@@ -53,7 +57,11 @@
       </v-toolbar>
 
       <v-tabs-items v-model="tab">
-        <v-tab-item v-for="(component, index) in demoComponents" :key="index">
+        <v-tab-item
+          v-for="(component, index) in demoComponents"
+          :key="index"
+          class="tab-item-full-height"
+        >
           <component v-bind:is="`${component}Demo`"></component>
         </v-tab-item>
       </v-tabs-items>
@@ -63,7 +71,9 @@
 
 <script>
 // todo: 寫 readme.md
-// todo: rwd consider
+// todo: component rwd consider
+// todo: dark theme
+// todo: 輸入顏色特定顏色時，全部看不到的問題
 
 import Vue from "vue";
 
@@ -78,7 +88,7 @@ Vue.component("NotifyDemo", NotifyDemo);
 export default {
   data: () => ({
     colorInput: "primary",
-    colorItems: ["primary", "error", "success"],
+    colorItems: ["primary", "info", "success", "error", "warning"],
     colorPick: "#1976d2FF",
     tab: null,
     demoComponents: ["Dialog", "Loader", "Notify"]
@@ -124,8 +134,8 @@ export default {
 </script>
 
 <style>
-.tab-item-wrapper {
-  height: calc(100vh - 104px);
+.tab-item-full-height {
+  height: calc(100vh - 115px);
 }
 .v-tab.v-tab {
   color: inherit !important;

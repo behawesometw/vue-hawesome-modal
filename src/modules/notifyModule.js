@@ -37,6 +37,9 @@ export default {
         resolveAllNotify(state) {
             state.list.forEach(notifyObj => {
                 notifyObj.resolve();
+                if (notifyObj.intervalId) {
+                    clearInterval(notifyObj.intervalId)
+                }
             });
             state.list = [];
         },
@@ -61,9 +64,11 @@ export default {
             var p = new Promise((rsv) => {
                 configReadyToShoot.resolve = rsv;
 
-                if (typeof configReadyToShoot.timeout === "number" && configReadyToShoot.timeout > 0) {
+                var timeout = Number(configReadyToShoot.timeout);
 
-                    var percentAdd = (UPT_FRQCY * HUNDRED) / (Math.ceil(configReadyToShoot.timeout) * 1000 - DELAY);
+                if (!isNaN(timeout) && timeout > 0) {
+
+                    var percentAdd = (UPT_FRQCY * HUNDRED) / (Math.ceil(timeout) * 1000 - DELAY);
 
                     var intervalId = setInterval(() => {
                         configReadyToShoot.progressValue += percentAdd;
@@ -72,7 +77,7 @@ export default {
 
                     setTimeout(() => {
                         commit('resolveItem', configReadyToShoot);
-                    }, Math.ceil(configReadyToShoot.timeout) * 1000);
+                    }, Math.ceil(timeout) * 1000);
                 }
             });
 
