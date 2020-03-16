@@ -8,7 +8,7 @@
 
     <v-card flat>
       <v-toolbar :color="globalThemeColor" dark>
-        <v-toolbar-title>hawesome-vue-extends</v-toolbar-title>
+        <v-toolbar-title class="userSelect-none">hawesome-vue-extends</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -70,8 +70,8 @@
 </template>
 
 <script>
-// todo: 寫 readme.md
 // todo: component rwd consider
+// todo: 寫 readme.md
 // todo: dark theme
 // todo: 輸入顏色特定顏色時，全部看不到的問題
 
@@ -139,5 +139,9 @@ export default {
 }
 .v-tab.v-tab {
   color: inherit !important;
+}
+
+.userSelect-none {
+  user-select: none;
 }
 </style>

@@ -83,23 +83,17 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center">
-      <v-col md="6" cols="12">
-        <v-sheet elevation="4" class="pa-4">
-          <div v-for="(code, i) in codeToAchieves" :key="i" class="overflow-hidden">
-            <pre v-html="code"></pre>
-          </div>
-        </v-sheet>
-      </v-col>
-    </v-row>
+    <JavaScriptCodeBlock :codes="codeToAchieves"></JavaScriptCodeBlock>
   </v-container>
 </template>
 
 <script>
-import Prism from "prismjs";
-import "prismjs/themes/prism.css";
+import JavaScriptCodeBlock from "./JavaScriptCodeBlock";
 
 export default {
+  components: {
+    JavaScriptCodeBlock
+  },
   data: () => ({
     notiText: "Lorem, ipsum dolor.",
     notiType: "info",
@@ -108,8 +102,7 @@ export default {
     top: false,
     bottom: true,
     left: false,
-    right: true,
-    carouselIdx: 0
+    right: true
   }),
   computed: {
     globalThemeColor() {
@@ -165,9 +158,8 @@ this.$notify
   });`;
         resultArr.push(codeToAchieve3);
       }
-      return resultArr.map(code => {
-        return Prism.highlight(code, Prism.languages.javascript, "javascript");
-      });
+
+      return resultArr;
     }
   },
   methods: {
