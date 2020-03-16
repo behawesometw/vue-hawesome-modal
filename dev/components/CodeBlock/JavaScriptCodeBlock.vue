@@ -65,13 +65,9 @@ export default {
 
         try {
           document.execCommand("copy");
-          that.$notify.success("copy success.", builder => {
-            builder.setTimeout(1);
-          });
+          that.$notify.success("copy success.");
         } catch (error) {
-          that.$notify.error("copy fail.", builder => {
-            builder.setTimeout(1);
-          });
+          that.$notify.error("copy fail.");
         }
       });
     }

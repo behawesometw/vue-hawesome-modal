@@ -83,16 +83,20 @@
       </v-col>
     </v-row>
 
+    <GlobalSettingCodeBlock :codes="codeToAchieveGlobalSetting"></GlobalSettingCodeBlock>
+
     <JavaScriptCodeBlock :codes="codeToAchieves"></JavaScriptCodeBlock>
   </v-container>
 </template>
 
 <script>
-import JavaScriptCodeBlock from "./JavaScriptCodeBlock";
+import JavaScriptCodeBlock from "./CodeBlock/JavaScriptCodeBlock";
+import GlobalSettingCodeBlock from "./CodeBlock/GlobalSettingCodeBlock";
 
 export default {
   components: {
-    JavaScriptCodeBlock
+    JavaScriptCodeBlock,
+    GlobalSettingCodeBlock
   },
   data: () => ({
     notiText: "Lorem, ipsum dolor.",
@@ -107,6 +111,18 @@ export default {
   computed: {
     globalThemeColor() {
       return this.$store.state.theme.color;
+    },
+    codeToAchieveGlobalSetting() {
+      return [
+        `
+var options = { 
+  store, 
+  notifySetting: { 
+    position: "${this.positionText()}", 
+    timeout: ${this.duration} 
+  } 
+};`
+      ];
     },
     codeToAchieves() {
       var resultArr = [];
@@ -174,14 +190,17 @@ this.$notify
           console.log("resolved");
         });
     },
-    setNotifyPosition() {
-      var positionText = ""
+    positionText() {
+      return ""
         .concat(`${this.top ? "top" : ""}`)
         .concat(`${this.bottom ? "bottom" : ""}`)
         .concat(`${this.left ? "Left" : ""}`)
         .concat(`${this.right ? "Right" : ""}`);
-
-      this.$store.commit("notify/setGlobalSetting", { position: positionText });
+    },
+    setNotifyPosition() {
+      this.$store.commit("notify/setGlobalSetting", {
+        position: this.positionText()
+      });
     },
     resolve() {
       this.$notify.resolveAllNotify();

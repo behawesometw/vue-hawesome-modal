@@ -70,6 +70,7 @@
 </template>
 
 <script>
+// todo: 元件 demo 頁
 // todo: component rwd consider
 // todo: 寫 readme.md
 // todo: dark theme
