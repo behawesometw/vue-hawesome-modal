@@ -1,13 +1,14 @@
 <template>
   <v-row justify="center">
-    <v-col md="6" cols="12">
+    <v-col md="8" cols="12">
       <v-sheet elevation="4" class="pa-4">
         <textarea ref="copyTarget" type="text" class="copy-textarea" :value="copyTargetContent" />
         <div v-for="(code, i) in codeToAchieves" :key="i" class="mb-4 rltv">
-          <div class="abslt topLeft lang-label caption">JavaScript</div>
+          <div class="abslt topLeft lang-label caption">{{lang}}</div>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
+                v-if="isEnableCopyFunc"
                 icon
                 class="abslt topRight"
                 @click.stop.prevent="copySnippet(code.origCode)"
@@ -18,7 +19,7 @@
             </template>
             <span>copy snippet</span>
           </v-tooltip>
-          <pre class="language-javascript pt-8" v-html="code.compiledHTMLCode"></pre>
+          <pre class="pt-8" :class="`language-${lang}`" v-html="code.compiledHTMLCode"></pre>
         </div>
       </v-sheet>
     </v-col>
@@ -26,7 +27,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
 
@@ -38,6 +38,14 @@ export default {
     codes: {
       type: Array,
       required: true
+    },
+    lang: {
+      type: String,
+      required: true
+    },
+    isEnableCopyFunc: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -47,8 +55,8 @@ export default {
         .map(code => ({
           compiledHTMLCode: Prism.highlight(
             code,
-            Prism.languages.javascript,
-            "javascript"
+            Prism.languages[this.lang],
+            this.lang
           ),
           origCode: code
         }));
@@ -57,17 +65,17 @@ export default {
   methods: {
     copySnippet(origCode) {
       var that = this;
-      this.copyTargetContent = origCode;
+      that.copyTargetContent = origCode;
 
-      Vue.nextTick(() => {
-        var copyTarget = this.$refs.copyTarget;
+      that.$nextTick(() => {
+        var copyTarget = that.$refs.copyTarget;
         copyTarget.select();
 
         try {
           document.execCommand("copy");
-          that.$notify.success("copy success.");
+          that.$notify.success("copy success");
         } catch (error) {
-          that.$notify.error("copy fail.");
+          that.$notify.error("copy fail");
         }
       });
     }

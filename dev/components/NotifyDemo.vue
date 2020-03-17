@@ -85,17 +85,17 @@
 
     <GlobalSettingCodeBlock :codes="codeToAchieveGlobalSetting"></GlobalSettingCodeBlock>
 
-    <JavaScriptCodeBlock :codes="codeToAchieves"></JavaScriptCodeBlock>
+    <ExampleCodeBlock :codes="codeToAchieves"></ExampleCodeBlock>
   </v-container>
 </template>
 
 <script>
-import JavaScriptCodeBlock from "./CodeBlock/JavaScriptCodeBlock";
+import ExampleCodeBlock from "./CodeBlock/ExampleCodeBlock";
 import GlobalSettingCodeBlock from "./CodeBlock/GlobalSettingCodeBlock";
 
 export default {
   components: {
-    JavaScriptCodeBlock,
+    ExampleCodeBlock,
     GlobalSettingCodeBlock
   },
   data: () => ({
@@ -144,7 +144,7 @@ this.$notify
         ${setTimeoutStatement}
     })
   .then(() => {
-    console.log('resolved');
+    console.log("resolved");
   });`;
 
       resultArr.push(codeToAchieve1);
@@ -157,7 +157,7 @@ this.$notify
       builder${setTimeoutStatement}
     })
   .then(() => {
-    console.log('resolved');
+    console.log("resolved");
   });`;
       resultArr.push(codeToAchieve2);
 
@@ -170,7 +170,7 @@ this.$notify
       builder${setTypeStatement}
     })
   .then(() => {
-    console.log('resolved');
+    console.log("resolved");
   });`;
         resultArr.push(codeToAchieve3);
       }

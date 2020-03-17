@@ -12,9 +12,6 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-invert-colors</v-icon>
-        </v-btn>
         <v-menu :close-on-content-click="false" :nudge-width="200" offset-x>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
@@ -25,13 +22,13 @@
           <v-card>
             <v-list>
               <v-list-item>
-                <v-combobox
-                  label="select/type a color"
+                <v-select
+                  label="select a color"
                   v-model="colorInput"
                   :items="colorItems"
                   :color="globalThemeColor"
-                  @change="colorInputChange"
-                ></v-combobox>
+                  @blur="colorInputBlur"
+                ></v-select>
               </v-list-item>
             </v-list>
             <v-divider></v-divider>
@@ -71,10 +68,7 @@
 
 <script>
 // todo: 元件 demo 頁
-// todo: component rwd consider
 // todo: 寫 readme.md
-// todo: dark theme
-// todo: 輸入顏色特定顏色時，全部看不到的問題
 
 import Vue from "vue";
 
@@ -89,7 +83,7 @@ Vue.component("NotifyDemo", NotifyDemo);
 export default {
   data: () => ({
     colorInput: "primary",
-    colorItems: ["primary", "info", "success", "error", "warning"],
+    colorItems: ["primary", "info", "success", "error", "warning", "black"],
     colorPick: "#1976d2FF",
     tab: null,
     demoComponents: ["Dialog", "Loader", "Notify"]
@@ -100,7 +94,7 @@ export default {
     }
   },
   methods: {
-    colorInputChange() {
+    colorInputBlur() {
       if (this.colorInput) {
         this.$store.commit("theme/setColor", this.colorInput);
       }

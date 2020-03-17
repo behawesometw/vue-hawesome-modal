@@ -18,16 +18,8 @@ export default {
         .map(code => code.trim())
         .map(code => {
           return `
-// import
-import store from "../path/to/your/vuex/store.js"
-import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
-
-// initialize global settings
+// \`this\` points to the Vue instance
 ${code}
-
-// install
-Vue.use(hawesomeVue, options)
 `;
         })
         .map(code => code.trim());

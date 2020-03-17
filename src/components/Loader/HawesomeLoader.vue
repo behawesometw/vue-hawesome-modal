@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isGlobalLoading" persistent overlay-opacity width="300">
+  <v-dialog v-model="isGlobalLoading" persistent overlay-opacity :width="width">
     <v-card class="pa-0">
       <v-card-text class="pa-5 text-center">
         {{loaderText}}
@@ -40,7 +40,10 @@ export default {
     },
     ...mapGetters({
       isGlobalLoading: "waitingCount/isGlobalLoading"
-    })
+    }),
+    width() {
+      return this.isCircular ? 200 : 300;
+    }
   }
 };
 </script>

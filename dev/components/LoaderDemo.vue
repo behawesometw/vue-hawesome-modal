@@ -37,11 +37,22 @@
         <v-btn width="200" :color="globalThemeColor" outlined @click="loaderDemo">open loader</v-btn>
       </v-col>
     </v-row>
+
+    <GlobalSettingCodeBlock :codes="codeToAchieveGlobalSetting"></GlobalSettingCodeBlock>
+
+    <ExampleCodeBlock :codes="codeToAchieves"></ExampleCodeBlock>
   </v-container>
 </template>
 
 <script>
+import ExampleCodeBlock from "./CodeBlock/ExampleCodeBlock";
+import GlobalSettingCodeBlock from "./CodeBlock/GlobalSettingCodeBlock";
+
 export default {
+  components: {
+    ExampleCodeBlock,
+    GlobalSettingCodeBlock
+  },
   data: () => ({
     loaderText: "",
     timeout: 2000,
@@ -53,6 +64,39 @@ export default {
     },
     loaderLabel() {
       return this.loaderTypeText();
+    },
+    codeToAchieveGlobalSetting() {
+      var loaderTextStatement = `${
+        this.loaderText.length > 0 ? `, loaderText: ${this.loaderText}` : ""
+      }`;
+
+      return [
+        `
+var options = { 
+  store, 
+  loaderSetting: { 
+    type: "${this.loaderTypeText()}"${loaderTextStatement}
+  } 
+};`
+      ];
+    },
+    codeToAchieves() {
+      var resultArr = [];
+
+      var loaderTextStatement = `${
+        this.loaderText.length > 0 ? `"${this.loaderText}"` : ""
+      }`;
+
+      var codeToAchieve = `
+this.$loader.on(${loaderTextStatement});
+setTimeout(() => {
+  this.$loader.off();
+}, ${this.timeout});
+    `;
+
+      resultArr.push(codeToAchieve);
+
+      return resultArr;
     }
   },
   methods: {
