@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <HawesomeLoader></HawesomeLoader>
-    <HawesomeDialog></HawesomeDialog>
-    <HawesomeNotify></HawesomeNotify>
+    <HawesomeLoader />
+    <HawesomeDialog />
+    <HawesomeNotify />
 
     <!-- <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn> -->
 
@@ -48,18 +48,18 @@
 
         <template v-slot:extension>
           <v-tabs class="white" :color="globalThemeColor" dark v-model="tab" grow>
-            <v-tab v-for="(component, index) in demoComponents" :key="index">{{ component }}</v-tab>
+            <v-tab v-for="(item, index) in demoComponents" :key="index">{{ item.tabName }}</v-tab>
           </v-tabs>
         </template>
       </v-toolbar>
 
       <v-tabs-items v-model="tab">
         <v-tab-item
-          v-for="(component, index) in demoComponents"
+          v-for="(item, index) in demoComponents"
           :key="index"
           class="tab-item-full-height"
         >
-          <component v-bind:is="`${component}Demo`"></component>
+          <component v-bind:is="`${item.component}`"></component>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -71,14 +71,15 @@
 // todo: 寫 readme.md
 
 import Vue from "vue";
-
+import GetStartedDemo from "./components/GetStartedDemo";
 import DialogDemo from "./components/DialogDemo";
-import LoaderDemo from "./components/LoaderDemo";
 import NotifyDemo from "./components/NotifyDemo";
+import LoaderDemo from "./components/LoaderDemo";
 
+Vue.component("GetStartedDemo", GetStartedDemo);
 Vue.component("DialogDemo", DialogDemo);
-Vue.component("LoaderDemo", LoaderDemo);
 Vue.component("NotifyDemo", NotifyDemo);
+Vue.component("LoaderDemo", LoaderDemo);
 
 export default {
   data: () => ({
@@ -86,7 +87,12 @@ export default {
     colorItems: ["primary", "info", "success", "error", "warning", "black"],
     colorPick: "#1976d2FF",
     tab: null,
-    demoComponents: ["Dialog", "Loader", "Notify"]
+    demoComponents: [
+      { tabName: "Get Started", component: "GetStartedDemo" },
+      { tabName: "Dialog", component: "DialogDemo" },
+      { tabName: "Notify", component: "NotifyDemo" },
+      { tabName: "Loader", component: "LoaderDemo" }
+    ]
   }),
   computed: {
     globalThemeColor() {
@@ -131,6 +137,10 @@ export default {
 <style>
 .tab-item-full-height {
   height: calc(100vh - 115px);
+}
+
+.v-tab {
+  text-transform: none !important;
 }
 .v-tab.v-tab {
   color: inherit !important;

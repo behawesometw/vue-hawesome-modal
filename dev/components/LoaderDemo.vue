@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-row dense justify="center">
-      <v-col md="6" cols="10">
+      <v-col md="8" cols="10">
         <v-text-field label="text" v-model="loaderText" :color="globalThemeColor"></v-text-field>
       </v-col>
     </v-row>
 
     <v-row dense justify="center">
-      <v-col md="6" cols="10">
+      <v-col md="8" cols="10">
         <v-text-field
           type="number"
           label="timeout"
@@ -19,14 +19,11 @@
     </v-row>
 
     <v-row dense justify="center">
-      <v-col md="6" cols="10">
-        <v-switch
-          inset
-          v-model="loaderTypeSwitch"
-          :color="globalThemeColor"
-          :label="loaderLabel"
-          @change="loaderTypeChange"
-        ></v-switch>
+      <v-col md="8" cols="10">
+        <v-radio-group row v-model="loaderType" @change="loaderTypeChange">
+          <v-radio :color="globalThemeColor" label="linear" value="linear"></v-radio>
+          <v-radio :color="globalThemeColor" label="circular" value="circular"></v-radio>
+        </v-radio-group>
       </v-col>
     </v-row>
 
@@ -56,14 +53,11 @@ export default {
   data: () => ({
     loaderText: "",
     timeout: 2000,
-    loaderTypeSwitch: true
+    loaderType: "linear"
   }),
   computed: {
     globalThemeColor() {
       return this.$store.state.theme.color;
-    },
-    loaderLabel() {
-      return this.loaderTypeText();
     },
     codeToAchieveGlobalSetting() {
       var loaderTextStatement = `${
@@ -75,7 +69,7 @@ export default {
 var options = { 
   store, 
   loaderSetting: { 
-    type: "${this.loaderTypeText()}"${loaderTextStatement}
+    type: "${this.loaderType}"${loaderTextStatement}
   } 
 };`
       ];
@@ -100,12 +94,9 @@ setTimeout(() => {
     }
   },
   methods: {
-    loaderTypeText() {
-      return this.loaderTypeSwitch ? "linear" : "circular";
-    },
     loaderTypeChange() {
       this.$store.commit("loader/setGlobalSetting", {
-        type: this.loaderTypeText()
+        type: this.loaderType
       });
     },
     loaderDemo() {

@@ -27,7 +27,7 @@
     </v-row>
 
     <v-row dense justify="center">
-      <v-col cols="10" md="8">
+      <v-col md="8" cols="10">
         <v-checkbox class="d-inline-block mr-4" :color="globalThemeColor" v-model="top" label="Top"></v-checkbox>
         <v-checkbox
           class="d-inline-block mr-4"

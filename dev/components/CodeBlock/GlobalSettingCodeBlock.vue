@@ -9,6 +9,10 @@ export default {
     codes: {
       type: Array,
       required: true
+    },
+    preInsertSnippet: {
+      type: String,
+      default: ""
     }
   },
   components: { CodeBlockBase },
@@ -18,6 +22,7 @@ export default {
         .map(code => code.trim())
         .map(code => {
           return `
+${this.preInsertSnippet}
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
