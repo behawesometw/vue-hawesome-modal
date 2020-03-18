@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col md="8" cols="12">
+    <v-col md="10" cols="12">
       <v-sheet elevation="4" class="pa-4">
         <textarea ref="copyTarget" type="text" class="copy-textarea" :value="copyTargetContent" />
         <div v-for="(code, i) in codeToAchieves" :key="i" class="mb-4 rltv">
@@ -98,7 +98,6 @@ export default {
 .topRight {
   top: 0;
   right: 0;
-  margin: 2px;
 }
 .lang-label {
   user-select: none;

@@ -24,7 +24,7 @@ export default {
     <!-- Components can be used after \`hawesome-vue-extends\` been installed -->
     <!-- \`hawesome-vue-extends\` component should 
             i.  be used at root(the most top-level) component
-            ii. make sure these components are \`singleton\` in a web app
+            ii. make sure these components are \`singleton\`(one and only one) in a web app
     -->
     <HawesomeLoader />
     <HawesomeDialog />

@@ -67,6 +67,8 @@
 </template>
 
 <script>
+// todo: vali
+// todo: dialog 當兩個都是按鈕都不顯示時
 // todo: 元件 demo 頁
 // todo: 寫 readme.md
 
@@ -86,7 +88,7 @@ export default {
     colorInput: "primary",
     colorItems: ["primary", "info", "success", "error", "warning", "black"],
     colorPick: "#1976d2FF",
-    tab: null,
+    tab: 1,
     demoComponents: [
       { tabName: "Get Started", component: "GetStartedDemo" },
       { tabName: "Dialog", component: "DialogDemo" },
@@ -139,6 +141,10 @@ export default {
   height: calc(100vh - 115px);
 }
 
+.userSelect-none {
+  user-select: none;
+}
+
 .v-tab {
   text-transform: none !important;
 }
@@ -146,7 +152,7 @@ export default {
   color: inherit !important;
 }
 
-.userSelect-none {
-  user-select: none;
+.v-slide-group__prev {
+  display: none !important;
 }
 </style>
