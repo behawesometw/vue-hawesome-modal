@@ -6,7 +6,7 @@
           :color="globalThemeColor"
           v-model="title"
           label="title"
-          hint="default value: 'Message'"
+          hint="default value: `Message`"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -45,97 +45,47 @@
     </v-row>
 
     <v-row dense justify="center">
-      <v-col md="4" cols="10">
-        <v-card>
-          <v-card-text>
-            <v-switch
-              dense
-              :color="globalThemeColor"
-              v-model="confirmBtn.isShow"
-              :label="(confirmBtn.isShow ? 'show' : 'hide') + ' confirm button'"
-            ></v-switch>
-          </v-card-text>
-          <v-expand-transition>
-            <div v-show="confirmBtn.isShow">
-              <v-divider></v-divider>
-              <v-container>
-                <v-row justify="center" align="center">
-                  <v-col md="3" cols="12">
-                    <v-text-field
-                      :color="globalThemeColor"
-                      :disabled="!confirmBtn.isShow"
-                      v-model="confirmBtn.txt"
-                      label="text"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col md="9" cols="12">
-                    <v-color-picker
-                      :disabled="!confirmBtn.isShow"
-                      v-model="confirmBtn.color"
-                      hide-mode-switch
-                      hide-canvas
-                      flat
-                    ></v-color-picker>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </div>
-          </v-expand-transition>
-        </v-card>
+      <v-col md="4" cols="5">
+        <ColorSelectBundle
+          v-model="themeColor"
+          :label="'theme color'"
+          :hint="'change both title bar and confirm button color. default value: `primary`'"
+        ></ColorSelectBundle>
       </v-col>
+      <v-col md="4" cols="5">
+        <ColorSelectBundle
+          v-model="titleBarColor"
+          :label="'titie bar color'"
+          :hint="'default value: `primary`'"
+        ></ColorSelectBundle>
+      </v-col>
+    </v-row>
 
-      <v-col md="4" cols="10">
-        <v-card>
-          <v-card-text>
-            <v-switch
-              dense
-              :color="globalThemeColor"
-              v-model="cancelBtn.isShow"
-              :label="(cancelBtn.isShow ? 'show' : 'hide') + ' cancel button'"
-            ></v-switch>
-          </v-card-text>
-          <v-expand-transition>
-            <div v-show="cancelBtn.isShow">
-              <v-divider></v-divider>
-              <v-container>
-                <v-row justify="center" align="center">
-                  <v-col md="3" cols="12">
-                    <v-text-field
-                      :color="globalThemeColor"
-                      :disabled="!cancelBtn.isShow"
-                      v-model="cancelBtn.txt"
-                      label="text"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col md="9" cols="12">
-                    <v-color-picker
-                      :disabled="!cancelBtn.isShow"
-                      v-model="cancelBtn.color"
-                      hide-mode-switch
-                      hide-canvas
-                      flat
-                    ></v-color-picker>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </div>
-          </v-expand-transition>
-        </v-card>
+    <v-row dense justify="center">
+      <v-col md="2" cols="10">
+        <DialogButtonConfigure :buttonType="'confirm'" v-model="confirmBtn"></DialogButtonConfigure>
+      </v-col>
+      <v-col md="2" cols="10">
+        <DialogButtonConfigure :buttonType="'cancel'" v-model="cancelBtn"></DialogButtonConfigure>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import ColorSelectBundle from "./Common/Color/ColorSelectBundle";
 import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
+import DialogButtonConfigure from "./Business/DialogButtonConfigure";
 var dialogConfig = DialogConfigBuilder.defaultConfig();
 export default {
-  mounted() {},
+  components: { ColorSelectBundle, DialogButtonConfigure },
   data: () => ({
     title: "",
     content: "Lorem ipsum dolor sit amet.",
     width: "",
     height: "",
+    themeColor: "",
+    titleBarColor: "",
     cancelBtn: {
       isShow: dialogConfig.isShowCancelBtn,
       color: "#a5b2c2",
@@ -150,6 +100,9 @@ export default {
   computed: {
     globalThemeColor() {
       return this.$store.state.theme.color;
+    },
+    colorItems() {
+      return this.$store.state.colorItems;
     }
   }
 };

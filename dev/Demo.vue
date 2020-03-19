@@ -59,6 +59,7 @@
           :key="index"
           class="tab-item-full-height"
         >
+          <!-- todo : https://vuetifyjs.com/en/components/lazy/ -->
           <component v-bind:is="`${item.component}`"></component>
         </v-tab-item>
       </v-tabs-items>
@@ -86,7 +87,6 @@ Vue.component("LoaderDemo", LoaderDemo);
 export default {
   data: () => ({
     colorInput: "primary",
-    colorItems: ["primary", "info", "success", "error", "warning", "black"],
     colorPick: "#1976d2FF",
     tab: 1,
     demoComponents: [
@@ -99,6 +99,9 @@ export default {
   computed: {
     globalThemeColor() {
       return this.$store.state.theme.color;
+    },
+    colorItems() {
+      return this.$store.state.colorItems;
     }
   },
   methods: {

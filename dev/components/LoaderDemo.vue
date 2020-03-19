@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import ExampleCodeBlock from "./CodeBlock/ExampleCodeBlock";
-import GlobalSettingCodeBlock from "./CodeBlock/GlobalSettingCodeBlock";
+import ExampleCodeBlock from "./Common/CodeBlock/ExampleCodeBlock";
+import GlobalSettingCodeBlock from "./Common/CodeBlock/GlobalSettingCodeBlock";
 
 export default {
   components: {

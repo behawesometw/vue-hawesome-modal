@@ -10,8 +10,8 @@
 
 
 <script>
-import CodeBlockBase from "./CodeBlock/CodeBlockBase";
-import GlobalSettingCodeBlock from "./CodeBlock/GlobalSettingCodeBlock";
+import CodeBlockBase from "./Common/CodeBlock/CodeBlockBase";
+import GlobalSettingCodeBlock from "./Common/CodeBlock/GlobalSettingCodeBlock";
 
 export default {
   components: { CodeBlockBase, GlobalSettingCodeBlock },
