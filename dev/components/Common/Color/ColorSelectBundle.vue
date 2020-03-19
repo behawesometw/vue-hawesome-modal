@@ -12,7 +12,7 @@
       <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left :nudge-top="50">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon>mdi-format-color-highlight</v-icon>
+            <v-icon>mdi-palette</v-icon>
           </v-btn>
         </template>
         <v-card>

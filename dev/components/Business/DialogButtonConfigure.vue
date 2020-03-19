@@ -8,10 +8,13 @@
         <v-divider></v-divider>
         <v-container>
           <v-list dense>
-            <v-list-item>
+            <v-list-item class="px-2">
               <v-list-item-content>
                 <v-list-item-subtitle>text: `{{value.txt}}`</v-list-item-subtitle>
-                <v-list-item-subtitle>color: {{value.color}}</v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  color: {{value.color}}
+                  <div :style="colorBlockStyle" :class="['color-block', colorBlockClass]"></div>
+                </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
                 <v-menu
@@ -23,7 +26,7 @@
                 >
                   <template v-slot:activator="{ on }">
                     <v-btn icon v-on="on">
-                      <v-icon>mdi-cog</v-icon>
+                      <v-icon dense>mdi-cog</v-icon>
                     </v-btn>
                   </template>
                   <v-card>
@@ -74,10 +77,24 @@ export default {
     },
     colorItems() {
       return this.$store.state.colorItems;
+    },
+    colorBlockStyle() {
+      return { [`background-color`]: this.value.color };
+    },
+    colorBlockClass() {
+      return {
+        [`${this.value.color}`]: true
+      };
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.color-block {
+  margin-left: 1px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+}
 </style>

@@ -12,10 +12,10 @@
 
         <v-spacer></v-spacer>
 
-        <v-menu :close-on-content-click="false" :nudge-width="200" offset-x>
+        <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
-              <v-icon>mdi-palette</v-icon>
+              <v-icon>mdi-cog</v-icon>
             </v-btn>
           </template>
 
@@ -31,7 +31,6 @@
                 ></v-select>
               </v-list-item>
             </v-list>
-            <v-divider></v-divider>
             <v-list>
               <v-list-item>
                 <v-color-picker
@@ -43,6 +42,14 @@
                 ></v-color-picker>
               </v-list-item>
             </v-list>
+            <div v-if="$vuetify.breakpoint.xs">
+              <v-divider></v-divider>
+              <v-list>
+                <v-list-item>
+                  <v-switch v-model="isEnableTabSwipe" label="enable tab swipe"></v-switch>
+                </v-list-item>
+              </v-list>
+            </div>
           </v-card>
         </v-menu>
 
@@ -53,7 +60,7 @@
         </template>
       </v-toolbar>
 
-      <v-tabs-items v-model="tab">
+      <v-tabs-items v-model="tab" :touchless="!isEnableTabSwipe">
         <v-tab-item
           v-for="(item, index) in demoComponents"
           :key="index"
@@ -88,6 +95,7 @@ export default {
   data: () => ({
     colorInput: "primary",
     colorPick: "#1976d2FF",
+    isEnableTabSwipe: true,
     tab: 1,
     demoComponents: [
       { tabName: "Get Started", component: "GetStartedDemo" },

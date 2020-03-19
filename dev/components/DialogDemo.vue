@@ -88,12 +88,12 @@ export default {
     titleBarColor: "",
     cancelBtn: {
       isShow: dialogConfig.isShowCancelBtn,
-      color: "#a5b2c2",
+      color: "#000000DE",
       txt: dialogConfig.cancelBtnTxt
     },
     confirmBtn: {
       isShow: dialogConfig.isShowConfirmBtn,
-      color: "#1976d2",
+      color: "#1976d2FF",
       txt: dialogConfig.confirmBtnTxt
     }
   }),
