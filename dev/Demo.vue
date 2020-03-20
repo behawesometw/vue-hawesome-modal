@@ -4,8 +4,6 @@
     <HawesomeDialog />
     <HawesomeNotify />
 
-    <!-- <v-btn class="d-block mt-5" @click="dialogTest">dialog test</v-btn> -->
-
     <v-card flat>
       <v-toolbar :color="globalThemeColor" dark>
         <v-toolbar-title class="userSelect-none">hawesome-vue-extends</v-toolbar-title>
@@ -86,10 +84,24 @@ import DialogDemo from "./components/DialogDemo";
 import NotifyDemo from "./components/NotifyDemo";
 import LoaderDemo from "./components/LoaderDemo";
 
+import CodeBlockBase from "./components/Common/CodeBlock/CodeBlockBase";
+import ExampleCodeBlock from "./components/Common/CodeBlock/ExampleCodeBlock";
+import GlobalSettingCodeBlock from "./components/Common/CodeBlock/GlobalSettingCodeBlock";
+
+import AllExpandedPanelScope from "./components/Common/Layout/Panel/AllExpandedPanelScope";
+import ColorResponsiveExpansionPanel from "./components/Common/Layout/Panel/ColorResponsiveExpansionPanel";
+
 Vue.component("GetStartedDemo", GetStartedDemo);
 Vue.component("DialogDemo", DialogDemo);
 Vue.component("NotifyDemo", NotifyDemo);
 Vue.component("LoaderDemo", LoaderDemo);
+
+Vue.component("AllExpandedPanelScope", AllExpandedPanelScope);
+Vue.component("ColorResponsiveExpansionPanel", ColorResponsiveExpansionPanel);
+
+Vue.component("CodeBlockBase", CodeBlockBase);
+Vue.component("ExampleCodeBlock", ExampleCodeBlock);
+Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
 export default {
   data: () => ({
@@ -122,26 +134,6 @@ export default {
       if (this.colorPick) {
         this.$store.commit("theme/setColor", this.colorPick);
       }
-    },
-    dialogTest() {
-      var that = this;
-      that.$dialog
-        .talk("chainable testing")
-        .then(() => {
-          return that.$dialog.talk("chaining", builder => {
-            builder
-              .set("confirmBtnTxt", "success")
-              .set("themeColor", "purple")
-              .set("isShowCancelBtn", false);
-          });
-        })
-        .then(() => {
-          console.log("confirm!!");
-        })
-        .catch(() => {
-          console.log("cancel!!");
-        })
-        .finally(that.$dialog.hangUp);
     }
   }
 };

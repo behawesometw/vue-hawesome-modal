@@ -1,14 +1,7 @@
 <template>
-  <v-dialog
-    overlay-opacity
-    persistent
-    v-model="config.isShow"
-    :max-width="config.maxWidth"
-    :max-height="config.maxHeight"
-    :fullscreen="config.fullscreen"
-  >
+  <v-dialog scrollable overlay-opacity persistent v-model="config.isShow" :max-width="config.width">
     <v-card>
-      <v-toolbar dark dense flat :color="config.toolbarColor || globalThemeColor">
+      <v-toolbar dark dense flat :color="config.titleBarColor || globalThemeColor">
         <v-toolbar-title>{{config.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon dark v-if="config.isShowCancelBtn" @click="config.reject()">

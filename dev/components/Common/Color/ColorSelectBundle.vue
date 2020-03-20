@@ -1,5 +1,6 @@
 <template>
   <v-combobox
+    clearable
     :value="bindingValue"
     :color="globalThemeColor"
     :items="colorItems"

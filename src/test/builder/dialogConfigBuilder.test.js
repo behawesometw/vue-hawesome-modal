@@ -1,5 +1,4 @@
 import DialogConfigBuilder from "../../../lib/dialog/dialogConfigBuilder";
-import { dialogSizeArr } from "../../../lib/dialog/dialogConfigAttribute";
 
 describe("test DialogConfigBuilder", () => {
     test("ctor call", () => {
@@ -21,11 +20,4 @@ describe("test DialogConfigBuilder", () => {
         expect(Object.prototype.hasOwnProperty.call(defaultConfig, "notContainThisAttr")).toBeFalsy();
     })
 
-    test("setSize", () => {
-        var builder = new DialogConfigBuilder("test").setSize("l");
-        var compareItem = dialogSizeArr.find(m => m.type === "S");
-
-        expect(builder.config.maxWidth >= compareItem.width).toBeTruthy();
-        expect(builder.config.maxHeight >= compareItem.height).toBeTruthy();
-    })
 })

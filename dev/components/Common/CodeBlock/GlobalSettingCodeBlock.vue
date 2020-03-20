@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import CodeBlockBase from "./CodeBlockBase";
 export default {
   props: {
     codes: {
@@ -15,7 +14,6 @@ export default {
       default: ""
     }
   },
-  components: { CodeBlockBase },
   computed: {
     decoratedCodes() {
       return this.codes

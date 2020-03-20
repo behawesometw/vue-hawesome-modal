@@ -38,8 +38,8 @@ export default {
 
             return dialogPromise;
         },
-        hangUp({ commit }) {
-            commit('setConfig', { ...DialogConfigBuilder.defaultConfig() })
+        hangUp({ commit, state }) {
+            commit('setConfig', { ...DialogConfigBuilder.defaultConfig(), ...{ isShowCancelBtn: state.config.isShowCancelBtn } })
         }
     }
 }

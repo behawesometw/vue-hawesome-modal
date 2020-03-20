@@ -10,11 +10,7 @@
 
 
 <script>
-import CodeBlockBase from "./Common/CodeBlock/CodeBlockBase";
-import GlobalSettingCodeBlock from "./Common/CodeBlock/GlobalSettingCodeBlock";
-
 export default {
-  components: { CodeBlockBase, GlobalSettingCodeBlock },
   computed: {
     templateCodeToAchieves() {
       return [

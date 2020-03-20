@@ -3,10 +3,8 @@ import Vuex from "vuex";
 
 Vue.use(Vuex)
 
-import colorList from "./colorList";
-
 export default new Vuex.Store({
     state: {
-        colorItems: [...["primary", "info", "success", "error", "warning"], ...colorList]
+        colorItems: ["primary", "info", "success", "error", "warning", "black"]
     }
 });
