@@ -67,7 +67,9 @@
       </v-tabs>
       <v-tabs-items v-model="tabSync" @change="updateRouter($event)" :touchless="!isEnableTabSwipe">
         <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -75,8 +77,7 @@
 </template>
 
 <script>
-// todo: 考慮把全部按鈕都換成 floating button
-// todo: 寬度過小的時候，dialog 會爆掉
+// todo: 考慮把全部按鈕都換成 floating button，dial position
 // todo: 元件 demo 頁
 // todo: 寫 readme.md
 

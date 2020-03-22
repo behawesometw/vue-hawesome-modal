@@ -1,6 +1,6 @@
 <template>
-  <v-dialog scrollable overlay-opacity persistent v-model="config.isShow" :max-width="config.width">
-    <v-card>
+  <v-dialog scrollable overlay-opacity persistent v-model="config.isShow" :width="config.width">
+    <v-card min-width="200">
       <v-toolbar dark dense flat :color="config.titleBarColor || globalThemeColor">
         <v-toolbar-title>{{config.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -16,12 +16,16 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+          class="text-truncate"
+          width="50%"
           v-if="config.isShowCancelBtn"
           :color="config.cancelBtnColor"
           text
           @click="config.reject()"
         >{{config.cancelBtnTxt}}</v-btn>
         <v-btn
+          class="text-truncate"
+          width="50%"
           v-if="config.isShowConfirmBtn"
           :color="config.confirmBtnColor || globalThemeColor"
           text

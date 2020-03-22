@@ -1,5 +1,28 @@
 <template>
   <v-container>
+    <v-speed-dial
+      v-model="fab"
+      class="top-right-fixed"
+      transition="scale-transition"
+      direction="bottom"
+    >
+      <template v-slot:activator>
+        <v-btn v-model="fab" :color="globalThemeColor" fab dark>
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-icon v-else>mdi-account-circle</v-icon>
+        </v-btn>
+      </template>
+      <v-btn fab dark small color="green">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+      <v-btn fab dark small color="indigo">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn fab dark small color="red" @click.stop>
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
+    </v-speed-dial>
+
     <v-row dense justify="center">
       <v-col md="8" cols="10">
         <v-text-field :color="globalThemeColor" v-model="notiText" label="text"></v-text-field>
@@ -99,6 +122,7 @@ export default {
     GlobalSettingCodeBlock
   },
   data: () => ({
+    fab: false,
     notiText: "Lorem, ipsum dolor.",
     notiType: "info",
     isEnableDuration: true,
@@ -228,7 +252,4 @@ this.$notify
 };
 </script>
 <style>
-.overflow-hidden {
-  overflow: hidden;
-}
 </style>
