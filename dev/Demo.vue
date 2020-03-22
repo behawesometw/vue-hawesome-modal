@@ -60,22 +60,14 @@
             </div>
           </v-card>
         </v-menu>
-
-        <template v-slot:extension>
-          <v-tabs class="white" :color="globalThemeColor" dark v-model="tab" grow>
-            <v-tab v-for="(item, index) in demoComponents" :key="index">{{ item.tabName }}</v-tab>
-          </v-tabs>
-        </template>
       </v-toolbar>
 
-      <v-tabs-items v-model="tab" :touchless="!isEnableTabSwipe">
-        <v-tab-item
-          v-for="(item, index) in demoComponents"
-          :key="index"
-          class="tab-item-full-height"
-        >
-          <!-- todo : https://vuetifyjs.com/en/components/lazy/ -->
-          <component v-bind:is="`${item.component}`"></component>
+      <v-tabs v-model="tabSync" :color="globalThemeColor" grow>
+        <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{ tab.tabName }}</v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tabSync" @change="updateRouter($event)" :touchless="!isEnableTabSwipe">
+        <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
+          <router-view></router-view>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -83,17 +75,12 @@
 </template>
 
 <script>
-// todo: vue router 考慮
 // todo: 考慮把全部按鈕都換成 floating button
 // todo: 寬度過小的時候，dialog 會爆掉
 // todo: 元件 demo 頁
 // todo: 寫 readme.md
 
 import Vue from "vue";
-import GetStartedDemo from "./components/GetStartedDemo";
-import DialogDemo from "./components/DialogDemo";
-import NotifyDemo from "./components/NotifyDemo";
-import LoaderDemo from "./components/LoaderDemo";
 
 import CodeBlockBase from "./components/Common/CodeBlock/CodeBlockBase";
 import ExampleCodeBlock from "./components/Common/CodeBlock/ExampleCodeBlock";
@@ -101,11 +88,6 @@ import GlobalSettingCodeBlock from "./components/Common/CodeBlock/GlobalSettingC
 
 import AllExpandedPanelScope from "./components/Common/Layout/Panel/AllExpandedPanelScope";
 import ColorResponsiveExpansionPanel from "./components/Common/Layout/Panel/ColorResponsiveExpansionPanel";
-
-Vue.component("GetStartedDemo", GetStartedDemo);
-Vue.component("DialogDemo", DialogDemo);
-Vue.component("NotifyDemo", NotifyDemo);
-Vue.component("LoaderDemo", LoaderDemo);
 
 Vue.component("AllExpandedPanelScope", AllExpandedPanelScope);
 Vue.component("ColorResponsiveExpansionPanel", ColorResponsiveExpansionPanel);
@@ -116,15 +98,15 @@ Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
 export default {
   data: () => ({
+    tabSync: null,
     colorInput: "primary",
     colorPick: "#1976d2FF",
     isEnableTabSwipe: true,
-    tab: 1,
-    demoComponents: [
-      { tabName: "Get Started", component: "GetStartedDemo" },
-      { tabName: "Dialog", component: "DialogDemo" },
-      { tabName: "Notify", component: "NotifyDemo" },
-      { tabName: "Loader", component: "LoaderDemo" }
+    tabs: [
+      { tabName: "Get Started", path: "/GetStarted" },
+      { tabName: "Dialog", path: "/Dialog" },
+      { tabName: "Notify", path: "/Notify" },
+      { tabName: "Loader", path: "/Loader" }
     ]
   }),
   computed: {
@@ -144,6 +126,9 @@ export default {
     }
   },
   methods: {
+    updateRouter(val) {
+      this.$router.push(val);
+    },
     colorInputBlur() {
       if (this.colorInput) {
         this.$store.commit("theme/setColor", this.colorInput);
@@ -159,10 +144,6 @@ export default {
 </script>
 
 <style>
-.tab-item-full-height {
-  height: calc(100vh - 115px);
-}
-
 .userSelect-none {
   user-select: none;
 }

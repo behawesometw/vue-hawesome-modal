@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import vuetify from './src/vuetify'
+import store from "./src/store";
+import router from "./src/router";
 import hawesomeVue from '../src/plugin'
 import Demo from './Demo'
-import store from "./src/store";
 
 var notifySetting = { position: "bottomRight" };
 var dialogSetting = {};
@@ -13,5 +14,6 @@ Vue.use(hawesomeVue, { store, notifySetting, dialogSetting, loaderSetting })
 new Vue({
     store,
     vuetify,
+    router,
     render: h => h(Demo)
 }).$mount('#app')
