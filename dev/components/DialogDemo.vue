@@ -33,6 +33,7 @@
               <v-text-field
                 :color="globalThemeColor"
                 v-model="width"
+                type="number"
                 label="width"
                 hint="default value: 300"
               ></v-text-field>
@@ -89,11 +90,9 @@
 </template>
 
 <script>
-import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
 import ColorSelectBundle from "./Common/Color/ColorSelectBundle";
 import DialogButtonConfigure from "./Business/DialogButtonConfigure";
 
-var dialogConfig = DialogConfigBuilder.defaultConfig();
 export default {
   components: {
     ColorSelectBundle,
@@ -106,14 +105,14 @@ export default {
     themeColor: "",
     titleBarColor: "",
     cancelBtn: {
-      isShow: dialogConfig.isShowCancelBtn,
+      isShow: true,
       color: "",
-      txt: dialogConfig.cancelBtnTxt
+      txt: ""
     },
     confirmBtn: {
-      isShow: dialogConfig.isShowConfirmBtn,
+      isShow: true,
       color: "",
-      txt: dialogConfig.confirmBtnTxt
+      txt: ""
     }
   }),
   watch: {
@@ -153,7 +152,81 @@ export default {
       return [];
     },
     codeToAchieves() {
-      return [];
+      var code = `
+this.$dialog
+  ${this.talkStatement}
+  .then(() => {
+    // trigger after user clicks the confirm button
+  })
+  .catch(() => {
+    // trigger after user clicks the cancel button
+  })
+  .finally(this.$dialog.hangUp);
+      `;
+      return [code];
+    },
+    talkStatement() {
+      var isWithBuilder = this.statementReadyToRender.trim().length > 0;
+      var talkStatement = undefined;
+      if (isWithBuilder) {
+        talkStatement =
+          `.talk("${this.content}", builder => {
+    builder` +
+          `${this.statementReadyToRender}
+  })`;
+      } else {
+        talkStatement = `.talk("${this.content}")`;
+      }
+      return talkStatement;
+    },
+    statementReadyToRender() {
+      return (
+        this.genStatemant("title", this.title, this.valOrUndefined) +
+        this.genStatemant(
+          "width",
+          this.width,
+          this.numberGreaterThanZero,
+          false
+        ) +
+        this.genStatemant("themeColor", this.themeColor, this.valOrUndefined) +
+        this.genStatemant(
+          "titleBarColor",
+          this.titleBarColor,
+          this.valOrUndefined
+        ) +
+        this.genStatemant(
+          "isShowConfirmBtn",
+          this.confirmBtn.isShow,
+          this.falsyOrUndefined,
+          false
+        ) +
+        this.genStatemant(
+          "confirmBtnTxt",
+          this.confirmBtn.txt,
+          this.valOrUndefined
+        ) +
+        this.genStatemant(
+          "confirmBtnColor",
+          this.confirmBtn.color,
+          this.valOrUndefined
+        ) +
+        this.genStatemant(
+          "isShowCancelBtn",
+          this.cancelBtn.isShow,
+          this.falsyOrUndefined,
+          false
+        ) +
+        this.genStatemant(
+          "cancelBtnTxt",
+          this.cancelBtn.txt,
+          this.valOrUndefined
+        ) +
+        this.genStatemant(
+          "cancelBtnColor",
+          this.cancelBtn.color,
+          this.valOrUndefined
+        )
+      );
     }
   },
   methods: {
@@ -168,26 +241,45 @@ export default {
       var target = this.validNumber(num);
       return target !== undefined && target > 0 ? target : undefined;
     },
+    valOrUndefined(val) {
+      return val || undefined;
+    },
+    falsyOrUndefined(val) {
+      return val ? undefined : val;
+    },
     dialogDemo() {
       this.$dialog
         .talk(this.content, builder => {
           builder
-            .set("title", this.title || undefined)
+            .set("title", this.valOrUndefined(this.title))
             .set("width", this.numberGreaterThanZero(this.width))
-            .set("themeColor", this.themeColor || undefined)
-            .set("titleBarColor", this.titleBarColor || undefined)
-            .set("isShowConfirmBtn", this.confirmBtn.isShow)
-            .set("confirmBtnTxt", this.confirmBtn.txt || undefined)
-            .set("confirmBtnColor", this.confirmBtn.color || undefined)
-            .set("isShowCancelBtn", this.cancelBtn.isShow)
-            .set("cancelBtnTxt", this.cancelBtn.txt || undefined)
-            .set("cancelBtnColor", this.cancelBtn.color || undefined);
+            .set("themeColor", this.valOrUndefined(this.themeColor))
+            .set("titleBarColor", this.valOrUndefined(this.titleBarColor))
+            .set(
+              "isShowConfirmBtn",
+              this.falsyOrUndefined(this.confirmBtn.isShow)
+            )
+            .set("confirmBtnTxt", this.valOrUndefined(this.confirmBtn.txt))
+            .set("confirmBtnColor", this.valOrUndefined(this.confirmBtn.color))
+            .set(
+              "isShowCancelBtn",
+              this.falsyOrUndefined(this.cancelBtn.isShow)
+            )
+            .set("cancelBtnTxt", this.valOrUndefined(this.cancelBtn.txt))
+            .set("cancelBtnColor", this.valOrUndefined(this.cancelBtn.color));
         })
-        .then(() => {
-          console.log(this.title);
-        })
+        .then(() => {})
         .catch(() => {})
         .finally(this.$dialog.hangUp);
+    },
+    genStatemant(attrName, val, handler, isDoubleQuoteWrap = true) {
+      var flag = handler.call(this, val) === undefined;
+      if (flag) {
+        return "";
+      }
+      var valStatement = isDoubleQuoteWrap ? `"${val}"` : `${val}`;
+      return `
+      .set("${attrName}", ${valStatement})`;
     }
   }
 };

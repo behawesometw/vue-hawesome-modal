@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels flat multiple :value="value">
+  <v-expansion-panels flat multiple :value="value" :disabled="isDisablePanelExpandable">
     <slot></slot>
   </v-expansion-panels>
 </template>
@@ -15,6 +15,11 @@ export default {
       default: () => {
         return indexArrayByLength(100);
       }
+    }
+  },
+  computed: {
+    isDisablePanelExpandable() {
+      return !this.$store.state.isEnablePanelExpandable;
     }
   }
 };

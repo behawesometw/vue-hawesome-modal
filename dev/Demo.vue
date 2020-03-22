@@ -40,11 +40,21 @@
                 ></v-color-picker>
               </v-list-item>
             </v-list>
+            <v-divider></v-divider>
+            <v-list>
+              <v-list-item>
+                <v-switch
+                  :color="globalThemeColor"
+                  v-model="isEnablePanelExpandable"
+                  label="panel expandable"
+                ></v-switch>
+              </v-list-item>
+            </v-list>
             <div v-if="$vuetify.breakpoint.xs">
               <v-divider></v-divider>
               <v-list>
                 <v-list-item>
-                  <v-switch v-model="isEnableTabSwipe" label="enable tab swipe"></v-switch>
+                  <v-switch :color="globalThemeColor" v-model="isEnableTabSwipe" label="tab swipe"></v-switch>
                 </v-list-item>
               </v-list>
             </div>
@@ -73,8 +83,9 @@
 </template>
 
 <script>
-// todo: vali
-// todo: dialog 當兩個都是按鈕都不顯示時
+// todo: vue router 考慮
+// todo: 考慮把全部按鈕都換成 floating button
+// todo: 寬度過小的時候，dialog 會爆掉
 // todo: 元件 demo 頁
 // todo: 寫 readme.md
 
@@ -117,6 +128,14 @@ export default {
     ]
   }),
   computed: {
+    isEnablePanelExpandable: {
+      get() {
+        return this.$store.state.isEnablePanelExpandable;
+      },
+      set(value) {
+        this.$store.commit("updateIsEnablePanelExpandable", value);
+      }
+    },
     globalThemeColor() {
       return this.$store.state.theme.color;
     },

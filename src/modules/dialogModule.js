@@ -38,8 +38,9 @@ export default {
 
             return dialogPromise;
         },
-        hangUp({ commit, state }) {
-            commit('setConfig', { ...DialogConfigBuilder.defaultConfig(), ...{ isShowCancelBtn: state.config.isShowCancelBtn } })
+        hangUp({ commit }) {
+            var harmoniousHangUp = { content: "", title: "", confirmBtnTxt: "", cancelBtnTxt: "", isShowCancelBtn: false };
+            commit('setConfig', { ...DialogConfigBuilder.defaultConfig(), ...harmoniousHangUp });
         }
     }
 }
