@@ -4,7 +4,7 @@
       <v-sheet elevation="4" class="pa-4">
         <textarea ref="copyTarget" type="text" class="copy-textarea" :value="copyTargetContent" />
         <div v-for="(code, i) in codeToAchieves" :key="i" class="mb-4 rltv">
-          <div class="abslt topLeft lang-label caption">{{lang}}</div>
+          <div v-if="isShowLangType" class="abslt topLeft lang-label caption">{{lang}}</div>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -44,6 +44,10 @@ export default {
       required: true
     },
     isEnableCopyFunc: {
+      type: Boolean,
+      default: true
+    },
+    isShowLangType: {
       type: Boolean,
       default: true
     }

@@ -153,12 +153,18 @@ export default {
         .map(m => `${m.attrName}: ${m.val}`)
         .join(`, \n    `);
 
+      var settingStr =
+        attrNameValPairStr.length > 0
+          ? `
+  dialogSetting: {
+    ${attrNameValPairStr}
+  }`
+          : "dialogSetting: {}";
+
       var code = `
 var options = { 
   store,
-  dialogSetting: {
-    ${attrNameValPairStr}
-  }
+  ${settingStr.trim()}
 };`;
       return [code];
     },

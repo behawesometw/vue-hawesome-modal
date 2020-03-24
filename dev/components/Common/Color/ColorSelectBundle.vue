@@ -9,7 +9,7 @@
     :menu-props="{ maxHeight: 150 }"
     v-on="$listeners"
   >
-    <template v-slot:append-outer>
+    <template v-slot:prepend-inner>
       <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left :nudge-top="50">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">

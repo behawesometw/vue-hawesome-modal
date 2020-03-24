@@ -1,10 +1,23 @@
 <template>
   <v-container>
-    <CodeBlockBase :codes="templateCodeToAchieves" :lang="'markup'"></CodeBlockBase>
-    <GlobalSettingCodeBlock
-      :codes="codeToAchieveGlobalSetting"
-      :preInsertSnippet="preInsertSnippet"
-    ></GlobalSettingCodeBlock>
+    <AllExpandedPanelScope>
+      <ColorResponsiveExpansionPanel>
+        <template v-slot:header>Install</template>
+        <template v-slot:content>
+          <CodeBlockBase :codes="codeInstallPlugin" :isShowLangType="false" :lang="'html'"></CodeBlockBase>
+        </template>
+      </ColorResponsiveExpansionPanel>
+      <ColorResponsiveExpansionPanel>
+        <template v-slot:header>Usage</template>
+        <template v-slot:content>
+          <GlobalSettingCodeBlock
+            :codes="codeToAchieveGlobalSetting"
+            :preInsertSnippet="preInsertSnippet"
+          ></GlobalSettingCodeBlock>
+          <CodeBlockBase :codes="templateCodeToAchieves" :lang="'html'"></CodeBlockBase>
+        </template>
+      </ColorResponsiveExpansionPanel>
+    </AllExpandedPanelScope>
   </v-container>
 </template>
 
@@ -12,6 +25,9 @@
 <script>
 export default {
   computed: {
+    codeInstallPlugin() {
+      return [`$ npm install hawesome-vue-extends`];
+    },
     templateCodeToAchieves() {
       return [
         `
@@ -22,9 +38,10 @@ export default {
             i.  be used at root(the most top-level) component
             ii. make sure these components are \`singleton\`(one and only one) in a web app
     -->
-    <HawesomeLoader />
+    
     <HawesomeDialog />
     <HawesomeNotify />
+    <HawesomeLoader />
 
     ...
   </v-app>
@@ -45,7 +62,7 @@ var options = {
       ];
     },
     preInsertSnippet() {
-      return `// main.js or somewhere you initialize your app.
+      return `// main.js or somewhere you initialize your app
       `;
     }
   }

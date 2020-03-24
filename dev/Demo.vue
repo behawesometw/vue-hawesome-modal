@@ -77,8 +77,6 @@
 </template>
 
 <script>
-// todo: 考慮把全部按鈕都換成 floating button，dial position
-// todo: 元件 demo 頁
 // todo: 寫 readme.md
 
 import Vue from "vue";
@@ -107,7 +105,8 @@ export default {
       { tabName: "Get Started", path: "/getStarted" },
       { tabName: "Dialog", path: "/dialog" },
       { tabName: "Notify", path: "/notify" },
-      { tabName: "Loader", path: "/loader" }
+      { tabName: "Loader", path: "/loader" },
+      { tabName: "Tutorial", path: "/tutorial" }
     ]
   }),
   computed: {

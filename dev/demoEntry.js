@@ -5,6 +5,8 @@ import router from "./src/router";
 import hawesomeVue from '../src/plugin'
 import Demo from './Demo'
 
+Vue.config.productionTip = false;
+
 var notifySetting = {};
 var dialogSetting = {};
 var loaderSetting = {};

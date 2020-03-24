@@ -1,43 +1,57 @@
 <template>
   <v-container>
-    <v-row dense justify="center">
-      <v-col md="8" cols="10">
-        <v-text-field label="text" v-model="loaderText" :color="globalThemeColor"></v-text-field>
-      </v-col>
-    </v-row>
+    <v-btn
+      fab
+      class="top-right-fixed"
+      :color="globalThemeColor"
+      :x-small="$vuetify.breakpoint.xs"
+      dark
+      @click="loaderDemo"
+    >
+      <v-icon>mdi-play</v-icon>
+    </v-btn>
 
-    <v-row dense justify="center">
-      <v-col md="8" cols="10">
-        <v-text-field
-          type="number"
-          label="timeout"
-          step="500"
-          v-model="timeout"
-          :color="globalThemeColor"
-        ></v-text-field>
-      </v-col>
-    </v-row>
+    <AllExpandedPanelScope>
+      <ColorResponsiveExpansionPanel>
+        <template v-slot:header>Playground</template>
+        <template v-slot:content>
+          <v-row dense justify="center">
+            <v-col md="8" cols="10">
+              <v-text-field label="text" v-model="loaderText" :color="globalThemeColor"></v-text-field>
+            </v-col>
+          </v-row>
 
-    <v-row dense justify="center">
-      <v-col md="8" cols="10">
-        <v-radio-group row v-model="loaderType" @change="loaderTypeChange">
-          <v-radio :color="globalThemeColor" label="linear" value="linear"></v-radio>
-          <v-radio :color="globalThemeColor" label="circular" value="circular"></v-radio>
-        </v-radio-group>
-      </v-col>
-    </v-row>
+          <v-row dense justify="center">
+            <v-col md="8" cols="10">
+              <v-text-field
+                type="number"
+                label="timeout"
+                step="500"
+                v-model="timeout"
+                :color="globalThemeColor"
+              ></v-text-field>
+            </v-col>
+          </v-row>
 
-    <v-divider class="my-5"></v-divider>
+          <v-row dense justify="center">
+            <v-col md="8" cols="10">
+              <v-radio-group row v-model="loaderType" @change="loaderTypeChange">
+                <v-radio :color="globalThemeColor" label="linear" value="linear"></v-radio>
+                <v-radio :color="globalThemeColor" label="circular" value="circular"></v-radio>
+              </v-radio-group>
+            </v-col>
+          </v-row>
+        </template>
+      </ColorResponsiveExpansionPanel>
 
-    <v-row dense justify="center" class="text-center">
-      <v-col cols="12">
-        <v-btn width="200" :color="globalThemeColor" outlined @click="loaderDemo">open loader</v-btn>
-      </v-col>
-    </v-row>
-
-    <GlobalSettingCodeBlock :codes="codeToAchieveGlobalSetting"></GlobalSettingCodeBlock>
-
-    <ExampleCodeBlock :codes="codeToAchieves"></ExampleCodeBlock>
+      <ColorResponsiveExpansionPanel>
+        <template v-slot:header>Usage</template>
+        <template v-slot:content>
+          <GlobalSettingCodeBlock :codes="codeToAchieveGlobalSetting"></GlobalSettingCodeBlock>
+          <ExampleCodeBlock :codes="codeToAchieves"></ExampleCodeBlock>
+        </template>
+      </ColorResponsiveExpansionPanel>
+    </AllExpandedPanelScope>
   </v-container>
 </template>
 
