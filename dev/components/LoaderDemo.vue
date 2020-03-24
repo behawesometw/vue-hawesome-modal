@@ -42,14 +42,7 @@
 </template>
 
 <script>
-import ExampleCodeBlock from "./Common/CodeBlock/ExampleCodeBlock";
-import GlobalSettingCodeBlock from "./Common/CodeBlock/GlobalSettingCodeBlock";
-
 export default {
-  components: {
-    ExampleCodeBlock,
-    GlobalSettingCodeBlock
-  },
   data: () => ({
     loaderText: "",
     timeout: 2000,

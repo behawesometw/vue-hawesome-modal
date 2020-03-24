@@ -5,9 +5,9 @@ import router from "./src/router";
 import hawesomeVue from '../src/plugin'
 import Demo from './Demo'
 
-var notifySetting = { position: "bottomRight" };
+var notifySetting = {};
 var dialogSetting = {};
-var loaderSetting = { type: "linear" };
+var loaderSetting = {};
 
 Vue.use(hawesomeVue, { store, notifySetting, dialogSetting, loaderSetting })
 

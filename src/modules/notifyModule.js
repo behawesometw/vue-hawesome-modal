@@ -7,7 +7,7 @@ export default {
     state: {
         list: [],
         globalSetting: {
-            position: "bottomRight",
+            position: "bottomLeft",
             timeout: 3
         }
     },
@@ -84,6 +84,11 @@ export default {
             commit('pushItem', configReadyToShoot)
 
             return p;
+        }
+    },
+    getters: {
+        hasNotify: state => {
+            return state.list.length > 0;
         }
     }
 }

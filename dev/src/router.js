@@ -3,18 +3,31 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import store from "./store";
+
 import GetStartedDemo from "../components/GetStartedDemo";
 import DialogDemo from "../components/DialogDemo";
 import NotifyDemo from "../components/NotifyDemo";
 import LoaderDemo from "../components/LoaderDemo";
 
 const routes = [
-    { path: '*', alias: "GetStarted", component: GetStartedDemo, },
-    { path: '/Dialog', component: DialogDemo },
-    { path: '/Notify', component: NotifyDemo },
-    { path: '/Loader', component: LoaderDemo }
+    { path: '*', component: GetStartedDemo },
+    { path: '/dialog', component: DialogDemo },
+    { path: '/notify', component: NotifyDemo },
+    { path: '/loader', component: LoaderDemo },
 ]
 
-export default new VueRouter({
-    routes, mode: 'history'
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+});
+
+router.beforeEach((to, from, next) => {
+    var hasNotify = store.getters["notify/hasNotify"];
+    if (hasNotify) {
+        store.commit('notify/clearAllNotify');
+    }
+    next();
 })
+
+export default router

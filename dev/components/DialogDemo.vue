@@ -149,7 +149,18 @@ export default {
       return this.$store.state.colorItems;
     },
     codeToAchieveGlobalSetting() {
-      return [];
+      var attrNameValPairStr = this.attrToBeRendering
+        .map(m => `${m.attrName}: ${m.val}`)
+        .join(`, \n    `);
+
+      var code = `
+var options = { 
+  store,
+  dialogSetting: {
+    ${attrNameValPairStr}
+  }
+};`;
+      return [code];
     },
     codeToAchieves() {
       var code = `
@@ -166,67 +177,98 @@ this.$dialog
       return [code];
     },
     talkStatement() {
-      var isWithBuilder = this.statementReadyToRender.trim().length > 0;
+      var that = this;
+      var isWithBuilder = this.attrToBeRendering.length > 0;
       var talkStatement = undefined;
+
       if (isWithBuilder) {
-        talkStatement =
-          `.talk("${this.content}", builder => {
-    builder` +
-          `${this.statementReadyToRender}
+        var builderSetStatement = this.attrToBeRendering
+          .map(m => that.templateForStatement.call(this, m.attr, m.val))
+          .join("");
+        talkStatement = `.talk("${this.content}", builder => {
+    builder ${builderSetStatement}
   })`;
       } else {
         talkStatement = `.talk("${this.content}")`;
       }
+
       return talkStatement;
     },
-    statementReadyToRender() {
-      return (
-        this.genStatemant("title", this.title, this.valOrUndefined) +
-        this.genStatemant(
-          "width",
-          this.width,
-          this.numberGreaterThanZero,
-          false
-        ) +
-        this.genStatemant("themeColor", this.themeColor, this.valOrUndefined) +
-        this.genStatemant(
-          "titleBarColor",
-          this.titleBarColor,
-          this.valOrUndefined
-        ) +
-        this.genStatemant(
-          "isShowConfirmBtn",
-          this.confirmBtn.isShow,
-          this.falsyOrUndefined,
-          false
-        ) +
-        this.genStatemant(
-          "confirmBtnTxt",
-          this.confirmBtn.txt,
-          this.valOrUndefined
-        ) +
-        this.genStatemant(
-          "confirmBtnColor",
-          this.confirmBtn.color,
-          this.valOrUndefined
-        ) +
-        this.genStatemant(
-          "isShowCancelBtn",
-          this.cancelBtn.isShow,
-          this.falsyOrUndefined,
-          false
-        ) +
-        this.genStatemant(
-          "cancelBtnTxt",
-          this.cancelBtn.txt,
-          this.valOrUndefined
-        ) +
-        this.genStatemant(
-          "cancelBtnColor",
-          this.cancelBtn.color,
-          this.valOrUndefined
-        )
-      );
+    attrToBeRendering() {
+      var renderArr = [
+        {
+          attrName: "title",
+          val: this.title,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "width",
+          val: this.width,
+          handler: this.numberGreaterThanZero,
+          isDoubleQuoteWrap: false
+        },
+        {
+          attrName: "themeColor",
+          val: this.themeColor,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "titleBarColor",
+          val: this.titleBarColor,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "isShowConfirmBtn",
+          val: this.confirmBtn.isShow,
+          handler: this.falsyOrUndefined,
+          isDoubleQuoteWrap: false
+        },
+        {
+          attrName: "confirmBtnTxt",
+          val: this.confirmBtn.txt,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "confirmBtnColor",
+          val: this.confirmBtn.color,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "isShowCancelBtn",
+          val: this.cancelBtn.isShow,
+          handler: this.falsyOrUndefined,
+          isDoubleQuoteWrap: false
+        },
+        {
+          attrName: "cancelBtnTxt",
+          val: this.cancelBtn.txt,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        },
+        {
+          attrName: "cancelBtnColor",
+          val: this.cancelBtn.color,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: true
+        }
+      ];
+
+      var that = this;
+      return renderArr
+        .map(m => ({
+          ...m,
+          ...{ attr: m.attrName, val: m.handler.call(that, m.val) }
+        }))
+        .filter(m => m.val !== undefined)
+        .map(m => ({
+          ...m,
+          ...{ val: m.isDoubleQuoteWrap ? `"${m.val}"` : m.val }
+        }));
     }
   },
   methods: {
@@ -272,14 +314,12 @@ this.$dialog
         .catch(() => {})
         .finally(this.$dialog.hangUp);
     },
-    genStatemant(attrName, val, handler, isDoubleQuoteWrap = true) {
-      var flag = handler.call(this, val) === undefined;
-      if (flag) {
-        return "";
-      }
-      var valStatement = isDoubleQuoteWrap ? `"${val}"` : `${val}`;
+    templateForStatement(attrName, valStatement) {
       return `
       .set("${attrName}", ${valStatement})`;
+    },
+    templateForGlobal(attrName, valStatement) {
+      return `${attrName}: ${valStatement}`;
     }
   }
 };
