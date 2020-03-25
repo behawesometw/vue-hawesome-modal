@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         colorItems: ["primary", "info", "success", "error", "warning", "black"],
-        isEnablePanelExpandable: true
+        isEnablePanelExpandable: false
     },
     mutations: {
         updateIsEnablePanelExpandable(state, value) {

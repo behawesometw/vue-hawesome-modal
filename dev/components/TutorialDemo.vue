@@ -8,7 +8,7 @@
       dark
       @click="replay"
     >
-      <v-icon>mdi-replay</v-icon>
+      <v-icon>mdi-play</v-icon>
     </v-btn>
     <AllExpandedPanelScope>
       <ColorResponsiveExpansionPanel>

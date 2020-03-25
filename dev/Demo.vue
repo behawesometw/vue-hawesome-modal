@@ -103,7 +103,7 @@ export default {
     tabSync: null,
     colorInput: "primary",
     colorPick: "#1976d2FF",
-    isEnableTabSwipe: true,
+    isEnableTabSwipe: false,
     tabs: [
       { tabName: "Get Started", path: "/getStarted" },
       { tabName: "Dialog", path: "/dialog" },
