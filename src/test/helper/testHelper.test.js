@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import * as  testHelper from "./testHelper";
 
 describe("test testHelper", () => {

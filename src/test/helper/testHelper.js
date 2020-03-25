@@ -58,5 +58,6 @@ export const isArrElementContainNameAttrAndNameBeUnique = (arr) => {
     if (!isArrEveryElementContainCertainAttrs(arr, [NAME])) {
         return false
     }
+
     return !hasNameDuplicate(arr);
 }

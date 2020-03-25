@@ -10,6 +10,10 @@ import themeModule from "./modules/themeModule";
 import dialogModule from "./modules/dialogModule";
 import notifyModule from "./modules/notifyModule";
 
+const isWellDefinedFunction = (func) => {
+    return func && typeof func === "function";
+};
+
 export default {
     install(Vue, options) {
         if (!options || !options.store) {
@@ -23,6 +27,13 @@ export default {
         $storeFromApp.registerModule("loader", loaderModule)
         $storeFromApp.registerModule("dialog", dialogModule)
         $storeFromApp.registerModule("notify", notifyModule)
+
+        if (options.loaderSetting)
+            $storeFromApp.commit('loader/setGlobalSetting', options.loaderSetting)
+        if (options.dialogSetting)
+            $storeFromApp.commit('dialog/setGlobalSetting', options.dialogSetting)
+        if (options.notifySetting)
+            $storeFromApp.commit('notify/setGlobalSetting', options.notifySetting)
 
         Vue.component('HawesomeLoader', HawesomeLoader);
         Vue.component('HawesomeDialog', HawesomeDialog);
@@ -44,7 +55,12 @@ export default {
         Object.defineProperty(Vue.prototype, "$dialog", {
             get() {
                 return {
-                    talk(val) {
+                    talk(val, func) {
+                        var builder = new DialogConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._talk(builder);
+                    },
+                    _talk(val) {
                         if (val && typeof val === "string") {
                             return $storeFromApp.dispatch("dialog/talk", new DialogConfigBuilder(val));
                         }
@@ -65,23 +81,34 @@ export default {
         Object.defineProperty(Vue.prototype, "$notify", {
             get() {
                 return {
-                    info(val) {
-                        return this._push(val);
+                    info(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("info"));
                     },
-                    success(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("success");
-                        return this._push(builder);
+                    success(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("success"));
                     },
-                    warning(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("warning");
-                        return this._push(builder);
+                    warning(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("warning"));
                     },
-                    error(val) {
-                        var builder = new NotifyConfigBuilder(val).setType("error");
-                        return this._push(builder);
+                    error(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setType("error"));
                     },
-                    promise(val, type) {
-                        var builder = new NotifyConfigBuilder(val).setType(type).setTimeout(0);
+                    promise(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                        return this._push(builder.setTimeout(0));
+                    },
+                    push(val, func) {
+                        var builder = new NotifyConfigBuilder(val);
+                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
                         return this._push(builder);
                     },
                     _push(val) {
@@ -94,7 +121,13 @@ export default {
                         else {
                             throw new Error("val should be a string or instance of NotifyConfigBuilder.");
                         }
-                    }
+                    },
+                    resolveAllNotify() {
+                        $storeFromApp.commit('notify/resolveAllNotify')
+                    },
+                    clearAllNotify() {
+                        $storeFromApp.commit('notify/clearAllNotify')
+                    },
                 }
             }
         })
