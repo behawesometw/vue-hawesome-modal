@@ -25,6 +25,3 @@ ${code}
   }
 };
 </script>
-
-<style>
-</style>

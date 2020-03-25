@@ -1,7 +1,7 @@
 <template>
   <v-dialog scrollable overlay-opacity persistent v-model="config.isShow" :width="config.width">
     <v-card min-width="200">
-      <v-toolbar dark dense flat :color="config.titleBarColor || globalThemeColor">
+      <v-toolbar dark dense flat :color="dialogToolBarColor">
         <v-toolbar-title>{{config.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon dark v-if="config.isShowCancelBtn" @click="config.reject()">
@@ -39,6 +39,11 @@
 <script>
 export default {
   computed: {
+    dialogToolBarColor() {
+      return this.$vuetify.theme.dark
+        ? ""
+        : this.config.titleBarColor || this.globalThemeColor;
+    },
     config() {
       return this.$store.state.dialog.config;
     },

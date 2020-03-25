@@ -25,10 +25,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var hasNotify = store.getters["notify/hasNotify"];
-    if (hasNotify) {
-        store.commit('notify/clearAllNotify');
-    }
+    store.commit('notify/clearAllNotify');
     next();
 })
 

@@ -35,6 +35,10 @@ export default {
             }
         },
         resolveAllNotify(state) {
+            if (state.list.length === 0) {
+                return;
+            }
+
             state.list.forEach(notifyObj => {
                 notifyObj.resolve();
                 if (notifyObj.intervalId) {
@@ -44,6 +48,10 @@ export default {
             state.list = [];
         },
         clearAllNotify(state) {
+            if (state.list.length === 0) {
+                return;
+            }
+
             state.list = [];
         }
     },

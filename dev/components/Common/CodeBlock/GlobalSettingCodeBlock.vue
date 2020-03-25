@@ -38,6 +38,3 @@ Vue.use(hawesomeVue, options)
   }
 };
 </script>
-
-<style>
-</style>

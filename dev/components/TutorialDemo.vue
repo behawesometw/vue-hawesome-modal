@@ -28,7 +28,7 @@ this.$notify
   .then(() => this.$dialog.talk("ready to start a tutorial?"))
   .then(() =>
     this.$dialog.talk(
-      "we can use promise object chaining a series of tasks.",
+      "we can use \`Promise API\` chaining a series of tasks.",
       builder => {
         builder
           .set("width", 500)
@@ -76,11 +76,8 @@ export default {
       return this.$store.state.theme.color;
     },
     codeToAchieves() {
-      return [demoSnippet, "123"];
+      return [demoSnippet];
     }
   }
 };
 </script>
-
-<style>
-</style>

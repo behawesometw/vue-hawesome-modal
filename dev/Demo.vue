@@ -5,11 +5,14 @@
     <HawesomeNotify />
 
     <v-card flat>
-      <v-toolbar :color="globalThemeColor" dark>
+      <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
         <v-toolbar-title class="userSelect-none">hawesome-vue-extends</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
+        <v-btn icon @click="darkThemeToggle">
+          <v-icon>mdi-invert-colors</v-icon>
+        </v-btn>
         <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
@@ -110,6 +113,9 @@ export default {
     ]
   }),
   computed: {
+    toolbarColor() {
+      return this.$vuetify.theme.dark ? "" : this.globalThemeColor;
+    },
     isEnablePanelExpandable: {
       get() {
         return this.$store.state.isEnablePanelExpandable;
@@ -138,6 +144,12 @@ export default {
       if (this.colorPick) {
         this.$store.commit("theme/setColor", this.colorPick);
       }
+    },
+    darkThemeToggle() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+
+      var prismDefaultTheme = document.getElementById("_prismDefaultTheme");
+      prismDefaultTheme.disabled = this.$vuetify.theme.dark;
     }
   }
 };

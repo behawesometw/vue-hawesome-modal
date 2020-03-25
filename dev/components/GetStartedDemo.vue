@@ -4,7 +4,7 @@
       <ColorResponsiveExpansionPanel>
         <template v-slot:header>Install</template>
         <template v-slot:content>
-          <CodeBlockBase :codes="codeInstallPlugin" :isShowLangType="false" :lang="'html'"></CodeBlockBase>
+          <CodeBlockBase :codes="codeInstallPlugin" :lang="'bash'"></CodeBlockBase>
         </template>
       </ColorResponsiveExpansionPanel>
       <ColorResponsiveExpansionPanel>
@@ -68,6 +68,3 @@ var options = {
   }
 };
 </script>
-
-<style>
-</style>

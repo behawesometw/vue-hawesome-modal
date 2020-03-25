@@ -116,6 +116,3 @@ setTimeout(() => {
   }
 };
 </script>
-
-<style>
-</style>
