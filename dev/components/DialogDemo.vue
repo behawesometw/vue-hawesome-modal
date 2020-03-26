@@ -7,7 +7,7 @@
           class="top-right-fixed"
           :color="globalThemeColor"
           :x-small="$vuetify.breakpoint.xs"
-          :dark="isReadyToPlay"
+          :dark="isButtonGoDark"
           :disabled="isNotReadyToPlay"
           @click="dialogDemo"
         >
@@ -136,6 +136,10 @@ export default {
     }
   },
   computed: {
+    isButtonGoDark() {
+      if (this.isNotReadyToPlay && !this.$vuetify.theme.dark) return false;
+      return this.isReadyToPlay;
+    },
     isReadyToPlay() {
       return this.content && this.content.trim().length > 0;
     },

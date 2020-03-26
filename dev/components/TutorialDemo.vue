@@ -1,15 +1,21 @@
 <template>
   <v-container>
-    <v-btn
-      fab
-      class="top-right-fixed"
-      :color="globalThemeColor"
-      :x-small="$vuetify.breakpoint.xs"
-      dark
-      @click="replay"
-    >
-      <v-icon>mdi-play</v-icon>
-    </v-btn>
+    <v-tooltip left>
+      <template v-slot:activator="{on}">
+        <v-btn
+          v-on="on"
+          fab
+          class="top-right-fixed"
+          :color="globalThemeColor"
+          :x-small="$vuetify.breakpoint.xs"
+          dark
+          @click="play"
+        >
+          <v-icon>mdi-play</v-icon>
+        </v-btn>
+      </template>
+      <span>click to run the snippet</span>
+    </v-tooltip>
     <AllExpandedPanelScope>
       <ColorResponsiveExpansionPanel>
         <template v-slot:header>Usage</template>
@@ -59,14 +65,8 @@ this.$notify
   .finally(this.$dialog.hangUp);
       `;
 export default {
-  mounted() {
-    if (this.$store.getters["notify/hasNotify"]) {
-      return;
-    }
-    eval(demoSnippet);
-  },
   methods: {
-    replay() {
+    play() {
       this.$store.commit("notify/clearAllNotify");
       eval(demoSnippet);
     }
