@@ -19,6 +19,7 @@ const routes = [
     { path: '/tutorial', component: TutorialDemo },
 ]
 
+// todo: mode 也許會影響 # 的使用，測測看
 const router = new VueRouter({ base: "/hawesome-vue-extends/", routes, mode: 'history' });
 
 router.beforeEach((to, from, next) => {
