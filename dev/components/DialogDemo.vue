@@ -169,7 +169,7 @@ export default {
 var options = { 
   store,
   ${settingStr.trim()}
-};`;
+}`;
       return [code];
     },
     codeToAchieves() {

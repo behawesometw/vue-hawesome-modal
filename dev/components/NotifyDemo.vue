@@ -142,7 +142,7 @@ var options = {
     position: "${this.positionText()}", 
     timeout: ${this.duration} 
   } 
-};`
+}`
       ];
     },
     codeToAchieves() {

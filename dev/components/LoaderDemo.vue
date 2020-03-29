@@ -78,7 +78,7 @@ var options = {
   loaderSetting: { 
     type: "${this.loaderType}"${loaderTextStatement}
   } 
-};`
+}`
       ];
     },
     codeToAchieves() {
