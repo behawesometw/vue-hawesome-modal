@@ -2,7 +2,7 @@
   <v-container>
     <AllExpandedPanelScope>
       <ColorResponsiveExpansionPanel>
-        <template v-slot:header>Install</template>
+        <template v-slot:header>Installation</template>
         <template v-slot:content>
           <CodeBlockBase :codes="codeInstallPlugin" :lang="'bash'"></CodeBlockBase>
         </template>
@@ -58,7 +58,7 @@ var options = {
   dialogSetting: { ... },
   notifySetting: { ... },
   loaderSetting: { ... }
-};`
+}`
       ];
     },
     preInsertSnippet() {

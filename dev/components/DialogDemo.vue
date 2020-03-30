@@ -161,6 +161,7 @@ export default {
         attrNameValPairStr.length > 0
           ? `
   dialogSetting: {
+    // hawesome-vue-extends/lib/dialog/dialogConfigAttribute
     ${attrNameValPairStr}
   }`
           : "dialogSetting: {}";
@@ -169,7 +170,7 @@ export default {
 var options = { 
   store,
   ${settingStr.trim()}
-};`;
+}`;
       return [code];
     },
     codeToAchieves() {

@@ -139,10 +139,11 @@ export default {
 var options = { 
   store, 
   notifySetting: { 
+    // hawesome-vue-extends/lib/notify/notifyConfigAttribute
     position: "${this.positionText()}", 
     timeout: ${this.duration} 
   } 
-};`
+}`
       ];
     },
     codeToAchieves() {
