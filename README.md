@@ -28,7 +28,7 @@ var options = {
 // install
 Vue.use(hawesomeVue, options)
 ```
-Use component at `root (the most top-level)` component like
+Use component at `root (the most top-level)` component like:
 ```vue
 <template>
   <v-app>
@@ -41,6 +41,8 @@ Use component at `root (the most top-level)` component like
 ```
 ## Usage
 After Installing the plugin, `$dialog`, `$notify` and `$loader` will available on the Vue prototype.
+
+---
 ### Dialog
 [Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
 #### API
