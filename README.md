@@ -1,8 +1,8 @@
 # hawesome-vue-extends
-A Vue modal component plugin based on Vuetify with Vuex.  
-Provides dialog, notification and loader for building a modern website.  
-Using Promise API refactor modal component to provide fluent experience.  
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/)  
+> A Vue modal component plugin based on Vuetify with Vuex.  
+> Provides dialog, notification and loader for building a modern website.  
+> Using Promise API refactor modal component to provide fluent experience.  
+> [Live Demo](https://behawesometw.github.io/hawesome-vue-extends/)  
 ## Installation
 ### NPM
 ```bash
@@ -42,11 +42,11 @@ Use component at `root (the most top-level)` component like
 ## Usage
 After Installing the plugin, `$dialog`, `$notify` and `$loader` will available on the Vue prototype.
 ### Dialog
-Dialog Live Demo:[Playground](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
 #### API
 | Name   | Parameter                                                 | Return Type      | Description           |
 | :----- | :-------------------------------------------------------- | :--------------- | :-------------------- |
-| talk   | val: string, func: (builder: DialogConfigBuilder) => void | Promise&lt;null> | setup and open dialog |
+| talk   | val: string<br />func: (builder: DialogConfigBuilder) => void | Promise&lt;null> | setup and open dialog |
 | hangUp |                                                           | void             | close dialog          |
 #### Global Settings
 ```javascript
@@ -102,18 +102,18 @@ this.$dialog
 ```
 ---
 ### Notify
-Notify Live Demo:[Playground](https://behawesometw.github.io/hawesome-vue-extends/#/notify)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/notify)
 #### API
 | Name             | Parameter                                                      | Return Type      | Description                                                       |
 | :--------------- | :------------------------------------------------------------- | :--------------- | :---------------------------------------------------------------- |
-| info             | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push info notification                                            |
-| success          | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push success notification                                         |
-| warning          | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push warning notification                                         |
-| error            | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push error notification                                           |
-| promise          | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification without auto dismiss                            |
-| push             | notiText: string, func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification                                                 |
+| info             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push info notification                                            |
+| success          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push success notification                                         |
+| warning          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push warning notification                                         |
+| error            | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push error notification                                           |
+| promise          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification without auto dismiss                            |
+| push             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification                                                 |
 | resolveAllNotify |                                                                | void             | resolve all notification                                          |
-| clearAllNotify   |                                                                | void             | clear all notification ( p.s. not trigger then callback function) |
+| clearAllNotify   |                                                                | void             | clear all notification<br />( p.s. not trigger then callback function) |
 #### Global Settings
 ```javascript
 // import
@@ -160,7 +160,7 @@ this.$notify
 ```
 ---
 ### Loader
-Loader Live Demo:[Playground](https://behawesometw.github.io/hawesome-vue-extends/#/loader)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/loader)
 #### API
 | Name | Parameter          | Return Type | Description  |
 | :--- | :----------------- | :---------- | :----------- |
