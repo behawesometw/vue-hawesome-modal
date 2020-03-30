@@ -105,7 +105,7 @@ export default {
     colorPick: "#1976d2FF",
     isEnableTabSwipe: false,
     tabs: [
-      { tabName: "Get Started", path: "/getStarted" },
+      { tabName: "Get Started", path: "/gettingStarted" },
       { tabName: "Dialog", path: "/dialog" },
       { tabName: "Notify", path: "/notify" },
       { tabName: "Loader", path: "/loader" },
