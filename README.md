@@ -44,12 +44,12 @@ After Installing the plugin, `$dialog`, `$notify` and `$loader` will available o
 
 ---
 ### Dialog
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/dialog)
 #### API
-| Name   | Parameter                                                 | Return Type      | Description           |
-| :----- | :-------------------------------------------------------- | :--------------- | :-------------------- |
+| Name   | Parameter                                                     | Return Type      | Description           |
+| :----- | :------------------------------------------------------------ | :--------------- | :-------------------- |
 | talk   | val: string<br />func: (builder: DialogConfigBuilder) => void | Promise&lt;null> | setup and open dialog |
-| hangUp |                                                           | void             | close dialog          |
+| hangUp |                                                               | void             | close dialog          |
 #### Global Settings
 ```javascript
 // import
@@ -104,18 +104,18 @@ this.$dialog
 ```
 ---
 ### Notify
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/notify)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/notify)
 #### API
-| Name             | Parameter                                                      | Return Type      | Description                                                       |
-| :--------------- | :------------------------------------------------------------- | :--------------- | :---------------------------------------------------------------- |
-| info             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push info notification                                            |
-| success          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push success notification                                         |
-| warning          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push warning notification                                         |
-| error            | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push error notification                                           |
-| promise          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification without auto dismiss                            |
-| push             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification                                                 |
-| resolveAllNotify |                                                                | void             | resolve all notification                                          |
-| clearAllNotify   |                                                                | void             | clear all notification<br />( p.s. not trigger then callback function) |
+| Name             | Parameter                                                          | Return Type      | Description                                                            |
+| :--------------- | :----------------------------------------------------------------- | :--------------- | :--------------------------------------------------------------------- |
+| info             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push info notification                                                 |
+| success          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push success notification                                              |
+| warning          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push warning notification                                              |
+| error            | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push error notification                                                |
+| promise          | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification without auto dismiss                                 |
+| push             | notiText: string<br />func: (builder: NotifyConfigBuilder) => void | Promise&lt;null> | push notification                                                      |
+| resolveAllNotify |                                                                    | void             | resolve all notification                                               |
+| clearAllNotify   |                                                                    | void             | clear all notification<br />( p.s. not trigger then callback function) |
 #### Global Settings
 ```javascript
 // import
@@ -162,7 +162,7 @@ this.$notify
 ```
 ---
 ### Loader
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/loader)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/loader)
 #### API
 | Name | Parameter          | Return Type | Description  |
 | :--- | :----------------- | :---------- | :----------- |
@@ -202,7 +202,7 @@ setTimeout(() => {
 ```
 ---
 ### Tutorial
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/tutorial)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/tutorial)
 #### Working With Promise API
 ```javascript
 // `this` points to the Vue instance
