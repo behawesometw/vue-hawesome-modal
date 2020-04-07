@@ -12,7 +12,7 @@ import LoaderDemo from "../components/LoaderDemo";
 import TutorialDemo from "../components/TutorialDemo";
 
 const routes = [
-    { path: '/', component: GettingStartedDemo },
+    { path: '*', component: GettingStartedDemo },
     { path: '/gettingStarted', component: GettingStartedDemo },
     { path: '/dialog', component: DialogDemo },
     { path: '/notify', component: NotifyDemo },
@@ -20,9 +20,7 @@ const routes = [
     { path: '/tutorial', component: TutorialDemo },
 ]
 
-routes.push({ path: '*', redirect: '/' });
-
-const router = new VueRouter({ base: "/hawesome-vue-extends/", routes, mode: "history" });
+const router = new VueRouter({ base: "/hawesome-vue-extends/", routes });
 
 router.beforeEach((to, from, next) => {
     store.commit('notify/clearAllNotify');

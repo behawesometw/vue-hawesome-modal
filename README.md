@@ -44,7 +44,7 @@ After Installing the plugin, `$dialog`, `$notify` and `$loader` will available o
 
 ---
 ### Dialog
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/dialog)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
 #### API
 | Name   | Parameter                                                     | Return Type      | Description           |
 | :----- | :------------------------------------------------------------ | :--------------- | :-------------------- |
@@ -104,7 +104,7 @@ this.$dialog
 ```
 ---
 ### Notify
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/notify)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/notify)
 #### API
 | Name             | Parameter                                                          | Return Type      | Description                                                            |
 | :--------------- | :----------------------------------------------------------------- | :--------------- | :--------------------------------------------------------------------- |
@@ -162,7 +162,7 @@ this.$notify
 ```
 ---
 ### Loader
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/loader)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/loader)
 #### API
 | Name | Parameter          | Return Type | Description  |
 | :--- | :----------------- | :---------- | :----------- |
@@ -202,7 +202,7 @@ setTimeout(() => {
 ```
 ---
 ### Tutorial
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/tutorial)
+[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/tutorial)
 #### Working With Promise API
 ```javascript
 // `this` points to the Vue instance
