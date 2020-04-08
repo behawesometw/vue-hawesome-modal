@@ -1,12 +1,16 @@
 <template>
   <v-app>
-    <HawesomeLoader />
-    <HawesomeDialog />
-    <HawesomeNotify />
+    <h-dialog />
+    <h-notify />
+    <h-loader />
 
     <v-card flat>
       <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
-        <v-toolbar-title class="userSelect-none">hawesome-vue-extends</v-toolbar-title>
+        <v-toolbar-title
+          class="userSelect-none"
+          :class="titleColorClass"
+          :style="titleColorStyle"
+        >vue-hawesome-modal</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -129,6 +133,14 @@ export default {
     },
     colorItems() {
       return this.$store.state.colorItems;
+    },
+    titleColorStyle() {
+      return this.$vuetify.theme.dark
+        ? { [`color`]: this.globalThemeColor }
+        : {};
+    },
+    titleColorClass() {
+      return { [`${this.globalThemeColor}--text`]: this.$vuetify.theme.dark };
     }
   },
   methods: {

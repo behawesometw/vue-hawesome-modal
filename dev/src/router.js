@@ -20,7 +20,7 @@ const routes = [
     { path: '/tutorial', component: TutorialDemo },
 ]
 
-const router = new VueRouter({ base: "/hawesome-vue-extends/", routes });
+const router = new VueRouter({ base: "/vue-hawesome-modal/", routes });
 
 router.beforeEach((to, from, next) => {
     store.commit('notify/clearAllNotify');

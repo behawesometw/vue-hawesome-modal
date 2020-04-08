@@ -161,7 +161,7 @@ export default {
         attrNameValPairStr.length > 0
           ? `
   dialogSetting: {
-    // hawesome-vue-extends/lib/dialog/dialogConfigAttribute
+    // vue-hawesome-modal/lib/dialog/dialogConfigAttribute
     ${attrNameValPairStr}
   }`
           : "dialogSetting: {}";
@@ -175,7 +175,7 @@ var options = {
     },
     codeToAchieves() {
       var code = `
-this.$dialog
+this.$h.dialog
   ${this.talkStatement}
   .then(() => {
     // trigger after user clicks the confirm button
@@ -183,7 +183,7 @@ this.$dialog
   .catch(() => {
     // trigger after user clicks the cancel button
   })
-  .finally(this.$dialog.hangUp);
+  .finally(this.$h.dialog.hangUp);
       `;
       return [code];
     },
@@ -301,7 +301,7 @@ this.$dialog
       return val ? undefined : val;
     },
     dialogDemo() {
-      this.$dialog
+      this.$h.dialog
         .talk(this.content, builder => {
           builder
             .set("title", this.valOrUndefined(this.title))
@@ -323,7 +323,7 @@ this.$dialog
         })
         .then(() => {})
         .catch(() => {})
-        .finally(this.$dialog.hangUp);
+        .finally(this.$h.dialog.hangUp);
     },
     templateForStatement(attrName, valStatement) {
       return `

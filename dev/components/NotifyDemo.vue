@@ -139,7 +139,7 @@ export default {
 var options = { 
   store, 
   notifySetting: { 
-    // hawesome-vue-extends/lib/notify/notifyConfigAttribute
+    // vue-hawesome-modal/lib/notify/notifyConfigAttribute
     position: "${this.positionText()}", 
     timeout: ${this.duration} 
   } 
@@ -157,7 +157,7 @@ var options = {
       var setTypeStatement = `.setType("${this.notiType}")`;
 
       var codeToAchieve1 = `
-this.$notify
+this.$h.notify
   .push(
     "${this.notiText}",
     builder => {
@@ -172,7 +172,7 @@ this.$notify
       resultArr.push(codeToAchieve1);
 
       var codeToAchieve2 = `
-this.$notify
+this.$h.notify
   .${this.notiType}(
     "${this.notiText}", 
     builder => {
@@ -185,7 +185,7 @@ this.$notify
 
       if (!this.isEnableDuration) {
         var codeToAchieve3 = `
-this.$notify
+this.$h.notify
   .promise(
     "${this.notiText}", 
     builder => {
@@ -202,7 +202,7 @@ this.$notify
   },
   methods: {
     notiDemo() {
-      this.$notify
+      this.$h.notify
         .push(this.notiText, builder => {
           builder
             .setType(this.notiType)
@@ -225,10 +225,10 @@ this.$notify
       });
     },
     resolve() {
-      this.$notify.resolveAllNotify();
+      this.$h.notify.resolveAllNotify();
     },
     clean() {
-      this.$notify.clearAllNotify();
+      this.$h.notify.clearAllNotify();
     }
   },
   watch: {

@@ -89,9 +89,9 @@ var options = {
       }`;
 
       var codeToAchieve = `
-this.$loader.on(${loaderTextStatement});
+this.$h.loader.on(${loaderTextStatement});
 setTimeout(() => {
-  this.$loader.off();
+  this.$h.loader.off();
 }, ${this.timeout});
     `;
 
@@ -108,9 +108,9 @@ setTimeout(() => {
     },
     loaderDemo() {
       var sec = this.timeout >= 0 ? this.timeout : 2000;
-      this.$loader.on(this.loaderText);
+      this.$h.loader.on(this.loaderText);
       setTimeout(() => {
-        this.$loader.off();
+        this.$h.loader.off();
       }, sec);
     }
   }

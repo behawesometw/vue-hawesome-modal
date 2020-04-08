@@ -35,99 +35,93 @@ export default {
         if (options.notifySetting)
             $storeFromApp.commit('notify/setGlobalSetting', options.notifySetting)
 
-        Vue.component('HawesomeLoader', HawesomeLoader);
-        Vue.component('HawesomeDialog', HawesomeDialog);
-        Vue.component('HawesomeNotify', HawesomeNotify);
+        Vue.component('h-loader', HawesomeLoader);
+        Vue.component('h-dialog', HawesomeDialog);
+        Vue.component('h-notify', HawesomeNotify);
 
-        Object.defineProperty(Vue.prototype, "$loader", {
+        Object.defineProperty(Vue.prototype, "$h", {
             get() {
                 return {
-                    on(loaderText) {
-                        $storeFromApp.dispatch("loader/on", loaderText);
+                    loader: {
+                        on(loaderText) {
+                            $storeFromApp.dispatch("loader/on", loaderText);
+                        },
+                        off() {
+                            $storeFromApp.dispatch("loader/off");
+                        }
                     },
-                    off() {
-                        $storeFromApp.dispatch("loader/off");
+
+                    dialog: {
+                        talk(val, func) {
+                            var builder = new DialogConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._talk(builder);
+                        },
+                        _talk(val) {
+                            if (val && typeof val === "string") {
+                                return $storeFromApp.dispatch("dialog/talk", new DialogConfigBuilder(val));
+                            }
+                            else if (val instanceof DialogConfigBuilder) {
+                                return $storeFromApp.dispatch("dialog/talk", val);
+                            }
+                            else {
+                                throw new Error("val should be a string or instance of DialogConfigBuilder.");
+                            }
+                        },
+                        hangUp() {
+                            $storeFromApp.dispatch('dialog/hangUp');
+                        }
+                    },
+
+                    notify: {
+                        info(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder.setType("info"));
+                        },
+                        success(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder.setType("success"));
+                        },
+                        warning(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder.setType("warning"));
+                        },
+                        error(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder.setType("error"));
+                        },
+                        promise(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder.setTimeout(0));
+                        },
+                        push(val, func) {
+                            var builder = new NotifyConfigBuilder(val);
+                            if (isWellDefinedFunction(func)) { func.call(this, builder); }
+                            return this._push(builder);
+                        },
+                        _push(val) {
+                            if (val && typeof val === "string") {
+                                return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
+                            }
+                            else if (val instanceof NotifyConfigBuilder) {
+                                return $storeFromApp.dispatch("notify/push", val);
+                            }
+                            else {
+                                throw new Error("val should be a string or instance of NotifyConfigBuilder.");
+                            }
+                        },
+                        resolveAllNotify() {
+                            $storeFromApp.commit('notify/resolveAllNotify')
+                        },
+                        clearAllNotify() {
+                            $storeFromApp.commit('notify/clearAllNotify')
+                        },
                     }
-                }
-            }
-        })
-
-        Object.defineProperty(Vue.prototype, "$dialog", {
-            get() {
-                return {
-                    talk(val, func) {
-                        var builder = new DialogConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._talk(builder);
-                    },
-                    _talk(val) {
-                        if (val && typeof val === "string") {
-                            return $storeFromApp.dispatch("dialog/talk", new DialogConfigBuilder(val));
-                        }
-                        else if (val instanceof DialogConfigBuilder) {
-                            return $storeFromApp.dispatch("dialog/talk", val);
-                        }
-                        else {
-                            throw new Error("val should be a string or instance of DialogConfigBuilder.");
-                        }
-                    },
-                    hangUp() {
-                        $storeFromApp.dispatch('dialog/hangUp');
-                    }
-                }
-            }
-        })
-
-        Object.defineProperty(Vue.prototype, "$notify", {
-            get() {
-                return {
-                    info(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder.setType("info"));
-                    },
-                    success(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder.setType("success"));
-                    },
-                    warning(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder.setType("warning"));
-                    },
-                    error(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder.setType("error"));
-                    },
-                    promise(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder.setTimeout(0));
-                    },
-                    push(val, func) {
-                        var builder = new NotifyConfigBuilder(val);
-                        if (isWellDefinedFunction(func)) { func.call(this, builder); }
-                        return this._push(builder);
-                    },
-                    _push(val) {
-                        if (val && typeof val === "string") {
-                            return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
-                        }
-                        else if (val instanceof NotifyConfigBuilder) {
-                            return $storeFromApp.dispatch("notify/push", val);
-                        }
-                        else {
-                            throw new Error("val should be a string or instance of NotifyConfigBuilder.");
-                        }
-                    },
-                    resolveAllNotify() {
-                        $storeFromApp.commit('notify/resolveAllNotify')
-                    },
-                    clearAllNotify() {
-                        $storeFromApp.commit('notify/clearAllNotify')
-                    },
                 }
             }
         })

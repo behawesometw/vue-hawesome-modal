@@ -77,9 +77,9 @@ export default {
 
         try {
           document.execCommand("copy");
-          that.$notify.success("copy success");
+          that.$h.notify.success("copy success");
         } catch (error) {
-          that.$notify.error("copy fail");
+          that.$h.notify.error("copy fail");
         }
       });
     }

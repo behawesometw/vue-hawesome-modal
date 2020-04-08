@@ -26,22 +26,22 @@
 export default {
   computed: {
     codeInstallPlugin() {
-      return [`$ npm install hawesome-vue-extends`];
+      return [`$ npm install vue-hawesome-modal`];
     },
     templateCodeToAchieves() {
       return [
         `
 <template>
   <v-app>
-    <!-- Components can be used after \`hawesome-vue-extends\` been installed -->
-    <!-- \`hawesome-vue-extends\` component should 
+    <!-- Components can be used after \`vue-hawesome-modal\` been installed -->
+    <!-- \`vue-hawesome-modal\` component should 
             i.  be used at root(the most top-level) component
             ii. make sure these components are \`singleton\`(one and only one) in a web app
     -->
     
-    <HawesomeDialog />
-    <HawesomeNotify />
-    <HawesomeLoader />
+    <h-dialog />
+    <h-notify />
+    <h-loader />
 
     ...
   </v-app>

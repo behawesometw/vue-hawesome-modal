@@ -1,21 +1,21 @@
-# hawesome-vue-extends
+# vue-hawesome-modal
 > A Vue modal component plugin based on Vuetify with Vuex.  
 > Provides dialog, notification and loader for building a modern website.  
 > Using Promise API refactor modal component to provide fluent experience.  
-> [Live Demo](https://behawesometw.github.io/hawesome-vue-extends/)  
+> [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/)  
 ## Installation
 ### NPM
 ```bash
-$ npm install hawesome-vue-extends
+$ npm install vue-hawesome-modal
 ```
-Install `hawesome-vue-extends` via `Vue.use()`:
+Install `vue-hawesome-modal` via `Vue.use()`:
 ```javascript
 // main.js or somewhere you initialize your app
 
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
+import vueHawesomeModal from "vue-hawesome-modal"
 
 // initialize global settings
 var options = {
@@ -26,25 +26,25 @@ var options = {
 }
 
 // install
-Vue.use(hawesomeVue, options)
+Vue.use(vueHawesomeModal, options)
 ```
 Use component at `root (the most top-level)` component like:
 ```vue
 <template>
   <v-app>
-    <HawesomeDialog />
-    <HawesomeNotify />
-    <HawesomeLoader />
+    <h-dialog />
+    <h-notify />
+    <h-loader />
     ...
   </v-app>
 </template>
 ```
 ## Usage
-After Installing the plugin, `$dialog`, `$notify` and `$loader` will available on the Vue prototype.
+After Installing the plugin, `dialog`, `notify` and `loader` will available at `$h` on the Vue prototype.
 
 ---
 ### Dialog
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/dialog)
+[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/dialog)
 #### API
 | Name   | Parameter                                                     | Return Type      | Description           |
 | :----- | :------------------------------------------------------------ | :--------------- | :-------------------- |
@@ -55,13 +55,13 @@ After Installing the plugin, `$dialog`, `$notify` and `$loader` will available o
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
+import vueHawesomeModal from "vue-hawesome-modal"
 
 // initialize global settings
 var options = { 
   store,
   dialogSetting: {
-    // hawesome-vue-extends/lib/dialog/dialogConfigAttribute
+    // vue-hawesome-modal/lib/dialog/dialogConfigAttribute
     title: "訊息", 
     confirmBtnTxt: "確認", 
     cancelBtnTxt: "取消"
@@ -69,12 +69,12 @@ var options = {
 }
 
 // install
-Vue.use(hawesomeVue, options)
+Vue.use(vueHawesomeModal, options)
 ```
 #### Basic Usage
 ```javascript
 // `this` points to the Vue instance
-this.$dialog
+this.$h.dialog
   .talk("Lorem ipsum dolor sit amet.")
   .then(() => {
     // trigger after user clicks the confirm button
@@ -82,12 +82,12 @@ this.$dialog
   .catch(() => {
     // trigger after user clicks the cancel button
   })
-  .finally(this.$dialog.hangUp);
+  .finally(this.$h.dialog.hangUp);
 ```
 #### Working With Builder
 ```javascript
 // `this` points to the Vue instance
-this.$dialog
+this.$h.dialog
   .talk("嗨～大家今天過得好嗎？", builder => {
     builder 
       .set("width", 500)
@@ -100,11 +100,11 @@ this.$dialog
   .catch(() => {
     // trigger after user clicks the cancel button
   })
-  .finally(this.$dialog.hangUp);
+  .finally(this.$h.dialog.hangUp);
 ```
 ---
 ### Notify
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/notify)
+[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/notify)
 #### API
 | Name             | Parameter                                                          | Return Type      | Description                                                            |
 | :--------------- | :----------------------------------------------------------------- | :--------------- | :--------------------------------------------------------------------- |
@@ -121,25 +121,25 @@ this.$dialog
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
+import vueHawesomeModal from "vue-hawesome-modal"
 
 // initialize global settings
 var options = { 
   store, 
   notifySetting: { 
-    // hawesome-vue-extends/lib/notify/notifyConfigAttribute
+    // vue-hawesome-modal/lib/notify/notifyConfigAttribute
     position: "bottomLeft", 
     timeout: 5 
   } 
 }
 
 // install
-Vue.use(hawesomeVue, options)
+Vue.use(vueHawesomeModal, options)
 ```
 #### Basic Usage
 ```javascript
 // `this` points to the Vue instance
-this.$notify
+this.$h.notify
   .info("Lorem, ipsum dolor.")
   .then(() => {
     console.log("resolved");
@@ -148,7 +148,7 @@ this.$notify
 #### Working With Builder
 ```javascript
 // `this` points to the Vue instance
-this.$notify
+this.$h.notify
   .push(
     "Lorem, ipsum dolor.",
     builder => {
@@ -162,7 +162,7 @@ this.$notify
 ```
 ---
 ### Loader
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/loader)
+[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/loader)
 #### API
 | Name | Parameter          | Return Type | Description  |
 | :--- | :----------------- | :---------- | :----------- |
@@ -173,7 +173,7 @@ this.$notify
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
+import vueHawesomeModal from "vue-hawesome-modal"
 
 // initialize global settings
 var options = { 
@@ -184,33 +184,33 @@ var options = {
 }
 
 // install
-Vue.use(hawesomeVue, options)
+Vue.use(vueHawesomeModal, options)
 ```
 #### Basic Usage
 ```javascript
 // `this` points to the Vue instance
-this.$loader.on();
+this.$h.loader.on();
 setTimeout(() => {
-  this.$loader.off();
+  this.$h.loader.off();
 }, 2000);
 
 // `this` points to the Vue instance
-this.$loader.on("系統處理中，請稍後…");
+this.$h.loader.on("系統處理中，請稍後…");
 setTimeout(() => {
-  this.$loader.off();
+  this.$h.loader.off();
 }, 2000);
 ```
 ---
 ### Tutorial
-[Live Demo](https://behawesometw.github.io/hawesome-vue-extends/#/tutorial)
+[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/tutorial)
 #### Working With Promise API
 ```javascript
 // `this` points to the Vue instance
-this.$notify
+this.$h.notify
   .promise("hello!!")
-  .then(() => this.$dialog.talk("ready to start a tutorial?"))
+  .then(() => this.$h.dialog.talk("ready to start a tutorial?"))
   .then(() =>
-    this.$dialog.talk(
+    this.$h.dialog.talk(
       "we can use `Promise API` chaining a series of tasks.",
       builder => {
         builder
@@ -224,20 +224,20 @@ this.$notify
   .then(
     () =>
       new Promise(resolve => {
-        this.$loader.on();
+        this.$h.loader.on();
         setTimeout(() => {
-          this.$loader.off();
+          this.$h.loader.off();
           resolve({ result: true, msg: "hope you enjoy!" });
         }, 2000);
       })
   )
   .then(rs => {
     if (rs.result) {
-      this.$notify.success(rs.msg);
+      this.$h.notify.success(rs.msg);
     }
   })
   .catch(() => {
-    this.$notify.warning("ok. maybe next time.");
+    this.$h.notify.warning("ok. maybe next time.");
   })
-  .finally(this.$dialog.hangUp);
+  .finally(this.$h.dialog.hangUp);
 ```

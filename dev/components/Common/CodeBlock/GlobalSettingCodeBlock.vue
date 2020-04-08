@@ -24,13 +24,13 @@ ${this.preInsertSnippet}
 // import
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
-import hawesomeVue from "hawesome-vue-extends"
+import vueHawesomeModal from "vue-hawesome-modal"
 
 // initialize global settings
 ${code}
 
 // install
-Vue.use(hawesomeVue, options)
+Vue.use(vueHawesomeModal, options)
 `;
         })
         .map(code => code.trim());

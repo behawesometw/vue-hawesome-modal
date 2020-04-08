@@ -29,11 +29,11 @@
 
 <script>
 var demoSnippet = `
-this.$notify
+this.$h.notify
   .promise("hello!!")
-  .then(() => this.$dialog.talk("ready to start a tutorial?"))
+  .then(() => this.$h.dialog.talk("ready to start a tutorial?"))
   .then(() =>
-    this.$dialog.talk(
+    this.$h.dialog.talk(
       "we can use \`Promise API\` chaining a series of tasks.",
       builder => {
         builder
@@ -47,22 +47,22 @@ this.$notify
   .then(
     () =>
       new Promise(resolve => {
-        this.$loader.on();
+        this.$h.loader.on();
         setTimeout(() => {
-          this.$loader.off();
+          this.$h.loader.off();
           resolve({ result: true, msg: "hope you enjoy!" });
         }, 2000);
       })
   )
   .then(rs => {
     if (rs.result) {
-      this.$notify.success(rs.msg);
+      this.$h.notify.success(rs.msg);
     }
   })
   .catch(() => {
-    this.$notify.warning("ok. maybe next time.");
+    this.$h.notify.warning("ok. maybe next time.");
   })
-  .finally(this.$dialog.hangUp);
+  .finally(this.$h.dialog.hangUp);
       `;
 export default {
   methods: {
