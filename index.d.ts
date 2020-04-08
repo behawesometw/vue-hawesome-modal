@@ -1,26 +1,56 @@
-import DialogConfigBuilder from "./lib/dialog/dialogConfigBuilder";
-import NotifyConfigBuilder from "./lib/notify/notifyConfigBuilder";
+interface ConfigAttribute {
+    name: string;
+    defaultVal: any;
+    cascadeAttr?: string[];
+}
+
+export class ConfigBuilderBase {
+    constructor(content: string, configAttributeArr: ConfigAttribute[])
+
+    static defaultConfig(arr: ConfigAttribute[]): Object
+
+    set(attrName: String, val: any): ConfigBuilderBase
+
+    config: Object
+}
+
+export class DialogConfigBuilder extends ConfigBuilderBase {
+    constructor(content: string)
+
+    static defaultConfig(): Object
+}
+
+export class NotifyConfigBuilder extends ConfigBuilderBase {
+    constructor(content: string)
+
+    static defaultConfig(): Object
+
+    setTimeout(second: Number)
+
+    setType(type: String)
+}
 
 declare module 'vue/types/vue' {
+
     interface Vue {
         $h: {
             loader: {
-                on(loaderText: string): void,
+                on(loaderText: String): void,
                 off(): void,
             },
             dialog: {
-                talk(val: string, func: (builder: DialogConfigBuilder) => void): Promise<null>,
-                _talk(val: String | DialogConfigBuilder): Promise<null>,
+                talk(val: String, func: (builder: DialogConfigBuilder) => void): Promise<any>,
+                _talk(val: String | DialogConfigBuilder): Promise<any>,
                 hangUp(): void
             },
             notify: {
-                info(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                success(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                warning(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                error(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                promise(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                push(notiText: string, func: (builder: NotifyConfigBuilder) => void): Promise<null>,
-                _push(val: String | NotifyConfigBuilder): Promise<null>,
+                info(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                success(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                warning(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                error(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                promise(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                push(notiText: String, func: (builder: NotifyConfigBuilder) => void): Promise<any>,
+                _push(val: String | NotifyConfigBuilder): Promise<any>,
                 resolveAllNotify(): void,
                 clearAllNotify(): void
             }
