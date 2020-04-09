@@ -6,11 +6,17 @@
 
     <v-card flat>
       <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
-        <v-toolbar-title
-          class="userSelect-none"
-          :class="titleColorClass"
-          :style="titleColorStyle"
-        >vue-hawesome-modal</v-toolbar-title>
+        <v-tooltip right>
+          <template v-slot:activator="{on}">
+            <v-toolbar-title
+              v-on="on"
+              class="userSelect-none"
+              :class="titleColorClass"
+              :style="titleColorStyle"
+            >{{packageName}}</v-toolbar-title>
+          </template>
+          <span>{{packageVersion}}</span>
+        </v-tooltip>
 
         <v-spacer></v-spacer>
 
@@ -102,8 +108,32 @@ Vue.component("CodeBlockBase", CodeBlockBase);
 Vue.component("ExampleCodeBlock", ExampleCodeBlock);
 Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
+const packageInfo = require("../package.json");
+const packageName = packageInfo.name;
+const authorName = packageInfo.author;
+
 export default {
+  mounted() {
+    fetch(`https://api.npms.io/v2/search?q=${packageName}`)
+      .then(rs => {
+        return rs.json();
+      })
+      .then(rs => {
+        return new Promise((rsv, rj) => {
+          rs.total > 0 ? rsv(rs.results) : rj();
+        });
+      })
+      .then(rs => {
+        var item = rs
+          .map(m => m.package)
+          .find(m => m.name === packageName && m.author.name === authorName);
+        this.packageVersion = `v${item.version}`;
+      })
+      .catch();
+  },
   data: () => ({
+    packageName: packageName,
+    packageVersion: "fetching...",
     tabSync: null,
     colorInput: "primary",
     colorPick: "#1976d2FF",

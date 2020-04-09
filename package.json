@@ -1,7 +1,18 @@
 {
   "name": "vue-hawesome-modal",
   "version": "0.0.0-development",
-  "description": "vue-hawesome-modal",
+  "description": "A Vue promisify modal component plugin based on Vuetify with Vuex.",
+  "keywords": [
+    "vue",
+    "vuetify",
+    "vuex",
+    "modal",
+    "dialog",
+    "loader",
+    "notify",
+    "promisify",
+    "material-design"
+  ],
   "main": "./dist/vue-hawesome-modal.common.js",
   "types": "index.d.ts",
   "typing": "index.d.ts",
@@ -16,7 +27,7 @@
     "build": "vue-cli-service build --target lib --name vue-hawesome-modal src/plugin.js",
     "lint": "vue-cli-service lint",
     "test": "jest",
-    "showTestCoverage": "jest --coverage",
+    "test-coverage": "jest --coverage",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
