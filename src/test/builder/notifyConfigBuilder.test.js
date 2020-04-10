@@ -37,5 +37,13 @@ describe("test NotifyConfigBuilder", () => {
         var targetItem = typeMappingArr.find(m => m.type === "success");
         expect(builder.config.type === targetItem.type).toBeTruthy();
         expect(builder.config.icon === targetItem.icon).toBeTruthy();
+
+        var notContainTypeBuilder = new NotifyConfigBuilder("test").setType("notContainType");
+        expect(notContainTypeBuilder.config.type).toBeUndefined()
+        expect(notContainTypeBuilder.config.icon).toBeUndefined()
+
+        var notStringTypeBuilder = new NotifyConfigBuilder("test").setType({});
+        expect(notStringTypeBuilder.config.type).toBeUndefined()
+        expect(notStringTypeBuilder.config.icon).toBeUndefined()
     })
 })

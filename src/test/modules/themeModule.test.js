@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import themeModule from "../../modules/themeModule";
 const { setColor } = themeModule.mutations;
 

@@ -6,17 +6,12 @@
 
     <v-card flat>
       <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
-        <v-tooltip right>
-          <template v-slot:activator="{on}">
-            <v-toolbar-title
-              v-on="on"
-              class="userSelect-none"
-              :class="titleColorClass"
-              :style="titleColorStyle"
-            >{{packageName}}</v-toolbar-title>
-          </template>
-          <span>{{packageVersion}}</span>
-        </v-tooltip>
+        <v-toolbar-title
+          v-on="on"
+          class="userSelect-none"
+          :class="titleColorClass"
+          :style="titleColorStyle"
+        >{{packageName}}</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -90,8 +85,6 @@
 </template>
 
 <script>
-// todo: 寫 readme.md
-
 import Vue from "vue";
 
 import CodeBlockBase from "./components/Common/CodeBlock/CodeBlockBase";
@@ -108,32 +101,18 @@ Vue.component("CodeBlockBase", CodeBlockBase);
 Vue.component("ExampleCodeBlock", ExampleCodeBlock);
 Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
-const packageInfo = require("../package.json");
-const packageName = packageInfo.name;
-const authorName = packageInfo.author;
+const packageName = require("../package.json").name;
+
+// import DialogConfigBuilder from '../lib/dialog/dialogConfigBuilder'
 
 export default {
   mounted() {
-    fetch(`https://api.npms.io/v2/search?q=${packageName}`)
-      .then(rs => {
-        return rs.json();
-      })
-      .then(rs => {
-        return new Promise((rsv, rj) => {
-          rs.total > 0 ? rsv(rs.results) : rj();
-        });
-      })
-      .then(rs => {
-        var item = rs
-          .map(m => m.package)
-          .find(m => m.name === packageName && m.author.name === authorName);
-        this.packageVersion = `v${item.version}`;
-      })
-      .catch();
+    this.$h.dialog.talk("", builder => {
+      builder.set;
+    });
   },
   data: () => ({
     packageName: packageName,
-    packageVersion: "fetching...",
     tabSync: null,
     colorInput: "primary",
     colorPick: "#1976d2FF",
