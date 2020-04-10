@@ -1,5 +1,5 @@
 # vue-hawesome-modal
-A Vue modal component plugin based on Vuetify with Vuex.  
+A Vue promisify modal component plugin based on Vuetify with Vuex.  
 Provides dialog, notification and loader for building a modern website.  
 Using Promise API refactor modal component to provide fluent experience.  
 [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/)  
