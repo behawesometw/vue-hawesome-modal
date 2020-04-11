@@ -166,6 +166,7 @@ this.$h.notify
         ${setTimeoutStatement}
     })
   .then(() => {
+    // trigger after user clicks the confirm icon
     console.log("resolved");
   });`;
 
@@ -179,6 +180,7 @@ this.$h.notify
       builder${setTimeoutStatement}
     })
   .then(() => {
+    // trigger after user clicks the confirm icon
     console.log("resolved");
   });`;
       resultArr.push(codeToAchieve2);
@@ -192,6 +194,7 @@ this.$h.notify
       builder${setTypeStatement}
     })
   .then(() => {
+    // trigger after user clicks the confirm icon
     console.log("resolved");
   });`;
         resultArr.push(codeToAchieve3);

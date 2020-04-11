@@ -142,6 +142,7 @@ Vue.use(vueHawesomeModal, options)
 this.$h.notify
   .info("Lorem, ipsum dolor.")
   .then(() => {
+    // trigger after user clicks the confirm icon
     console.log("resolved");
   });
 ```
@@ -157,6 +158,7 @@ this.$h.notify
         .setTimeout(5)
     })
   .then(() => {
+    // trigger after user clicks the confirm icon
     console.log("resolved");
   });
 ```
