@@ -7,7 +7,6 @@
     <v-card flat>
       <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
         <v-toolbar-title
-          v-on="on"
           class="userSelect-none"
           :class="titleColorClass"
           :style="titleColorStyle"
@@ -103,14 +102,7 @@ Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
 const packageName = require("../package.json").name;
 
-// import DialogConfigBuilder from '../lib/dialog/dialogConfigBuilder'
-
 export default {
-  mounted() {
-    this.$h.dialog.talk("", builder => {
-      builder.set;
-    });
-  },
   data: () => ({
     packageName: packageName,
     tabSync: null,
