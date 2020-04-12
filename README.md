@@ -2,7 +2,7 @@
 A Vue promisify modal component plugin based on Vuetify with Vuex.  
 Provides dialog, notification and loader for building a modern website.  
 Using Promise API refactor modal component to provide fluent experience.  
-[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/)  
+⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/)  
 ## Installation
 ### NPM
 ```bash
@@ -44,7 +44,7 @@ After Installing the plugin, `dialog`, `notify` and `loader` will available at `
 
 ---
 ### Dialog
-[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/dialog)
+⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/dialog)
 #### API
 | Name   | Parameter                                                     | Return Type | Description           |
 | :----- | :------------------------------------------------------------ | :---------- | :-------------------- |
@@ -104,7 +104,7 @@ this.$h.dialog
 ```
 ---
 ### Notify
-[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/notify)
+⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/notify)
 #### API
 | Name             | Parameter                                                          | Return Type | Description                                                            |
 | :--------------- | :----------------------------------------------------------------- | :---------- | :--------------------------------------------------------------------- |
@@ -164,7 +164,7 @@ this.$h.notify
 ```
 ---
 ### Loader
-[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/loader)
+⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/loader)
 #### API
 | Name | Parameter          | Return Type | Description  |
 | :--- | :----------------- | :---------- | :----------- |
@@ -204,7 +204,7 @@ setTimeout(() => {
 ```
 ---
 ### Tutorial
-[Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/tutorial)
+⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/tutorial)
 #### Working With Promise API
 ```javascript
 // `this` points to the Vue instance

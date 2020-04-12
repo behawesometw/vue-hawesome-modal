@@ -252,25 +252,21 @@ this.$h.notify
   }
 };
 </script>
-<style>
-.topRight_position_fixed {
+<style lang="scss" scoped>
+.v-speed-dial {
   position: fixed;
   z-index: 2;
-  left: 20px;
-}
-.topLeft_position_fixed {
-  position: fixed;
-  z-index: 2;
-  right: 20px;
-}
-.bottomRight_position_fixed {
-  position: fixed;
-  z-index: 2;
-  left: 20px;
-}
-.bottomLeft_position_fixed {
-  position: fixed;
-  z-index: 2;
-  right: 20px;
+  &.topRight_position_fixed {
+    left: 20px;
+  }
+  &.topLeft_position_fixed {
+    right: 20px;
+  }
+  &.bottomRight_position_fixed {
+    left: 20px;
+  }
+  &.bottomLeft_position_fixed {
+    right: 20px;
+  }
 }
 </style>
