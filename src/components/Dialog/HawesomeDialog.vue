@@ -1,5 +1,11 @@
 <template>
-  <v-dialog scrollable overlay-opacity persistent v-model="config.isShow" :width="config.width">
+  <v-dialog
+    scrollable
+    :hide-overlay="!config.withOverlay"
+    persistent
+    v-model="config.isShow"
+    :width="config.width"
+  >
     <v-card min-width="200">
       <v-toolbar dark dense flat :color="dialogToolBarColor">
         <v-toolbar-title>{{config.title}}</v-toolbar-title>

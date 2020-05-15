@@ -28,6 +28,8 @@ export default {
         $storeFromApp.registerModule("dialog", dialogModule)
         $storeFromApp.registerModule("notify", notifyModule)
 
+        if (options.themeColor)
+            $storeFromApp.commit('theme/setColor', options.themeColor)
         if (options.loaderSetting)
             $storeFromApp.commit('loader/setGlobalSetting', options.loaderSetting)
         if (options.dialogSetting)

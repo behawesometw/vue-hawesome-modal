@@ -21,7 +21,7 @@
         <template v-slot:header>Playground</template>
         <template v-slot:content>
           <v-row dense justify="center">
-            <v-col md="4" cols="5">
+            <v-col md="3" cols="4">
               <v-text-field
                 :color="globalThemeColor"
                 v-model="title"
@@ -29,7 +29,7 @@
                 hint="default value: `Message`"
               ></v-text-field>
             </v-col>
-            <v-col md="4" cols="5">
+            <v-col md="3" cols="4">
               <v-text-field
                 :color="globalThemeColor"
                 v-model="width"
@@ -37,6 +37,9 @@
                 label="width"
                 hint="default value: 300"
               ></v-text-field>
+            </v-col>
+            <v-col md="2" cols="2">
+              <v-switch :color="globalThemeColor" v-model="withOverlay" label="with overlay"></v-switch>
             </v-col>
           </v-row>
 
@@ -102,6 +105,7 @@ export default {
     title: "",
     content: "Lorem ipsum dolor sit amet.",
     width: "",
+    withOverlay: false,
     themeColor: "",
     titleBarColor: "",
     cancelBtn: {
@@ -220,6 +224,12 @@ this.$h.dialog
           isDoubleQuoteWrap: false
         },
         {
+          attrName: "withOverlay",
+          val: this.withOverlay,
+          handler: this.valOrUndefined,
+          isDoubleQuoteWrap: false
+        },
+        {
           attrName: "themeColor",
           val: this.themeColor,
           handler: this.valOrUndefined,
@@ -306,6 +316,7 @@ this.$h.dialog
           builder
             .set("title", this.valOrUndefined(this.title))
             .set("width", this.numberGreaterThanZero(this.width))
+            .set("withOverlay", this.withOverlay)
             .set("themeColor", this.valOrUndefined(this.themeColor))
             .set("titleBarColor", this.valOrUndefined(this.titleBarColor))
             .set(
