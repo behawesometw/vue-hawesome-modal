@@ -22,7 +22,6 @@ export default {
 
         var $storeFromApp = options.store;
 
-        debugger
         if (!$storeFromApp.hasModule('waitingCount'))
             $storeFromApp.registerModule('waitingCount', waitingCountModule)
 
