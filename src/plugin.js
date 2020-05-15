@@ -22,11 +22,22 @@ export default {
 
         var $storeFromApp = options.store;
 
-        $storeFromApp.registerModule('waitingCount', waitingCountModule)
-        $storeFromApp.registerModule("theme", themeModule)
-        $storeFromApp.registerModule("loader", loaderModule)
-        $storeFromApp.registerModule("dialog", dialogModule)
-        $storeFromApp.registerModule("notify", notifyModule)
+        debugger
+        if (!$storeFromApp.hasModule('waitingCount'))
+            $storeFromApp.registerModule('waitingCount', waitingCountModule)
+
+        if (!$storeFromApp.hasModule("theme"))
+            $storeFromApp.registerModule("theme", themeModule)
+
+        if (!$storeFromApp.hasModule("loader"))
+            $storeFromApp.registerModule("loader", loaderModule)
+
+        if (!$storeFromApp.hasModule("dialog"))
+            $storeFromApp.registerModule("dialog", dialogModule)
+
+        if (!$storeFromApp.hasModule("notify"))
+            $storeFromApp.registerModule("notify", notifyModule)
+
 
         if (options.themeColor)
             $storeFromApp.commit('theme/setColor', options.themeColor)

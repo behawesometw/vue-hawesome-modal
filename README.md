@@ -20,6 +20,7 @@ import vueHawesomeModal from "vue-hawesome-modal"
 // initialize global settings
 var options = {
     store,
+    themeColor: "hex or semantic color",
     dialogSetting: { ... },
     notifySetting: { ... },
     loaderSetting: { ... }
