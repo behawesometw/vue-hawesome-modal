@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     scrollable
-    :hide-overlay="!config.withOverlay"
+    :overlay-opacity="config.withOverlay ? '0.5' : '0'"
     persistent
     v-model="config.isShow"
     :width="config.width"
