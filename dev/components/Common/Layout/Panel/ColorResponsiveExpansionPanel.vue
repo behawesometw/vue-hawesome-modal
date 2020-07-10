@@ -1,7 +1,9 @@
 <template>
   <v-expansion-panel>
     <v-expansion-panel-header :class="panelColorClass" :style="panelColorStyle">
-      <slot name="header"></slot>
+      <div class="userSelect-none">
+        <slot name="header"></slot>
+      </div>
       <template v-slot:actions>
         <v-icon :class="['px-5', panelColorClass]" :style="panelColorStyle">$expand</v-icon>
       </template>

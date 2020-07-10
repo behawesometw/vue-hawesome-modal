@@ -4,74 +4,80 @@
     <h-notify />
     <h-loader />
 
-    <v-card flat>
-      <v-toolbar :color="toolbarColor" :dark="!$vuetify.theme.dark">
-        <v-toolbar-title
-          class="userSelect-none"
-          :class="titleColorClass"
-          :style="titleColorStyle"
-        >{{packageName}}</v-toolbar-title>
+    <v-app-bar app :color="toolbarColor" :dark="!$vuetify.theme.dark">
+      <div
+        class="userSelect-none title"
+        :class="titleColorClass"
+        :style="titleColorStyle"
+      >{{packageName}}</div>
 
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-        <v-btn icon @click="darkThemeToggle">
-          <v-icon>mdi-invert-colors</v-icon>
-        </v-btn>
-        <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>mdi-cog</v-icon>
-            </v-btn>
-          </template>
+      <v-btn icon @click="darkThemeToggle">
+        <v-icon>mdi-invert-colors</v-icon>
+      </v-btn>
+      <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-cog</v-icon>
+          </v-btn>
+        </template>
 
-          <v-card>
-            <v-list>
-              <v-list-item>
-                <v-select
-                  label="select a color"
-                  v-model="colorInput"
-                  :items="colorItems"
-                  :color="globalThemeColor"
-                  @blur="colorInputBlur"
-                ></v-select>
-              </v-list-item>
-            </v-list>
-            <v-list>
-              <v-list-item>
-                <v-color-picker
-                  v-model="colorPick"
-                  hide-mode-switch
-                  hide-canvas
-                  flat
-                  @input="colorPickChange"
-                ></v-color-picker>
-              </v-list-item>
-            </v-list>
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-select
+                label="select a color"
+                v-model="colorInput"
+                :items="colorItems"
+                :color="globalThemeColor"
+                @blur="colorInputBlur"
+              ></v-select>
+            </v-list-item>
+          </v-list>
+          <v-list>
+            <v-list-item>
+              <v-color-picker
+                v-model="colorPick"
+                hide-mode-switch
+                hide-canvas
+                flat
+                @input="colorPickChange"
+              ></v-color-picker>
+            </v-list-item>
+          </v-list>
+          <v-divider></v-divider>
+          <v-list>
+            <v-list-item>
+              <v-switch
+                :color="globalThemeColor"
+                v-model="isEnablePanelExpandable"
+                label="panel expandable"
+              ></v-switch>
+            </v-list-item>
+          </v-list>
+          <div v-if="$vuetify.breakpoint.xs">
             <v-divider></v-divider>
             <v-list>
               <v-list-item>
-                <v-switch
-                  :color="globalThemeColor"
-                  v-model="isEnablePanelExpandable"
-                  label="panel expandable"
-                ></v-switch>
+                <v-switch :color="globalThemeColor" v-model="isEnableTabSwipe" label="tab swipe"></v-switch>
               </v-list-item>
             </v-list>
-            <div v-if="$vuetify.breakpoint.xs">
-              <v-divider></v-divider>
-              <v-list>
-                <v-list-item>
-                  <v-switch :color="globalThemeColor" v-model="isEnableTabSwipe" label="tab swipe"></v-switch>
-                </v-list-item>
-              </v-list>
-            </div>
-          </v-card>
-        </v-menu>
-      </v-toolbar>
-
-      <v-tabs v-model="tabSync" :color="globalThemeColor" grow>
-        <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{ tab.tabName }}</v-tab>
-      </v-tabs>
+          </div>
+        </v-card>
+      </v-menu>
+      <template #extension>
+        <v-tabs
+          v-model="tabSync"
+          grow
+          :color="globalThemeColor"
+          :background-color="$vuetify.theme.dark ? 'grey darken-4' : 'white'"
+        >
+          <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{ tab.tabName }}</v-tab>
+        </v-tabs>
+      </template>
+    </v-app-bar>
+    <v-content>
       <v-tabs-items v-model="tabSync" @change="updateRouter($event)" :touchless="!isEnableTabSwipe">
         <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
           <keep-alive>
@@ -79,7 +85,22 @@
           </keep-alive>
         </v-tab-item>
       </v-tabs-items>
-    </v-card>
+    </v-content>
+    <transition name="fab-transition">
+      <v-speed-dial fixed bottom right v-show="isShowToTopBtn">
+        <template v-slot:activator>
+          <v-btn
+            fab
+            dark
+            :color="globalThemeColor"
+            :x-small="$vuetify.breakpoint.xs"
+            @click="$vuetify.goTo(0)"
+          >
+            <v-icon>mdi-chevron-up</v-icon>
+          </v-btn>
+        </template>
+      </v-speed-dial>
+    </transition>
   </v-app>
 </template>
 
@@ -103,6 +124,12 @@ Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 const packageName = require("../package.json").name;
 
 export default {
+  mounted() {
+    document.addEventListener("scroll", this.scrollDetect);
+  },
+  destroyed() {
+    document.removeEventListener("scroll", this.scrollDetect);
+  },
   data: () => ({
     packageName: packageName,
     tabSync: null,
@@ -115,7 +142,8 @@ export default {
       { tabName: "Notify", path: "/notify" },
       { tabName: "Loader", path: "/loader" },
       { tabName: "Tutorial", path: "/tutorial" }
-    ]
+    ],
+    isShowToTopBtn: false
   }),
   computed: {
     toolbarColor() {
@@ -145,6 +173,9 @@ export default {
     }
   },
   methods: {
+    scrollDetect() {
+      this.isShowToTopBtn = document.scrollingElement.scrollTop > 100;
+    },
     updateRouter(val) {
       this.$router.push(val);
     },
