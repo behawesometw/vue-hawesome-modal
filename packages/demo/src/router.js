@@ -20,7 +20,10 @@ const routes = [
     { path: '/tutorial', component: TutorialDemo },
 ]
 
-const router = new VueRouter({ base: "/vue-hawesome-modal/", routes });
+const router = new VueRouter({
+    base: "/vue-hawesome-modal/", routes,
+    scrollBehavior: () => ({ x: 0, y: 0 })
+});
 
 router.beforeEach((to, from, next) => {
     store.commit('notify/clearAllNotify');
