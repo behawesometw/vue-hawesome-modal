@@ -19,7 +19,7 @@
   "files": [
     "dist",
     "index.d.ts",
-    "libs"
+    "libs" 
   ],
   "scripts": {
     "serve": "vue-cli-service serve ./packages/demo/demoEntry.js --open",
