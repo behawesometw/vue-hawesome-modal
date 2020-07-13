@@ -121,7 +121,7 @@ Vue.component("CodeBlockBase", CodeBlockBase);
 Vue.component("ExampleCodeBlock", ExampleCodeBlock);
 Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
-const packageName = require("../package.json").name;
+const packageName = require("../../package.json").name;
 
 export default {
   mounted() {

@@ -1,5 +1,5 @@
-import NotifyConfigBuilder from "../../../lib/notify/notifyConfigBuilder";
-import { typeMappingArr } from "../../../lib/notify/notifyConfigAttribute";
+import NotifyConfigBuilder from "../../lib/notify/notifyConfigBuilder";
+import { typeMappingArr } from "../../lib/notify/notifyConfigAttribute";
 
 describe("test NotifyConfigBuilder", () => {
     test("ctor call", () => {

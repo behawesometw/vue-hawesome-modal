@@ -1,4 +1,4 @@
-import themeModule from "../../modules/themeModule";
+import themeModule from "../../src/modules/themeModule";
 const { setColor } = themeModule.mutations;
 
 describe("themeModule", () => {

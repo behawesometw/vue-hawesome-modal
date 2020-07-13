@@ -1,5 +1,6 @@
-import DialogConfigBuilder from "../../../lib/dialog/dialogConfigBuilder";
-import dialogModule from "../../modules/dialogModule"
+import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
+import dialogModule from "../../src/modules/dialogModule"
+
 const { setConfig, setGlobalSetting } = dialogModule.mutations;
 const { talk, hangUp } = dialogModule.actions;
 

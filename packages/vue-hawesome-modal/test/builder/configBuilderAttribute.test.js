@@ -1,5 +1,7 @@
-import dialogConfigAttribute from "../../../lib/dialog/dialogConfigAttribute";
-import notifyConfigAttribute from "../../../lib/notify/notifyConfigAttribute";
+import dialogConfigAttribute from "../../lib/dialog/dialogConfigAttribute";
+import notifyConfigAttribute from "../../lib/notify/notifyConfigAttribute";
+
+
 import { isArrEveryElementContainCertainAttrs, isArrElementContainNameAttrAndNameBeUnique } from "../helper/testHelper";
 
 describe("is all configBuilderAttributes well-defined? every element must contains name and defaultVal attr", () => {

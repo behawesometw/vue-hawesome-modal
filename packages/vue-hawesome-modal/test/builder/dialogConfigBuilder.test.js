@@ -1,4 +1,4 @@
-import DialogConfigBuilder from "../../../lib/dialog/dialogConfigBuilder";
+import DialogConfigBuilder from "../../lib/dialog/dialogConfigBuilder";
 
 describe("test DialogConfigBuilder", () => {
     test("ctor call", () => {

@@ -1,4 +1,4 @@
-import waitingCountModule from "../../modules/waitingCountModule";
+import waitingCountModule from "../../src/modules/waitingCountModule";
 const { increase, decrease } = waitingCountModule.mutations;
 const getters = waitingCountModule.getters;
 

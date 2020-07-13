@@ -1,4 +1,5 @@
-import ConfigBuilderBase from "../../../lib/common/configBuilderBase";
+import ConfigBuilderBase from "../../lib/common/configBuilderBase";
+
 import { isArrEveryElementContainCertainAttrs, isArrElementContainNameAttrAndNameBeUnique } from "../helper/testHelper";
 
 const configAttributeArr = [

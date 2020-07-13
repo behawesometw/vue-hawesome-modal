@@ -2,7 +2,7 @@ import Vue from 'vue'
 import vuetify from './src/vuetify'
 import store from "./src/store";
 import router from "./src/router";
-import vueHawesomeModal from '../src/plugin'
+import vueHawesomeModal from "../vue-hawesome-modal/pluginEntry";
 import Demo from './Demo'
 
 Vue.config.productionTip = false;

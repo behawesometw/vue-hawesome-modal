@@ -18,13 +18,13 @@
   "typing": "index.d.ts",
   "files": [
     "dist",
-    "index.d.ts",
-    "lib"
+    "packages/vue-hawesome-modal/index.d.ts",
+    "packages/vue-hawesome-modal/lib"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve ./dev/demoEntry.js --open",
-    "build-demo-site": "vue-cli-service build --dest demoSite ./dev/demoEntry.js",
-    "build": "vue-cli-service build --target lib --name vue-hawesome-modal src/plugin.js",
+    "serve": "vue-cli-service serve ./packages/docs/demoEntry.js --open",
+    "build-demo-site": "vue-cli-service build --dest demoSite ./packages/docs/demoEntry.js",
+    "build": "vue-cli-service build --target lib --name vue-hawesome-modal ./packages/vue-hawesome-modal/pluginEntry.js",
     "lint": "vue-cli-service lint",
     "test": "jest",
     "test-coverage": "jest --coverage",

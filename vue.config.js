@@ -7,5 +7,13 @@ module.exports = {
     assetsDir: 'assets',
     publicPath: process.env.NODE_ENV === 'production'
         ? '/vue-hawesome-modal/'
-        : '/'
+        : '/',
+    chainWebpack: config => {
+        config
+            .plugin('html')
+            .tap(args => {
+                args[0].template = './packages/docs/public/index.html'
+                return args
+            })
+    }
 };

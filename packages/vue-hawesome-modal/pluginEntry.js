@@ -1,14 +1,14 @@
-import NotifyConfigBuilder from "../lib/notify/notifyConfigBuilder";
-import DialogConfigBuilder from "../lib/dialog/dialogConfigBuilder";
-import HawesomeLoader from './components/Loader/HawesomeLoader'
-import HawesomeDialog from './components/Dialog/HawesomeDialog'
-import HawesomeNotify from './components/Notify/HawesomeNotify'
+import NotifyConfigBuilder from "./lib/notify/notifyConfigBuilder";
+import DialogConfigBuilder from "./lib/dialog/dialogConfigBuilder";
+import HawesomeLoader from './src/components/Loader/HawesomeLoader'
+import HawesomeDialog from './src/components/Dialog/HawesomeDialog'
+import HawesomeNotify from './src/components/Notify/HawesomeNotify'
 
-import waitingCountModule from "./modules/waitingCountModule";
-import loaderModule from "./modules/loaderModule";
-import themeModule from "./modules/themeModule";
-import dialogModule from "./modules/dialogModule";
-import notifyModule from "./modules/notifyModule";
+import waitingCountModule from "./src/modules/waitingCountModule";
+import loaderModule from "./src/modules/loaderModule";
+import themeModule from "./src/modules/themeModule";
+import dialogModule from "./src/modules/dialogModule";
+import notifyModule from "./src/modules/notifyModule";
 
 const isWellDefinedFunction = (func) => {
     return func && typeof func === "function";
