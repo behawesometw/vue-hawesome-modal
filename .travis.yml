@@ -9,6 +9,8 @@ jobs:
       script: npm run test
     - stage: deployLibraryToNPM
       node_js: lts/*
+      before_script:
+        - npm install -g gulp-cli
       script: npm run build
       deploy:
         provider: script

@@ -3,6 +3,8 @@ node_modules
 demoSite
 dist
 coverage
+libs
+index.d.ts
 
 # local env files
 .env.local
