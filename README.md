@@ -62,7 +62,7 @@ import vueHawesomeModal from "vue-hawesome-modal"
 var options = { 
   store,
   dialogSetting: {
-    // vue-hawesome-modal/libs/dialog/dialogConfigAttribute
+    // vue-hawesome-modal/lib/dialog/dialogConfigAttribute
     title: "訊息", 
     confirmBtnTxt: "確認", 
     cancelBtnTxt: "取消"
@@ -128,7 +128,7 @@ import vueHawesomeModal from "vue-hawesome-modal"
 var options = { 
   store, 
   notifySetting: { 
-    // vue-hawesome-modal/libs/notify/notifyConfigAttribute
+    // vue-hawesome-modal/lib/notify/notifyConfigAttribute
     position: "bottomLeft", 
     timeout: 5 
   } 
