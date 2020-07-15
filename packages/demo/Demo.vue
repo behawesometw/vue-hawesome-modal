@@ -6,8 +6,8 @@
 
     <v-app-bar app :color="toolbarColor" :dark="!$vuetify.theme.dark">
       <div
-        class="userSelect-none title"
-        :class="titleColorClass"
+        class="userSelect-none"
+        :class="[titleColorClass, $vuetify.breakpoint.xs ? 'text-subtitle-1 font-weight-bold' : 'title']"
         :style="titleColorStyle"
       >{{packageName}}</div>
 
@@ -66,7 +66,23 @@
           </div>
         </v-card>
       </v-menu>
-      <template #extension>
+
+      <v-menu transition="slide-y-transition" v-if="isTgrScrollThreshold">
+        <template #activator="{ on }">
+          <v-btn fab icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item-group>
+            <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
+              <v-list-item-title>{{ item.tabName }}</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-menu>
+
+      <template #extension v-if="!isTgrScrollThreshold">
         <v-tabs
           v-model="tabSync"
           grow
@@ -77,7 +93,7 @@
         </v-tabs>
       </template>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-tabs-items v-model="tabSync" @change="updateRouter($event)" :touchless="!isEnableTabSwipe">
         <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
           <keep-alive>
@@ -85,9 +101,9 @@
           </keep-alive>
         </v-tab-item>
       </v-tabs-items>
-    </v-content>
+    </v-main>
     <transition name="fab-transition">
-      <v-speed-dial fixed bottom right v-show="isShowToTopBtn">
+      <v-speed-dial fixed bottom right v-show="isTgrScrollThreshold">
         <template v-slot:activator>
           <v-btn
             fab
@@ -143,7 +159,7 @@ export default {
       { tabName: "Loader", path: "/loader" },
       { tabName: "Tutorial", path: "/tutorial" }
     ],
-    isShowToTopBtn: false
+    isTgrScrollThreshold: false
   }),
   computed: {
     toolbarColor() {
@@ -173,8 +189,13 @@ export default {
     }
   },
   methods: {
+    onRouteMenuClick(path) {
+      if (path !== this.$route.path) {
+        this.$router.push(path);
+      }
+    },
     scrollDetect() {
-      this.isShowToTopBtn = document.scrollingElement.scrollTop > 100;
+      this.isTgrScrollThreshold = document.scrollingElement.scrollTop > 50;
     },
     updateRouter(val) {
       this.$router.push(val);
