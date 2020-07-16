@@ -9,7 +9,8 @@
         class="userSelect-none"
         :class="[titleColorClass, $vuetify.breakpoint.xs ? 'text-subtitle-1 font-weight-bold' : 'title']"
         :style="titleColorStyle"
-      >{{packageName}}</div>
+        v-text="packageName"
+      ></div>
 
       <v-spacer></v-spacer>
 
@@ -74,7 +75,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item-group>
+          <v-list-item-group :color="globalThemeColor" :value="currentRouteIndex">
             <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
               <v-list-item-title>{{ item.tabName }}</v-list-item-title>
             </v-list-item>
@@ -102,7 +103,7 @@
         </v-tab-item>
       </v-tabs-items>
     </v-main>
-    <transition name="fab-transition">
+    <v-fab-transition>
       <v-speed-dial fixed bottom right v-show="isTgrScrollThreshold">
         <template v-slot:activator>
           <v-btn
@@ -116,7 +117,7 @@
           </v-btn>
         </template>
       </v-speed-dial>
-    </transition>
+    </v-fab-transition>
   </v-app>
 </template>
 
@@ -162,6 +163,9 @@ export default {
     isTgrScrollThreshold: false
   }),
   computed: {
+    currentRouteIndex() {
+      return this.tabs.findIndex(m => m.path === this.$route.path);
+    },
     toolbarColor() {
       return this.$vuetify.theme.dark ? "" : this.globalThemeColor;
     },
