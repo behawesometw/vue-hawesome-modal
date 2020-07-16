@@ -4,7 +4,12 @@
     <h-notify />
     <h-loader />
 
-    <v-app-bar app :color="toolbarColor" :dark="!$vuetify.theme.dark">
+    <v-app-bar
+      app
+      :color="toolbarColor"
+      :dark="!$vuetify.theme.dark"
+      :extension-height="isTgrScrollThreshold ? 0 : 48"
+    >
       <div
         class="userSelect-none"
         :class="[titleColorClass, $vuetify.breakpoint.xs ? 'text-subtitle-1 font-weight-bold' : 'title']"
@@ -13,6 +18,28 @@
       ></div>
 
       <v-spacer></v-spacer>
+
+      <v-scroll-y-reverse-transition>
+        <v-btn id="route-menu-activator" fab icon v-show="isTgrScrollThreshold">
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-scroll-y-reverse-transition>
+      <v-menu
+        activator="#route-menu-activator"
+        transition="slide-y-transition"
+        bottom
+        left
+        open-on-hover
+        open-delay="300"
+      >
+        <v-list>
+          <v-list-item-group :color="globalThemeColor" :value="currentRouteIndex">
+            <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
+              <v-list-item-title>{{ item.tabName }}</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-menu>
 
       <v-btn icon @click="darkThemeToggle">
         <v-icon>mdi-invert-colors</v-icon>
@@ -68,23 +95,9 @@
         </v-card>
       </v-menu>
 
-      <v-menu transition="slide-y-transition" v-if="isTgrScrollThreshold">
-        <template #activator="{ on }">
-          <v-btn fab icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item-group :color="globalThemeColor" :value="currentRouteIndex">
-            <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
-              <v-list-item-title>{{ item.tabName }}</v-list-item-title>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-menu>
-
-      <template #extension v-if="!isTgrScrollThreshold">
+      <template #extension>
         <v-tabs
+          :class="{ 'on-light-theme': !$vuetify.theme.dark }"
           v-model="tabSync"
           grow
           :color="globalThemeColor"
@@ -238,5 +251,9 @@ export default {
 
 .v-slide-group__prev {
   display: none !important;
+}
+
+.v-toolbar__extension .v-tabs.on-light-theme {
+  background: white;
 }
 </style>
