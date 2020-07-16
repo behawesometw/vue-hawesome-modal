@@ -5,6 +5,9 @@ import router from "./src/router";
 import vueHawesomeModal from "../vue-hawesome-modal/pluginEntry";
 import Demo from './Demo'
 
+import VueCompositionAPI from '@vue/composition-api'
+Vue.use(VueCompositionAPI)
+
 Vue.config.productionTip = false;
 
 var notifySetting = {};

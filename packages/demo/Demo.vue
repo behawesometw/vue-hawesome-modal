@@ -7,15 +7,14 @@
     <v-app-bar
       app
       :color="toolbarColor"
-      :dark="!$vuetify.theme.dark"
+      :dark="!isDarkTheme"
       :extension-height="isTgrScrollThreshold ? 0 : 48"
     >
       <div
         class="userSelect-none"
-        :class="[titleColorClass, $vuetify.breakpoint.xs ? 'text-subtitle-1 font-weight-bold' : 'title']"
+        :class="[titleColorClass, isXs ? 'text-subtitle-1 font-weight-bold' : 'title']"
         :style="titleColorStyle"
-        v-text="packageName"
-      ></div>
+      >{{require("../../package.json").name}}</div>
 
       <v-spacer></v-spacer>
 
@@ -24,14 +23,7 @@
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </v-scroll-y-reverse-transition>
-      <v-menu
-        activator="#route-menu-activator"
-        transition="slide-y-transition"
-        bottom
-        left
-        open-on-hover
-        open-delay="300"
-      >
+      <v-menu activator="#route-menu-activator" transition="slide-y-transition" bottom left>
         <v-list>
           <v-list-item-group :color="globalThemeColor" :value="currentRouteIndex">
             <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
@@ -44,20 +36,20 @@
       <v-btn icon @click="darkThemeToggle">
         <v-icon>mdi-invert-colors</v-icon>
       </v-btn>
+
       <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon>mdi-cog</v-icon>
           </v-btn>
         </template>
-
         <v-card>
           <v-list>
             <v-list-item>
               <v-select
                 label="select a color"
                 v-model="colorInput"
-                :items="colorItems"
+                :items="$store.state.colorItems"
                 :color="globalThemeColor"
                 @blur="colorInputBlur"
               ></v-select>
@@ -84,7 +76,7 @@
               ></v-switch>
             </v-list-item>
           </v-list>
-          <div v-if="$vuetify.breakpoint.xs">
+          <div v-if="isXs">
             <v-divider></v-divider>
             <v-list>
               <v-list-item>
@@ -97,18 +89,18 @@
 
       <template #extension>
         <v-tabs
-          :class="{ 'on-light-theme': !$vuetify.theme.dark }"
+          :class="{ 'on-light-theme': !isDarkTheme }"
           v-model="tabSync"
           grow
           :color="globalThemeColor"
-          :background-color="$vuetify.theme.dark ? 'grey darken-4' : 'white'"
+          :background-color="isDarkTheme ? 'grey darken-4' : 'white'"
         >
           <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{ tab.tabName }}</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
     <v-main>
-      <v-tabs-items v-model="tabSync" @change="updateRouter($event)" :touchless="!isEnableTabSwipe">
+      <v-tabs-items v-model="tabSync" @change="updateRoute($event)" :touchless="!isEnableTabSwipe">
         <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
           <keep-alive>
             <router-view></router-view>
@@ -119,13 +111,7 @@
     <v-fab-transition>
       <v-speed-dial fixed bottom right v-show="isTgrScrollThreshold">
         <template v-slot:activator>
-          <v-btn
-            fab
-            dark
-            :color="globalThemeColor"
-            :x-small="$vuetify.breakpoint.xs"
-            @click="$vuetify.goTo(0)"
-          >
+          <v-btn fab dark :color="globalThemeColor" :x-small="isXs" @click="$vuetify.goTo(0)">
             <v-icon>mdi-chevron-up</v-icon>
           </v-btn>
         </template>
@@ -136,6 +122,7 @@
 
 <script>
 import Vue from "vue";
+import { computed } from "@vue/composition-api";
 
 import CodeBlockBase from "./components/Common/CodeBlock/CodeBlockBase";
 import ExampleCodeBlock from "./components/Common/CodeBlock/ExampleCodeBlock";
@@ -151,37 +138,68 @@ Vue.component("CodeBlockBase", CodeBlockBase);
 Vue.component("ExampleCodeBlock", ExampleCodeBlock);
 Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 
-const packageName = require("../../package.json").name;
+import useScrollThreshold from "./use/scrollThreshold";
+import useTabControl from "./use/tabControl";
+import useColorManagement from "./use/colorManagement";
+import routeControl from "./use/routeControl";
 
 export default {
-  mounted() {
-    document.addEventListener("scroll", this.scrollDetect);
+  setup(props, context) {
+    const getContext = () => context.root;
+
+    const isXs = computed(() => getContext().$vuetify.breakpoint.xs);
+
+    const { isTgrScrollThreshold } = useScrollThreshold();
+
+    const {
+      tabSync,
+      tabs,
+      currentRouteIndex,
+      isEnableTabSwipe
+    } = useTabControl(getContext);
+
+    const {
+      colorInput,
+      colorPick,
+      colorInputBlur,
+      colorPickChange,
+      globalThemeColor,
+      isDarkTheme,
+      toolbarColor,
+      titleColorClass,
+      titleColorStyle,
+      darkThemeToggle
+    } = useColorManagement(getContext);
+
+    const { onRouteMenuClick, updateRoute } = routeControl(getContext);
+
+    return {
+      isXs,
+
+      isTgrScrollThreshold,
+
+      tabSync,
+      tabs,
+      currentRouteIndex,
+      isEnableTabSwipe,
+
+      colorInput,
+      colorPick,
+      colorInputBlur,
+      colorPickChange,
+      globalThemeColor,
+      isDarkTheme,
+      toolbarColor,
+      titleColorClass,
+      titleColorStyle,
+      darkThemeToggle,
+
+      onRouteMenuClick,
+      updateRoute
+    };
   },
-  destroyed() {
-    document.removeEventListener("scroll", this.scrollDetect);
-  },
-  data: () => ({
-    packageName: packageName,
-    tabSync: null,
-    colorInput: "primary",
-    colorPick: "#1976d2FF",
-    isEnableTabSwipe: false,
-    tabs: [
-      { tabName: "Get Started", path: "/getStarted" },
-      { tabName: "Dialog", path: "/dialog" },
-      { tabName: "Notify", path: "/notify" },
-      { tabName: "Loader", path: "/loader" },
-      { tabName: "Tutorial", path: "/tutorial" }
-    ],
-    isTgrScrollThreshold: false
-  }),
+
   computed: {
-    currentRouteIndex() {
-      return this.tabs.findIndex(m => m.path === this.$route.path);
-    },
-    toolbarColor() {
-      return this.$vuetify.theme.dark ? "" : this.globalThemeColor;
-    },
     isEnablePanelExpandable: {
       get() {
         return this.$store.state.isEnablePanelExpandable;
@@ -189,49 +207,6 @@ export default {
       set(value) {
         this.$store.commit("updateIsEnablePanelExpandable", value);
       }
-    },
-    globalThemeColor() {
-      return this.$store.state.theme.color;
-    },
-    colorItems() {
-      return this.$store.state.colorItems;
-    },
-    titleColorStyle() {
-      return this.$vuetify.theme.dark
-        ? { [`color`]: this.globalThemeColor }
-        : {};
-    },
-    titleColorClass() {
-      return { [`${this.globalThemeColor}--text`]: this.$vuetify.theme.dark };
-    }
-  },
-  methods: {
-    onRouteMenuClick(path) {
-      if (path !== this.$route.path) {
-        this.$router.push(path);
-      }
-    },
-    scrollDetect() {
-      this.isTgrScrollThreshold = document.scrollingElement.scrollTop > 50;
-    },
-    updateRouter(val) {
-      this.$router.push(val);
-    },
-    colorInputBlur() {
-      if (this.colorInput) {
-        this.$store.commit("theme/setColor", this.colorInput);
-      }
-    },
-    colorPickChange() {
-      if (this.colorPick) {
-        this.$store.commit("theme/setColor", this.colorPick);
-      }
-    },
-    darkThemeToggle() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-
-      var prismDefaultTheme = document.getElementById("_prismDefaultTheme");
-      prismDefaultTheme.disabled = this.$vuetify.theme.dark;
     }
   }
 };
