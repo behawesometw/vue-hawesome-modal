@@ -5,11 +5,11 @@ Vue.use(VueRouter)
 
 import store from "./store";
 
-import GetStartedDemo from "../components/GetStartedDemo";
-import DialogDemo from "../components/DialogDemo";
-import NotifyDemo from "../components/NotifyDemo";
-import LoaderDemo from "../components/LoaderDemo";
-import TutorialDemo from "../components/TutorialDemo";
+import GetStartedDemo from "../pages/GetStartedDemo";
+import DialogDemo from "../pages/DialogDemo";
+import NotifyDemo from "../pages/NotifyDemo";
+import LoaderDemo from "../pages/LoaderDemo";
+import TutorialDemo from "../pages/TutorialDemo";
 
 const routes = [
     { path: '*', component: GetStartedDemo },

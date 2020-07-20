@@ -1,11 +1,13 @@
 export default (getContext) => {
 
+    const that = getContext();
+
     const _pushRoute = (path) => {
-        getContext().$router.push(path);
+        that.$router.push(path);
     }
 
     const onRouteMenuClick = (path) => {
-        if (path !== getContext().$route.path) {
+        if (path !== that.$route.path) {
             _pushRoute(path)
         }
     }

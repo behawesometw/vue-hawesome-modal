@@ -1,8 +1,10 @@
 const pkg = require('./package.json');
 process.env.VUE_APP_TITLE = `${pkg.name} - ${pkg.description}`
 
+const isOnProduction = process.env.NODE_ENV === 'production'
+
 const pages
-    = process.env.NODE_ENV === 'production'
+    = isOnProduction
         ? {
             index: {
                 entry: './packages/demo/demoEntry.js',
@@ -12,7 +14,7 @@ const pages
         : undefined;
 
 const chainWebpack
-    = process.env.NODE_ENV === 'production'
+    = isOnProduction
         ? undefined
         : config => {
             config
@@ -29,7 +31,7 @@ module.exports = {
     css: { extract: false },
     productionSourceMap: false,
     assetsDir: 'assets',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: isOnProduction
         ? '/vue-hawesome-modal/'
         : '/',
 };

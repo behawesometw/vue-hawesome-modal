@@ -141,7 +141,7 @@ Vue.component("GlobalSettingCodeBlock", GlobalSettingCodeBlock);
 import useScrollThreshold from "./use/scrollThreshold";
 import useTabControl from "./use/tabControl";
 import useColorManagement from "./use/colorManagement";
-import routeControl from "./use/routeControl";
+import useRouteControl from "./use/routeControl";
 
 export default {
   setup(props, context) {
@@ -171,7 +171,7 @@ export default {
       darkThemeToggle
     } = useColorManagement(getContext);
 
-    const { onRouteMenuClick, updateRoute } = routeControl(getContext);
+    const { onRouteMenuClick, updateRoute } = useRouteControl(getContext);
 
     return {
       isXs,

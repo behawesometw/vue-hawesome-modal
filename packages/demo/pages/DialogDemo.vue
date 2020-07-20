@@ -93,8 +93,8 @@
 </template>
 
 <script>
-import ColorSelectBundle from "./Common/Color/ColorSelectBundle";
-import DialogButtonConfigure from "./Business/DialogButtonConfigure";
+import ColorSelectBundle from "../components/Common/Color/ColorSelectBundle";
+import DialogButtonConfigure from "../components/Business/DialogButtonConfigure";
 
 export default {
   components: {

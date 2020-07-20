@@ -1,25 +1,26 @@
 import { ref, computed } from "@vue/composition-api";
 
 export default (getContext) => {
+    const that = getContext()
     const colorInput = ref("primary")
 
     const colorPick = ref("#1976d2FF")
 
     const colorInputBlur = () => {
         if (colorInput.value) {
-            getContext().$store.commit("theme/setColor", colorInput.value);
+            that.$store.commit("theme/setColor", colorInput.value);
         }
     }
 
     const colorPickChange = () => {
         if (colorPick.value) {
-            getContext().$store.commit("theme/setColor", colorPick.value);
+            that.$store.commit("theme/setColor", colorPick.value);
         }
     }
 
-    const globalThemeColor = computed(() => getContext().$store.state.theme.color)
+    const globalThemeColor = computed(() => that.$store.state.theme.color)
 
-    const isDarkTheme = computed(() => getContext().$vuetify.theme.dark)
+    const isDarkTheme = computed(() => that.$vuetify.theme.dark)
 
     const toolbarColor = computed(() => isDarkTheme.value ? "" : globalThemeColor.value)
 
@@ -28,7 +29,7 @@ export default (getContext) => {
     const titleColorStyle = computed(() => isDarkTheme.value ? { [`color`]: globalThemeColor.value } : {})
 
     const darkThemeToggle = () => {
-        var context = getContext();
+        var context = that;
         context.$vuetify.theme.dark = !context.$vuetify.theme.dark;
 
         var prismDefaultTheme = document.getElementById("_prismDefaultTheme");
