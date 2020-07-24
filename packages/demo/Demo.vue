@@ -33,8 +33,8 @@
         </v-list>
       </v-menu>
 
-      <v-btn icon @click="darkThemeToggle">
-        <v-icon>mdi-invert-colors</v-icon>
+      <v-btn icon href="https://github.com/behawesometw/vue-hawesome-modal" target="_blank">
+        <v-icon>mdi-github</v-icon>
       </v-btn>
 
       <v-menu :close-on-content-click="false" :nudge-width="200" offset-x left>
@@ -46,13 +46,22 @@
         <v-card>
           <v-list>
             <v-list-item>
-              <v-select
-                label="select a color"
-                v-model="colorInput"
-                :items="$store.state.colorItems"
-                :color="globalThemeColor"
-                @blur="colorInputBlur"
-              ></v-select>
+              <v-row :align="'center'">
+                <v-col cols="10">
+                  <v-select
+                    label="select a color"
+                    v-model="colorInput"
+                    :items="$store.state.colorItems"
+                    :color="globalThemeColor"
+                    @blur="colorInputBlur"
+                  ></v-select>
+                </v-col>
+                <v-col cols="2">
+                  <v-btn icon @click="darkThemeToggle">
+                    <v-icon>mdi-invert-colors</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
             </v-list-item>
           </v-list>
           <v-list>
@@ -122,7 +131,7 @@
 
 <script>
 import Vue from "vue";
-import { computed } from "@vue/composition-api";
+import { computed, provide } from "@vue/composition-api";
 
 import CodeBlockBase from "./components/Common/CodeBlock/CodeBlockBase";
 import ExampleCodeBlock from "./components/Common/CodeBlock/ExampleCodeBlock";
@@ -145,6 +154,8 @@ import useRouteControl from "./use/routeControl";
 
 export default {
   setup(props, context) {
+    provide("$root", context.root);
+
     const getContext = () => context.root;
 
     const isXs = computed(() => getContext().$vuetify.breakpoint.xs);
@@ -155,8 +166,8 @@ export default {
       tabSync,
       tabs,
       currentRouteIndex,
-      isEnableTabSwipe
-    } = useTabControl(getContext);
+      isEnableTabSwipe,
+    } = useTabControl();
 
     const {
       colorInput,
@@ -168,8 +179,8 @@ export default {
       toolbarColor,
       titleColorClass,
       titleColorStyle,
-      darkThemeToggle
-    } = useColorManagement(getContext);
+      darkThemeToggle,
+    } = useColorManagement();
 
     const { onRouteMenuClick, updateRoute } = useRouteControl(getContext);
 
@@ -195,7 +206,7 @@ export default {
       darkThemeToggle,
 
       onRouteMenuClick,
-      updateRoute
+      updateRoute,
     };
   },
 
@@ -206,9 +217,9 @@ export default {
       },
       set(value) {
         this.$store.commit("updateIsEnablePanelExpandable", value);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 

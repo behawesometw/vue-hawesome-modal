@@ -1,7 +1,8 @@
-import { ref, computed } from "@vue/composition-api";
+import { ref, computed, inject } from "@vue/composition-api";
 
-export default (getContext) => {
-    const that = getContext()
+export default () => {
+    const that = inject('$root')
+
     const colorInput = ref("primary")
 
     const colorPick = ref("#1976d2FF")

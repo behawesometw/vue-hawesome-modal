@@ -1,7 +1,6 @@
 import { ref, computed } from "@vue/composition-api";
 
-export default (getContext) => {
-    const that = getContext();
+export default () => {
     const tabSync = ref(null);
     const tabs = ref([
         { tabName: "Get Started", path: "/getStarted" },
@@ -10,7 +9,13 @@ export default (getContext) => {
         { tabName: "Loader", path: "/loader" },
         { tabName: "Tutorial", path: "/tutorial" }
     ])
-    const currentRouteIndex = computed(() => tabs.value.findIndex(m => m.path === that.$route.path))
+    const currentRouteIndex = computed(() => {
+        if (tabSync.value === null) {
+            return 0
+        }
+        var index = tabs.value.findIndex(m => m.path === tabSync.value)
+        return index === -1 ? 0 : index
+    })
     const isEnableTabSwipe = ref(false)
 
     return { tabSync, tabs, currentRouteIndex, isEnableTabSwipe }

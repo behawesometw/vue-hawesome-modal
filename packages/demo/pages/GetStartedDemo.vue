@@ -2,6 +2,20 @@
   <v-container>
     <AllExpandedPanelScope>
       <ColorResponsiveExpansionPanel>
+        <template v-slot:header>Introduction</template>
+        <template v-slot:content>
+          <v-row justify="center">
+            <v-col md="10" cols="12">
+              <pre
+                class="introduction-text"
+                :class="{'--dark': $vuetify.theme.dark}"
+                v-text="introductionText"
+              ></pre>
+            </v-col>
+          </v-row>
+        </template>
+      </ColorResponsiveExpansionPanel>
+      <ColorResponsiveExpansionPanel>
         <template v-slot:header>Installation</template>
         <template v-slot:content>
           <CodeBlockBase :codes="codeInstallPlugin" :lang="'bash'"></CodeBlockBase>
@@ -25,6 +39,14 @@
 <script>
 export default {
   computed: {
+    introductionText() {
+      var p = [
+        "A Vue promisify modal component plugin based on Vuetify with Vuex.",
+        "Provides dialog, notification and loader for building a modern website.",
+        "Using Promise API refactor modal component to provide fluent experience.",
+      ];
+      return p.join("\n");
+    },
     codeInstallPlugin() {
       return [`$ npm install vue-hawesome-modal`];
     },
@@ -46,7 +68,7 @@ export default {
     ...
   </v-app>
 </template>
-      `
+      `,
       ];
     },
     codeToAchieveGlobalSetting() {
@@ -59,13 +81,22 @@ var options = {
   dialogSetting: { ... },
   notifySetting: { ... },
   loaderSetting: { ... }
-}`
+}`,
       ];
     },
     preInsertSnippet() {
       return `// main.js or somewhere you initialize your app
       `;
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+.introduction-text {
+  color: black !important;
+  &.--dark {
+    color: white !important;
+  }
+}
+</style>
