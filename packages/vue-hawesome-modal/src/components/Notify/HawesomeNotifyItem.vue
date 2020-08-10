@@ -20,7 +20,8 @@
               <div ref="contentTarget" class="text-truncate" v-html="item.content"></div>
               <v-spacer></v-spacer>
               <v-btn icon :color="item.type" @click="resolveNoti(item)">
-                <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
+                <!-- <v-icon>mdi-checkbox-marked-circle-outline</v-icon> -->
+                <v-icon v-text="$vuetify.icons.values.success"></v-icon>
               </v-btn>
             </v-toolbar>
           </v-card>
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-export const positionCheck = position => {
+export const positionCheck = (position) => {
   var result = {};
   switch (position) {
     case "topRight":
@@ -70,8 +71,8 @@ export default {
   props: {
     item: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   methods: {
     resolveNoti(item) {
@@ -83,7 +84,7 @@ export default {
         return isXS ? 6 : 12;
       }
       return 2;
-    }
+    },
   },
   computed: {
     hasLoadingProgress() {
@@ -95,7 +96,7 @@ export default {
       );
       var isXS = this.$vuetify.breakpoint.xs;
       return {
-        [`${`m${positionObj.top ? "t" : "b"}-${isXS ? "4" : "6"}`}`]: true
+        [`${`m${positionObj.top ? "t" : "b"}-${isXS ? "4" : "6"}`}`]: true,
       };
     },
     width() {
@@ -103,8 +104,8 @@ export default {
     },
     height() {
       return this.$vuetify.breakpoint.xs ? "40" : "56";
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -8,6 +8,9 @@ export default {
     },
     mutations: {
         setGlobalSetting(state, setting) {
+            if (setting.themeColor) {
+                setting = { ...setting, ...{ titleBarColor: setting.themeColor, confirmBtnColor: setting.themeColor } }
+            }
             state.globalSetting = { ...state.globalSetting, ...setting };
         },
         setConfig(state, config) {

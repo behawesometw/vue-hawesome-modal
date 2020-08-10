@@ -11,7 +11,7 @@
         <v-toolbar-title>{{config.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon dark v-if="config.isShowCancelBtn" @click="config.reject()">
-          <v-icon>mdi-close</v-icon>
+          <v-icon v-text="$vuetify.icons.values.close"></v-icon>
         </v-btn>
       </v-toolbar>
 
