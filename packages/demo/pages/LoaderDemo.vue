@@ -101,9 +101,13 @@ setTimeout(() => {
         loaderTextStatement.length > 0 ? `, ${loaderTextStatement}` : "";
 
       var codeToAchieve2 = `
-this.$h.loader.promise(${this.timeout}${loaderTextStatementWithComma}).then(() => {
-  console.log('done');
-});
+this.$h.loader
+  .wait(() => {
+    // some code here
+  }, ${this.timeout}${loaderTextStatementWithComma})
+  .then(() => {
+    console.log('done');
+  });
       `;
       resultArr.push(codeToAchieve2);
 

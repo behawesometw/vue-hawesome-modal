@@ -61,8 +61,9 @@ export default {
                         off() {
                             $storeFromApp.dispatch("loader/off");
                         },
-                        promise(duration, loaderText) {
+                        wait(handler, duration, loaderText) {
                             this.on(loaderText)
+                            handler()
                             return new Promise((rsv) => {
                                 setTimeout(() => {
                                     this.off()
@@ -71,7 +72,7 @@ export default {
                             })
                         },
                     },
-                    
+
                     dialog: {
                         talk(val, func) {
                             var builder = new DialogConfigBuilder(val);
