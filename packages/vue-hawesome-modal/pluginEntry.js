@@ -60,9 +60,18 @@ export default {
                         },
                         off() {
                             $storeFromApp.dispatch("loader/off");
-                        }
+                        },
+                        promise(duration, loaderText) {
+                            this.on(loaderText)
+                            return new Promise((rsv) => {
+                                setTimeout(() => {
+                                    this.off()
+                                    rsv()
+                                }, duration);
+                            })
+                        },
                     },
-
+                    
                     dialog: {
                         talk(val, func) {
                             var builder = new DialogConfigBuilder(val);

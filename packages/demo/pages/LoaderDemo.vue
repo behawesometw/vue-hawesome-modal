@@ -60,7 +60,7 @@ export default {
   data: () => ({
     loaderText: "",
     timeout: 2000,
-    loaderType: "linear"
+    loaderType: "linear",
   }),
   computed: {
     globalThemeColor() {
@@ -68,7 +68,7 @@ export default {
     },
     codeToAchieveGlobalSetting() {
       var loaderTextStatement = `${
-        this.loaderText.length > 0 ? `, loaderText: ${this.loaderText}` : ""
+        this.loaderText.length > 0 ? `, loaderText: "${this.loaderText}"` : ""
       }`;
 
       return [
@@ -78,7 +78,7 @@ var options = {
   loaderSetting: { 
     type: "${this.loaderType}"${loaderTextStatement}
   } 
-}`
+}`,
       ];
     },
     codeToAchieves() {
@@ -97,13 +97,23 @@ setTimeout(() => {
 
       resultArr.push(codeToAchieve);
 
+      var loaderTextStatementWithComma =
+        loaderTextStatement.length > 0 ? `, ${loaderTextStatement}` : "";
+
+      var codeToAchieve2 = `
+this.$h.loader.promise(${this.timeout}${loaderTextStatementWithComma}).then(() => {
+  console.log('done');
+});
+      `;
+      resultArr.push(codeToAchieve2);
+
       return resultArr;
-    }
+    },
   },
   methods: {
     loaderTypeChange() {
       this.$store.commit("loader/setGlobalSetting", {
-        type: this.loaderType
+        type: this.loaderType,
       });
     },
     loaderDemo() {
@@ -112,7 +122,7 @@ setTimeout(() => {
       setTimeout(() => {
         this.$h.loader.off();
       }, sec);
-    }
-  }
+    },
+  },
 };
 </script>

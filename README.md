@@ -167,10 +167,11 @@ this.$h.notify
 ### Loader
 ⚡ [Live Demo](https://behawesometw.github.io/vue-hawesome-modal/#/loader)
 #### API
-| Name | Parameter          | Return Type | Description  |
-| :--- | :----------------- | :---------- | :----------- |
-| on   | loaderText: string | void        | open loader  |
-| off  |                    | void        | close loader |
+| Name    | Parameter                            | Return Type | Description            |
+| :------ | :----------------------------------- | :---------- | :--------------------- |
+| on      | loaderText: string                   | void        | open loader            |
+| off     |                                      | void        | close loader           |
+| promise | duration: number, loaderText: string | Promise     | open then close loader |
 #### Global Settings
 ```javascript
 // import
@@ -196,6 +197,11 @@ this.$h.loader.on();
 setTimeout(() => {
   this.$h.loader.off();
 }, 2000);
+
+// `this` points to the Vue instance
+this.$h.loader.promise(2000).then(() => {
+  console.log('done');
+});
 
 // `this` points to the Vue instance
 this.$h.loader.on("系統處理中，請稍後…");

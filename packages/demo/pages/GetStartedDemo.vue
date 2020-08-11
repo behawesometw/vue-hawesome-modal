@@ -76,7 +76,7 @@ export default {
         `
 var options = { 
   store, 
-  themeColor: "hex or semantic color"
+  themeColor: "hex or semantic color",
   // more setting detail see other tab
   dialogSetting: { ... },
   notifySetting: { ... },
