@@ -6,7 +6,7 @@
     v-model="config.isShow"
     :width="config.width"
   >
-    <v-card min-width="200">
+    <v-card class="h-dialog" min-width="200">
       <v-toolbar dark dense flat :color="dialogToolBarColor">
         <v-toolbar-title>{{config.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          class="text-truncate"
+          class="h-dialog-cancel-btn text-truncate"
           width="50%"
           v-if="config.isShowCancelBtn"
           :color="config.cancelBtnColor"
@@ -30,7 +30,7 @@
           @click="config.reject()"
         >{{config.cancelBtnTxt}}</v-btn>
         <v-btn
-          class="text-truncate"
+          class="h-dialog-confirm-btn text-truncate"
           width="50%"
           v-if="config.isShowConfirmBtn"
           :color="config.confirmBtnColor || globalThemeColor"
@@ -55,7 +55,7 @@ export default {
     },
     globalThemeColor() {
       return this.$store.state.theme.color;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="isGlobalLoading" persistent overlay-opacity :width="width">
-    <v-card class="pa-0">
+    <v-card class="h-loader pa-0">
       <v-card-text class="pa-5 text-center">
         {{loaderText}}
         <v-progress-circular
@@ -39,11 +39,11 @@ export default {
       return this.$store.state.loader.globalSetting.type === "circular";
     },
     ...mapGetters({
-      isGlobalLoading: "waitingCount/isGlobalLoading"
+      isGlobalLoading: "waitingCount/isGlobalLoading",
     }),
     width() {
       return this.isCircular ? 200 : 300;
-    }
-  }
+    },
+  },
 };
 </script>
