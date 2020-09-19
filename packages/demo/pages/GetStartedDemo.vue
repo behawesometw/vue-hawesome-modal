@@ -6,11 +6,11 @@
         <template v-slot:content>
           <v-row justify="center">
             <v-col md="10" cols="12">
-              <pre
-                class="introduction-text"
-                :class="{'--dark': $vuetify.theme.dark}"
-                v-text="introductionText"
-              ></pre>
+              <v-sheet class="subtitle-1">
+                <div>A Vue promisify modal component plugin based on Vuetify with Vuex.</div>
+                <div>Provides dialog, notification and loader for building a modern website.</div>
+                <div>Using Promise API refactor modal component to provide fluent experience.</div>
+              </v-sheet>
             </v-col>
           </v-row>
         </template>
@@ -91,12 +91,3 @@ var options = {
   },
 };
 </script>
-
-<style lang="scss">
-.introduction-text {
-  color: black !important;
-  &.--dark {
-    color: white !important;
-  }
-}
-</style>
