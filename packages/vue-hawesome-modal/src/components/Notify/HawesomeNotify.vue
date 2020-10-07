@@ -14,7 +14,7 @@ export default {
   components: { HawesomeNotifyItem },
   computed: {
     notifyList() {
-      return this.$store.state.notify.list;
+      return this.$store.state.hNotify.list;
     },
     flexDirection() {
       var position = this.position;
@@ -27,7 +27,7 @@ export default {
       return this.position.top ? "list-top" : "list-bottom";
     },
     position() {
-      return positionCheck(this.$store.state.notify.globalSetting.position);
+      return positionCheck(this.$store.state.hNotify.globalSetting.position);
     }
   }
 };

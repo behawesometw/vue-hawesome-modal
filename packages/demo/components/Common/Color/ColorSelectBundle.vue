@@ -49,7 +49,7 @@ export default {
   }),
   computed: {
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     colorItems() {
       return this.$store.state.colorItems;

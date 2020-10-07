@@ -51,10 +51,10 @@ export default {
         : this.config.titleBarColor || this.globalThemeColor;
     },
     config() {
-      return this.$store.state.dialog.config;
+      return this.$store.state.hDialog.config;
     },
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
   },
 };

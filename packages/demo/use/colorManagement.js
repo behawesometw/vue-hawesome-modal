@@ -9,17 +9,17 @@ export default () => {
 
     const colorInputBlur = () => {
         if (colorInput.value) {
-            that.$store.commit("theme/setColor", colorInput.value);
+            that.$store.commit("hTheme/setColor", colorInput.value);
         }
     }
 
     const colorPickChange = () => {
         if (colorPick.value) {
-            that.$store.commit("theme/setColor", colorPick.value);
+            that.$store.commit("hTheme/setColor", colorPick.value);
         }
     }
 
-    const globalThemeColor = computed(() => that.$store.state.theme.color)
+    const globalThemeColor = computed(() => that.$store.state.hTheme.color)
 
     const isDarkTheme = computed(() => that.$vuetify.theme.dark)
 

@@ -64,7 +64,7 @@ export default {
   }),
   computed: {
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     codeToAchieveGlobalSetting() {
       var loaderTextStatement = `${
@@ -116,7 +116,7 @@ this.$h.loader
   },
   methods: {
     loaderTypeChange() {
-      this.$store.commit("loader/setGlobalSetting", {
+      this.$store.commit("hLoader/setGlobalSetting", {
         type: this.loaderType,
       });
     },

@@ -24,10 +24,10 @@ export default {
     actions: {
         on({ commit }, loaderText) {
             commit("setLoaderText", loaderText);
-            commit('waitingCount/increase', null, { root: true })
+            commit('hWaitingCount/increase', null, { root: true })
         },
         off({ commit }) {
-            commit('waitingCount/decrease', null, { root: true })
+            commit('hWaitingCount/decrease', null, { root: true })
         },
 
     }

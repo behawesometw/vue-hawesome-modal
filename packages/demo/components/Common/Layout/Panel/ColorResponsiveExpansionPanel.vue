@@ -19,7 +19,7 @@
 export default {
   computed: {
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     panelColorStyle() {
       return { [`color`]: this.globalThemeColor };

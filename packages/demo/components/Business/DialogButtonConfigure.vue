@@ -73,7 +73,7 @@ export default {
       return `${this.value.isShow ? "show" : "hide"} ${this.buttonType} button`;
     },
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     colorItems() {
       return this.$store.state.colorItems;

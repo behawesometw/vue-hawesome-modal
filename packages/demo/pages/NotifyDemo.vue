@@ -131,7 +131,7 @@ export default {
       return `${this.positionText()}_position_fixed`;
     },
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     codeToAchieveGlobalSetting() {
       return [
@@ -223,7 +223,7 @@ this.$h.notify
         .concat(`${this.right ? "Right" : ""}`);
     },
     setNotifyPosition() {
-      this.$store.commit("notify/setGlobalSetting", {
+      this.$store.commit("hNotify/setGlobalSetting", {
         position: this.positionText()
       });
     },

@@ -27,19 +27,19 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     loaderText() {
-      return this.$store.state.loader.loaderText.trim();
+      return this.$store.state.hLoader.loaderText.trim();
     },
     hasLoaderText() {
       return this.loaderText.length > 0;
     },
     isCircular() {
-      return this.$store.state.loader.globalSetting.type === "circular";
+      return this.$store.state.hLoader.globalSetting.type === "circular";
     },
     ...mapGetters({
-      isGlobalLoading: "waitingCount/isGlobalLoading",
+      isGlobalLoading: "hWaitingCount/isGlobalLoading",
     }),
     width() {
       return this.isCircular ? 200 : 300;

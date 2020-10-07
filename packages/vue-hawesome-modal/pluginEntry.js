@@ -22,30 +22,30 @@ export default {
 
         var $storeFromApp = options.store;
 
-        if (!$storeFromApp.hasModule('waitingCount'))
-            $storeFromApp.registerModule('waitingCount', waitingCountModule)
+        if (!$storeFromApp.hasModule('hWaitingCount'))
+            $storeFromApp.registerModule('hWaitingCount', waitingCountModule)
 
-        if (!$storeFromApp.hasModule("theme"))
-            $storeFromApp.registerModule("theme", themeModule)
+        if (!$storeFromApp.hasModule("hTheme"))
+            $storeFromApp.registerModule("hTheme", themeModule)
 
-        if (!$storeFromApp.hasModule("loader"))
-            $storeFromApp.registerModule("loader", loaderModule)
+        if (!$storeFromApp.hasModule("hLoader"))
+            $storeFromApp.registerModule("hLoader", loaderModule)
 
-        if (!$storeFromApp.hasModule("dialog"))
-            $storeFromApp.registerModule("dialog", dialogModule)
+        if (!$storeFromApp.hasModule("hDialog"))
+            $storeFromApp.registerModule("hDialog", dialogModule)
 
-        if (!$storeFromApp.hasModule("notify"))
-            $storeFromApp.registerModule("notify", notifyModule)
+        if (!$storeFromApp.hasModule("hNotify"))
+            $storeFromApp.registerModule("hNotify", notifyModule)
 
 
         if (options.themeColor)
-            $storeFromApp.commit('theme/setColor', options.themeColor)
+            $storeFromApp.commit('hTheme/setColor', options.themeColor)
         if (options.loaderSetting)
-            $storeFromApp.commit('loader/setGlobalSetting', options.loaderSetting)
+            $storeFromApp.commit('hLoader/setGlobalSetting', options.loaderSetting)
         if (options.dialogSetting)
-            $storeFromApp.commit('dialog/setGlobalSetting', options.dialogSetting)
+            $storeFromApp.commit('hDialog/setGlobalSetting', options.dialogSetting)
         if (options.notifySetting)
-            $storeFromApp.commit('notify/setGlobalSetting', options.notifySetting)
+            $storeFromApp.commit('hNotify/setGlobalSetting', options.notifySetting)
 
         Vue.component('h-loader', HawesomeLoader);
         Vue.component('h-dialog', HawesomeDialog);
@@ -56,10 +56,10 @@ export default {
                 return {
                     loader: {
                         on(loaderText) {
-                            $storeFromApp.dispatch("loader/on", loaderText);
+                            $storeFromApp.dispatch("hLoader/on", loaderText);
                         },
                         off() {
-                            $storeFromApp.dispatch("loader/off");
+                            $storeFromApp.dispatch("hLoader/off");
                         },
                         wait(handler, duration, loaderText) {
                             this.on(loaderText)
@@ -81,17 +81,17 @@ export default {
                         },
                         _talk(val) {
                             if (val && typeof val === "string") {
-                                return $storeFromApp.dispatch("dialog/talk", new DialogConfigBuilder(val));
+                                return $storeFromApp.dispatch("hDialog/talk", new DialogConfigBuilder(val));
                             }
                             else if (val instanceof DialogConfigBuilder) {
-                                return $storeFromApp.dispatch("dialog/talk", val);
+                                return $storeFromApp.dispatch("hDialog/talk", val);
                             }
                             else {
                                 throw new Error("val should be a string or instance of DialogConfigBuilder.");
                             }
                         },
                         hangUp() {
-                            $storeFromApp.dispatch('dialog/hangUp');
+                            $storeFromApp.dispatch('hDialog/hangUp');
                         }
                     },
 
@@ -128,20 +128,20 @@ export default {
                         },
                         _push(val) {
                             if (val && typeof val === "string") {
-                                return $storeFromApp.dispatch("notify/push", new NotifyConfigBuilder(val));
+                                return $storeFromApp.dispatch("hNotify/push", new NotifyConfigBuilder(val));
                             }
                             else if (val instanceof NotifyConfigBuilder) {
-                                return $storeFromApp.dispatch("notify/push", val);
+                                return $storeFromApp.dispatch("hNotify/push", val);
                             }
                             else {
                                 throw new Error("val should be a string or instance of NotifyConfigBuilder.");
                             }
                         },
                         resolveAllNotify() {
-                            $storeFromApp.commit('notify/resolveAllNotify')
+                            $storeFromApp.commit('hNotify/resolveAllNotify')
                         },
                         clearAllNotify() {
-                            $storeFromApp.commit('notify/clearAllNotify')
+                            $storeFromApp.commit('hNotify/clearAllNotify')
                         },
                     }
                 }

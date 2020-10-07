@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     resolveNoti(item) {
-      this.$store.commit("notify/resolveItem", item);
+      this.$store.commit("hNotify/resolveItem", item);
     },
     elevationCalc(isOnHover) {
       var isXS = this.$vuetify.breakpoint.xs;
@@ -92,7 +92,7 @@ export default {
     },
     itemMarginClass() {
       var positionObj = positionCheck(
-        this.$store.state.notify.globalSetting.position
+        this.$store.state.hNotify.globalSetting.position
       );
       var isXS = this.$vuetify.breakpoint.xs;
       return {

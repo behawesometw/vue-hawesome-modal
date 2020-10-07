@@ -67,13 +67,13 @@ this.$h.notify
 export default {
   methods: {
     play() {
-      this.$store.commit("notify/clearAllNotify");
+      this.$store.commit("hNotify/clearAllNotify");
       eval(demoSnippet);
     }
   },
   computed: {
     globalThemeColor() {
-      return this.$store.state.theme.color;
+      return this.$store.state.hTheme.color;
     },
     codeToAchieves() {
       return [demoSnippet];
