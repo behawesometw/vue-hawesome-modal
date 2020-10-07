@@ -12,9 +12,14 @@
     >
       <div
         class="userSelect-none"
-        :class="[titleColorClass, isXs ? 'text-subtitle-1 font-weight-bold' : 'title']"
+        :class="[
+          titleColorClass,
+          isXs ? 'text-subtitle-1 font-weight-bold' : 'title',
+        ]"
         :style="titleColorStyle"
-      >{{require("../../package.json").name}}</div>
+      >
+        {{ require("../../package.json").name }}
+      </div>
 
       <v-spacer></v-spacer>
 
@@ -23,17 +28,33 @@
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </v-scroll-y-reverse-transition>
-      <v-menu activator="#route-menu-activator" transition="slide-y-transition" bottom left>
+      <v-menu
+        activator="#route-menu-activator"
+        transition="slide-y-transition"
+        bottom
+        left
+      >
         <v-list>
-          <v-list-item-group :color="globalThemeColor" :value="currentRouteIndex">
-            <v-list-item v-for="(item, i) in tabs" :key="i" @click="onRouteMenuClick(item.path)">
+          <v-list-item-group
+            :color="hGlobalThemeColor"
+            :value="currentRouteIndex"
+          >
+            <v-list-item
+              v-for="(item, i) in tabs"
+              :key="i"
+              @click="onRouteMenuClick(item.path)"
+            >
               <v-list-item-title>{{ item.tabName }}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-menu>
 
-      <v-btn icon href="https://github.com/behawesometw/vue-hawesome-modal" target="_blank">
+      <v-btn
+        icon
+        href="https://github.com/behawesometw/vue-hawesome-modal"
+        target="_blank"
+      >
         <v-icon>mdi-github</v-icon>
       </v-btn>
 
@@ -52,7 +73,7 @@
                     label="select a color"
                     v-model="colorInput"
                     :items="$store.state.colorItems"
-                    :color="globalThemeColor"
+                    :color="hGlobalThemeColor"
                     @blur="colorInputBlur"
                   ></v-select>
                 </v-col>
@@ -79,7 +100,7 @@
           <v-list>
             <v-list-item>
               <v-switch
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="isEnablePanelExpandable"
                 label="panel expandable"
               ></v-switch>
@@ -89,7 +110,11 @@
             <v-divider></v-divider>
             <v-list>
               <v-list-item>
-                <v-switch :color="globalThemeColor" v-model="isEnableTabSwipe" label="tab swipe"></v-switch>
+                <v-switch
+                  :color="hGlobalThemeColor"
+                  v-model="isEnableTabSwipe"
+                  label="tab swipe"
+                ></v-switch>
               </v-list-item>
             </v-list>
           </div>
@@ -101,15 +126,21 @@
           :class="{ 'on-light-theme': !isDarkTheme }"
           v-model="tabSync"
           grow
-          :color="globalThemeColor"
+          :color="hGlobalThemeColor"
           :background-color="isDarkTheme ? 'grey darken-4' : 'white'"
         >
-          <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{ tab.tabName }}</v-tab>
+          <v-tab v-for="(tab, index) in tabs" :key="index" :to="tab.path">{{
+            tab.tabName
+          }}</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
     <v-main>
-      <v-tabs-items v-model="tabSync" @change="updateRoute($event)" :touchless="!isEnableTabSwipe">
+      <v-tabs-items
+        v-model="tabSync"
+        @change="updateRoute($event)"
+        :touchless="!isEnableTabSwipe"
+      >
         <v-tab-item v-for="(tab, index) in tabs" :key="index" :value="tab.path">
           <keep-alive>
             <router-view></router-view>
@@ -120,7 +151,13 @@
     <v-fab-transition>
       <v-speed-dial fixed bottom right v-show="isTgrScrollThreshold">
         <template v-slot:activator>
-          <v-btn fab dark :color="globalThemeColor" :x-small="isXs" @click="$vuetify.goTo(0)">
+          <v-btn
+            fab
+            dark
+            :color="hGlobalThemeColor"
+            :x-small="isXs"
+            @click="$vuetify.goTo(0)"
+          >
             <v-icon>mdi-chevron-up</v-icon>
           </v-btn>
         </template>
@@ -174,7 +211,6 @@ export default {
       colorPick,
       colorInputBlur,
       colorPickChange,
-      globalThemeColor,
       isDarkTheme,
       toolbarColor,
       titleColorClass,
@@ -198,7 +234,6 @@ export default {
       colorPick,
       colorInputBlur,
       colorPickChange,
-      globalThemeColor,
       isDarkTheme,
       toolbarColor,
       titleColorClass,

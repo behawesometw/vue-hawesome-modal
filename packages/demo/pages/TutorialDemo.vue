@@ -6,7 +6,7 @@
           v-on="on"
           fab
           class="top-right-fixed"
-          :color="globalThemeColor"
+          :color="hGlobalThemeColor"
           :x-small="$vuetify.breakpoint.xs"
           dark
           @click="play"
@@ -72,9 +72,6 @@ export default {
     }
   },
   computed: {
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
-    },
     codeToAchieves() {
       return [demoSnippet];
     }

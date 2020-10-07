@@ -9,25 +9,23 @@ export default () => {
 
     const colorInputBlur = () => {
         if (colorInput.value) {
-            that.$store.commit("hTheme/setColor", colorInput.value);
+            that.$h.theme.setColor(colorInput.value)
         }
     }
 
     const colorPickChange = () => {
         if (colorPick.value) {
-            that.$store.commit("hTheme/setColor", colorPick.value);
+            that.$h.theme.setColor(colorPick.value)
         }
     }
 
-    const globalThemeColor = computed(() => that.$store.state.hTheme.color)
-
     const isDarkTheme = computed(() => that.$vuetify.theme.dark)
 
-    const toolbarColor = computed(() => isDarkTheme.value ? "" : globalThemeColor.value)
+    const toolbarColor = computed(() => isDarkTheme.value ? "" : that.hGlobalThemeColor)
 
-    const titleColorClass = computed(() => ({ [`${globalThemeColor.value}--text`]: isDarkTheme.value }))
+    const titleColorClass = computed(() => ({ [`${that.hGlobalThemeColor}--text`]: isDarkTheme.value }))
 
-    const titleColorStyle = computed(() => isDarkTheme.value ? { [`color`]: globalThemeColor.value } : {})
+    const titleColorStyle = computed(() => isDarkTheme.value ? { [`color`]: that.hGlobalThemeColor } : {})
 
     const darkThemeToggle = () => {
         var context = that;
@@ -36,5 +34,5 @@ export default () => {
         var prismDefaultTheme = document.getElementById("_prismDefaultTheme");
         prismDefaultTheme.disabled = context.$vuetify.theme.dark;
     }
-    return { colorInput, colorPick, colorInputBlur, colorPickChange, globalThemeColor, isDarkTheme, toolbarColor, titleColorClass, titleColorStyle, darkThemeToggle }
+    return { colorInput, colorPick, colorInputBlur, colorPickChange, isDarkTheme, toolbarColor, titleColorClass, titleColorStyle, darkThemeToggle }
 }

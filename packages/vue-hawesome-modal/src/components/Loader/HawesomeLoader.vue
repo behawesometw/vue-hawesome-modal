@@ -8,14 +8,14 @@
           class="d-block mx-auto"
           :class="{ 'mt-2' : hasLoaderText }"
           indeterminate
-          :color="globalThemeColor"
+          :color="hGlobalThemeColor"
         ></v-progress-circular>
         <v-progress-linear
           v-else
           :class="{ 'mt-2' : hasLoaderText }"
           height="10"
           indeterminate
-          :color="globalThemeColor"
+          :color="hGlobalThemeColor"
         ></v-progress-linear>
       </v-card-text>
     </v-card>
@@ -26,9 +26,6 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
-    },
     loaderText() {
       return this.$store.state.hLoader.loaderText.trim();
     },

@@ -7,5 +7,8 @@ export default {
         setColor(state, color) {
             state.color = color;
         }
+    },
+    getters: {
+        globalThemeColor: state => state.color
     }
 }

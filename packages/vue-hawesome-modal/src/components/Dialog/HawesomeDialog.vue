@@ -8,7 +8,7 @@
   >
     <v-card class="h-dialog" min-width="200">
       <v-toolbar dark dense flat :color="dialogToolBarColor">
-        <v-toolbar-title>{{config.title}}</v-toolbar-title>
+        <v-toolbar-title>{{ config.title }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon dark v-if="config.isShowCancelBtn" @click="config.reject()">
           <v-icon v-text="$vuetify.icons.values.close"></v-icon>
@@ -28,15 +28,17 @@
           :color="config.cancelBtnColor"
           text
           @click="config.reject()"
-        >{{config.cancelBtnTxt}}</v-btn>
+          >{{ config.cancelBtnTxt }}</v-btn
+        >
         <v-btn
           class="h-dialog-confirm-btn text-truncate"
           width="50%"
           v-if="config.isShowConfirmBtn"
-          :color="config.confirmBtnColor || globalThemeColor"
+          :color="config.confirmBtnColor || hGlobalThemeColor"
           text
           @click="config.resolve()"
-        >{{config.confirmBtnTxt}}</v-btn>
+          >{{ config.confirmBtnTxt }}</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -48,13 +50,10 @@ export default {
     dialogToolBarColor() {
       return this.$vuetify.theme.dark
         ? ""
-        : this.config.titleBarColor || this.globalThemeColor;
+        : this.config.titleBarColor || this.hGlobalThemeColor;
     },
     config() {
       return this.$store.state.hDialog.config;
-    },
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
     },
   },
 };

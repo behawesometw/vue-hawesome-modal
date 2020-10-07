@@ -51,9 +51,23 @@ export default {
         Vue.component('h-dialog', HawesomeDialog);
         Vue.component('h-notify', HawesomeNotify);
 
+        Vue.mixin({
+            computed: {
+                hGlobalThemeColor() {
+                    return $storeFromApp.getters['hTheme/globalThemeColor']
+                }
+            }
+        })
+
         Object.defineProperty(Vue.prototype, "$h", {
             get() {
                 return {
+                    theme: {
+                        setColor(color) {
+                            $storeFromApp.commit('hTheme/setColor', color)
+                        }
+                    },
+
                     loader: {
                         on(loaderText) {
                             $storeFromApp.dispatch("hLoader/on", loaderText);

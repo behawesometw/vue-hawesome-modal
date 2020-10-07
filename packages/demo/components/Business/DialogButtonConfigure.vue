@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-switch dense :color="globalThemeColor" v-model="value.isShow" :label="switchLabel"></v-switch>
+      <v-switch dense :color="hGlobalThemeColor" v-model="value.isShow" :label="switchLabel"></v-switch>
     </v-card-text>
     <v-expand-transition>
       <div v-show="value.isShow">
@@ -33,7 +33,7 @@
                     <v-list>
                       <v-list-item>
                         <v-text-field
-                          :color="globalThemeColor"
+                          :color="hGlobalThemeColor"
                           :disabled="!value.isShow"
                           v-model="value.txt"
                           label="text"
@@ -71,9 +71,6 @@ export default {
   computed: {
     switchLabel() {
       return `${this.value.isShow ? "show" : "hide"} ${this.buttonType} button`;
-    },
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
     },
     colorItems() {
       return this.$store.state.colorItems;

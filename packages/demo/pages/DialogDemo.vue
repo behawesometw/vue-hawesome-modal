@@ -5,7 +5,7 @@
         <v-btn
           fab
           class="top-right-fixed"
-          :color="globalThemeColor"
+          :color="hGlobalThemeColor"
           :x-small="$vuetify.breakpoint.xs"
           :dark="isButtonGoDark"
           :disabled="isNotReadyToPlay"
@@ -23,7 +23,7 @@
           <v-row dense justify="center">
             <v-col md="3" cols="4">
               <v-text-field
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="title"
                 label="title"
                 hint="default value: `Message`"
@@ -31,7 +31,7 @@
             </v-col>
             <v-col md="3" cols="4">
               <v-text-field
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="width"
                 type="number"
                 label="width"
@@ -39,7 +39,7 @@
               ></v-text-field>
             </v-col>
             <v-col md="2" cols="2">
-              <v-switch :color="globalThemeColor" v-model="withOverlay" label="with overlay"></v-switch>
+              <v-switch :color="hGlobalThemeColor" v-model="withOverlay" label="with overlay"></v-switch>
             </v-col>
           </v-row>
 
@@ -47,7 +47,7 @@
             <v-col md="8" cols="10">
               <v-textarea
                 v-model="content"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 no-resize
                 label="content"
                 rows="2"
@@ -149,9 +149,6 @@ export default {
     },
     isNotReadyToPlay() {
       return !this.isReadyToPlay;
-    },
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
     },
     colorItems() {
       return this.$store.state.colorItems;

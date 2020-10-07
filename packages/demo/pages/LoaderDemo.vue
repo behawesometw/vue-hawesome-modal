@@ -3,7 +3,7 @@
     <v-btn
       fab
       class="top-right-fixed"
-      :color="globalThemeColor"
+      :color="hGlobalThemeColor"
       :x-small="$vuetify.breakpoint.xs"
       dark
       @click="loaderDemo"
@@ -17,7 +17,7 @@
         <template v-slot:content>
           <v-row dense justify="center">
             <v-col md="8" cols="10">
-              <v-text-field label="text" v-model="loaderText" :color="globalThemeColor"></v-text-field>
+              <v-text-field label="text" v-model="loaderText" :color="hGlobalThemeColor"></v-text-field>
             </v-col>
           </v-row>
 
@@ -28,7 +28,7 @@
                 label="timeout"
                 step="500"
                 v-model="timeout"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -36,8 +36,8 @@
           <v-row dense justify="center">
             <v-col md="8" cols="10">
               <v-radio-group row v-model="loaderType" @change="loaderTypeChange">
-                <v-radio :color="globalThemeColor" label="linear" value="linear"></v-radio>
-                <v-radio :color="globalThemeColor" label="circular" value="circular"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="linear" value="linear"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="circular" value="circular"></v-radio>
               </v-radio-group>
             </v-col>
           </v-row>
@@ -63,9 +63,6 @@ export default {
     loaderType: "linear",
   }),
   computed: {
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
-    },
     codeToAchieveGlobalSetting() {
       var loaderTextStatement = `${
         this.loaderText.length > 0 ? `, loaderText: "${this.loaderText}"` : ""

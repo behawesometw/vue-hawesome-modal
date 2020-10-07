@@ -7,7 +7,7 @@
       transition="scale-transition"
     >
       <template v-slot:activator>
-        <v-btn :x-small="$vuetify.breakpoint.xs" v-model="fab" :color="globalThemeColor" fab dark>
+        <v-btn :x-small="$vuetify.breakpoint.xs" v-model="fab" :color="hGlobalThemeColor" fab dark>
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-icon v-else>mdi-plus</v-icon>
         </v-btn>
@@ -36,7 +36,7 @@
         <template v-slot:content>
           <v-row dense justify="center">
             <v-col md="8" cols="10">
-              <v-text-field :color="globalThemeColor" v-model="notiText" label="text"></v-text-field>
+              <v-text-field :color="hGlobalThemeColor" v-model="notiText" label="text"></v-text-field>
             </v-col>
           </v-row>
 
@@ -44,12 +44,12 @@
             <v-col md="8" cols="10">
               <v-checkbox
                 class="d-inline-block mr-4"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="isEnableDuration"
               ></v-checkbox>
               <v-text-field
                 class="d-inline-block"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 :disabled="!isEnableDuration"
                 type="number"
                 min="1"
@@ -64,25 +64,25 @@
             <v-col md="8" cols="10">
               <v-checkbox
                 class="d-inline-block mr-4"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="top"
                 label="Top"
               ></v-checkbox>
               <v-checkbox
                 class="d-inline-block mr-4"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="bottom"
                 label="Bottom"
               ></v-checkbox>
               <v-checkbox
                 class="d-inline-block mr-4"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="left"
                 label="Left"
               ></v-checkbox>
               <v-checkbox
                 class="d-inline-block mr-4"
-                :color="globalThemeColor"
+                :color="hGlobalThemeColor"
                 v-model="right"
                 label="Right"
               ></v-checkbox>
@@ -92,10 +92,10 @@
           <v-row dense justify="center">
             <v-col md="8" cols="10">
               <v-radio-group row v-model="notiType">
-                <v-radio :color="globalThemeColor" label="Info" value="info"></v-radio>
-                <v-radio :color="globalThemeColor" label="Success" value="success"></v-radio>
-                <v-radio :color="globalThemeColor" label="Warning" value="warning"></v-radio>
-                <v-radio :color="globalThemeColor" label="Error" value="error"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="Info" value="info"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="Success" value="success"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="Warning" value="warning"></v-radio>
+                <v-radio :color="hGlobalThemeColor" label="Error" value="error"></v-radio>
               </v-radio-group>
             </v-col>
           </v-row>
@@ -129,9 +129,6 @@ export default {
   computed: {
     dialPositionClass() {
       return `${this.positionText()}_position_fixed`;
-    },
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
     },
     codeToAchieveGlobalSetting() {
       return [

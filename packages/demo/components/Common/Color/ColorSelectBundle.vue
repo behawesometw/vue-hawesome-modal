@@ -2,7 +2,7 @@
   <v-combobox
     clearable
     :value="bindingValue"
-    :color="globalThemeColor"
+    :color="hGlobalThemeColor"
     :items="colorItems"
     :label="label"
     :hint="hint"
@@ -48,9 +48,6 @@ export default {
     bindingValue: ""
   }),
   computed: {
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
-    },
     colorItems() {
       return this.$store.state.colorItems;
     }

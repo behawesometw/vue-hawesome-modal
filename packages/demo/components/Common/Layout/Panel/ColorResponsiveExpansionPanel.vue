@@ -18,15 +18,12 @@
 <script>
 export default {
   computed: {
-    globalThemeColor() {
-      return this.$store.state.hTheme.color;
-    },
     panelColorStyle() {
-      return { [`color`]: this.globalThemeColor };
+      return { [`color`]: this.hGlobalThemeColor };
     },
     panelColorClass() {
       return {
-        [`${this.globalThemeColor}--text`]: true
+        [`${this.hGlobalThemeColor}--text`]: true
       };
     }
   }
