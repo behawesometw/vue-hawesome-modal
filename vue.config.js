@@ -28,7 +28,7 @@ const chainWebpack
 module.exports = {
     pages,
     chainWebpack,
-    css: { extract: false },
+    css: { extract: true }, // import vuetify CSS if you need
     productionSourceMap: false,
     assetsDir: 'assets',
     publicPath: isOnProduction

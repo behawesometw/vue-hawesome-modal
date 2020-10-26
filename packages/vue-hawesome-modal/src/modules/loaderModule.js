@@ -8,7 +8,8 @@ export default {
         loaderText: "",
         globalSetting: {
             type: "linear",
-            loaderText: ""
+            loaderText: "",
+            isBindingWithWaitingCount: true
         }
     },
     mutations: {

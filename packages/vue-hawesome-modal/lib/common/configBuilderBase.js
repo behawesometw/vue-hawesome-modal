@@ -1,4 +1,4 @@
-import { arrToObj } from "../common/builderHelper";
+import { arrToObj } from "./builderHelper";
 
 export default class ConfigBuilderBase {
 
