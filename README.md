@@ -40,6 +40,47 @@ Use component at `root (the most top-level)` component like:
   </v-app>
 </template>
 ```
+
+### For Nuxt.js
+Define `plugin` for `vue-hawesome-modal`
+```javascript
+// plugins/vue-hawesome-modal.js
+import Vue from "vue"
+import vueHawesomeModal from "vue-hawesome-modal"
+
+export default ({ store }) => {
+    var options = { 
+        store, 
+        themeColor: "hex or semantic color",
+        dialogSetting: { ... },
+        notifySetting: { ... },
+        loaderSetting: { ... }
+      }
+    Vue.use(vueHawesomeModal, options)
+}
+```
+Add `vue-hawesome-modal` inside the plugins key of your `nuxt.config.js`
+```javascript
+// nuxt.config.js
+{
+  plugins: [{ src: '@/plugins/vue-hawesome-modal.js', mode: 'client' }]
+}
+```
+
+```vue
+<template>
+  <v-app>
+    <client-only>
+      <h-dialog />
+      <h-notify />
+      <h-loader />
+    </client-only>
+    ...
+  </v-app>
+</template>
+```
+
+
 ## Usage
 After Installing the plugin, `dialog`, `notify` and `loader` will available at `$h` on the Vue prototype.
 

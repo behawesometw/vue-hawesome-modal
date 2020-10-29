@@ -22,21 +22,11 @@ export default {
 
         var $storeFromApp = options.store;
 
-        if (!$storeFromApp.hasModule('hWaitingCount'))
-            $storeFromApp.registerModule('hWaitingCount', waitingCountModule)
-
-        if (!$storeFromApp.hasModule("hTheme"))
-            $storeFromApp.registerModule("hTheme", themeModule)
-
-        if (!$storeFromApp.hasModule("hLoader"))
-            $storeFromApp.registerModule("hLoader", loaderModule)
-
-        if (!$storeFromApp.hasModule("hDialog"))
-            $storeFromApp.registerModule("hDialog", dialogModule)
-
-        if (!$storeFromApp.hasModule("hNotify"))
-            $storeFromApp.registerModule("hNotify", notifyModule)
-
+        $storeFromApp.registerModule('hWaitingCount', waitingCountModule, { preserveState: false })
+        $storeFromApp.registerModule("hTheme", themeModule, { preserveState: false })
+        $storeFromApp.registerModule("hLoader", loaderModule, { preserveState: false })
+        $storeFromApp.registerModule("hDialog", dialogModule, { preserveState: false })
+        $storeFromApp.registerModule("hNotify", notifyModule, { preserveState: false })
 
         if (options.themeColor)
             $storeFromApp.commit('hTheme/setColor', options.themeColor)
