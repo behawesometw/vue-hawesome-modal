@@ -25,6 +25,7 @@ ${this.preInsertSnippet}
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 // initialize global settings
 ${code}

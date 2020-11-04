@@ -153,7 +153,8 @@ export default ({ store }) => {
 
 // nuxt.config.js
 {
-  plugins: [{ src: '@/plugins/vue-hawesome-modal.js', mode: 'client' }]
+  plugins: [{ src: '@/plugins/vue-hawesome-modal.js', mode: 'client' }],
+  css: ['@/node_modules/vue-hawesome-modal/dist/vue-hawesome-modal.css']
 }
       `,
       ];

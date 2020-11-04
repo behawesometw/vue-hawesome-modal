@@ -16,6 +16,7 @@ Install `vue-hawesome-modal` via `Vue.use()`:
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 // initialize global settings
 var options = {
@@ -47,6 +48,7 @@ Define `plugin` for `vue-hawesome-modal`
 // plugins/vue-hawesome-modal.js
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 export default ({ store }) => {
     var options = { 
@@ -98,6 +100,7 @@ After Installing the plugin, `dialog`, `notify` and `loader` will available at `
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 // initialize global settings
 var options = { 
@@ -164,6 +167,7 @@ this.$h.dialog
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 // initialize global settings
 var options = { 
@@ -219,6 +223,7 @@ this.$h.notify
 import store from "../path/to/your/vuex/store.js"
 import Vue from "vue"
 import vueHawesomeModal from "vue-hawesome-modal"
+import "vue-hawesome-modal/dist/vue-hawesome-modal.css"
 
 // initialize global settings
 var options = { 
