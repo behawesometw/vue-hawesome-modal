@@ -33,6 +33,8 @@ export default () => {
 
         var prismDefaultTheme = document.getElementById("_prismDefaultTheme");
         prismDefaultTheme.disabled = context.$vuetify.theme.dark;
+
+        document.body.style.background = context.$vuetify.theme.dark ? "#1e1e1e" : ""
     }
     return { colorInput, colorPick, colorInputBlur, colorPickChange, isDarkTheme, toolbarColor, titleColorClass, titleColorStyle, darkThemeToggle }
 }
