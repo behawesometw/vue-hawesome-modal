@@ -8,7 +8,7 @@
             :width="width"
             :height="height"
             :elevation="elevationCalc(hover)"
-            :class="[{'on-hover': hover}, itemMarginClass]"
+            :class="[{ 'on-hover': hover }, itemMarginClass]"
           >
             <v-progress-linear
               v-if="hasLoadingProgress"
@@ -16,8 +16,17 @@
               :value="item.progressValue"
             ></v-progress-linear>
             <v-toolbar :height="height">
-              <v-icon class="mr-2" :color="item.type" v-text="item.icon"></v-icon>
-              <div ref="contentTarget" class="text-truncate" v-html="item.content"></div>
+              <v-icon
+                class="mr-2"
+                :color="item.type"
+                v-text="item.icon"
+              ></v-icon>
+              <div
+                :class="textContentClass"
+                ref="contentTarget"
+                class="text-truncate"
+                v-html="item.content"
+              ></div>
               <v-spacer></v-spacer>
               <v-btn icon :color="item.type" @click="resolveNoti(item)">
                 <!-- <v-icon>mdi-checkbox-marked-circle-outline</v-icon> -->
@@ -27,7 +36,7 @@
           </v-card>
         </v-hover>
       </template>
-      <span>{{item.content}}</span>
+      <span>{{ item.content }}</span>
     </v-tooltip>
   </div>
 </template>
@@ -87,6 +96,9 @@ export default {
     },
   },
   computed: {
+    textContentClass() {
+      return `body-${this.$vuetify.breakpoint.xs ? "2" : "1"}`;
+    },
     hasLoadingProgress() {
       return this.item.timeout > 0;
     },

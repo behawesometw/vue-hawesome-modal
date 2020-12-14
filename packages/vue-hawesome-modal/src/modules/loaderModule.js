@@ -30,6 +30,8 @@ export default {
         off({ commit }) {
             commit('hWaitingCount/decrease', null, { root: true })
         },
-
+        close({ commit }) {
+            commit('hWaitingCount/set', 0, { root: true })
+        }
     }
 }

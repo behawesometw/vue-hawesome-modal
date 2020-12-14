@@ -75,6 +75,9 @@ export default {
                                 }, duration);
                             })
                         },
+                        close() {
+                            $storeFromApp.dispatch("hLoader/close");
+                        }
                     },
 
                     dialog: {
@@ -121,12 +124,12 @@ export default {
                             return this._push(builder.setType("error"));
                         },
                         promise(val, func) {
-                            var builder = new NotifyConfigBuilder(val);
+                            var builder = new NotifyConfigBuilder(val).set("type", $storeFromApp.state.hTheme.color).set("icon", "");
                             if (isWellDefinedFunction(func)) { func.call(this, builder); }
                             return this._push(builder.setTimeout(0));
                         },
                         push(val, func) {
-                            var builder = new NotifyConfigBuilder(val);
+                            var builder = new NotifyConfigBuilder(val).set("type", $storeFromApp.state.hTheme.color).set("icon", "");
                             if (isWellDefinedFunction(func)) { func.call(this, builder); }
                             return this._push(builder);
                         },

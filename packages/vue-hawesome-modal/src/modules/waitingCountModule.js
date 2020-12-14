@@ -9,6 +9,11 @@ export default {
             if (state.waitingCount > 0) {
                 state.waitingCount--;
             }
+        },
+        set(state, val) {
+            if (Number.isInteger(val)) {
+                state.waitingCount = val
+            }
         }
     },
     getters: {

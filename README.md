@@ -216,6 +216,7 @@ this.$h.notify
 | :---------- | :------------------------------------------------------ | :---------- | :------------------------------------------------------------------------------- |
 | on          | loaderText: string                                      | void        | open loader                                                                      |
 | off         |                                                         | void        | close loader                                                                     |
+| close       |                                                         | void        | force close loader                                                               |
 | wait (sync) | handler: function, duration: number, loaderText: string | Promise     | open loader, execute handler, wait duration, close loader, trigger then callback |
 #### Global Settings
 ```javascript
