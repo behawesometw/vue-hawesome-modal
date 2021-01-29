@@ -1,5 +1,6 @@
 const pkg = require('./package.json');
 process.env.VUE_APP_TITLE = `${pkg.name} - ${pkg.description}`
+process.env.VUE_APP_DESC = `${pkg.description}`
 
 const isOnProduction = process.env.NODE_ENV === 'production'
 
